@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "lumina-gate.schema.json",
+  "title": "Lumina Gate Result",
+  "type": "object",
+  "required": [ "name", "version", "timestampUtc", "environment", "gateStatus", "pass", "checks" ],
+  "properties": {
+    "name": { "const": "lumina-gate" },
+    "version": { "type": "string" },
+    "timestampUtc": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "environment": {
+      "type": "string",
+      "enum": [ "CI", "Development", "Local" ]
+    },
+    "gateStatus": {
+      "type": "string",
+      "enum": [ "PASS", "WARN", "FAIL" ]
+    },
+    "pass": { "type": "boolean" },
+    "warnings": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "checks": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": [ "pass" ],
+        "properties": {
+          "pass": { "type": "boolean" },
+          "details": { "type": "string" }
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

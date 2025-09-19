@@ -1,0 +1,107 @@
+{
+  "_meta": {
+    "version": "1.0.0",
+    "kind": "Halos",
+    "createdUtc": "2025-09-16T00:00:00Z",
+    "uuid_namespace": "6f0e5f9f-7f3a-41bf-b969-9e2b7d2f9b21",
+    "notes": [ "Self-contained description of the gate, schemas, runner, and enforcement policy.", "Use this as the contract between docs, devs, and CI but expanding.", "Here is the brand new repository: https://github.com/JasonSilvestri/Halos/" ]
+  },
+  "project": {
+    "name": "Halos",
+    "envTargets": [ "LOCAL", "CI" ],
+    "requirements": {
+      "dotnetSdk": ">=9.0",
+      "node": ">=20.0",
+      "powershell": ">=7.0",
+      "dotnetEf": "global or local tool available on PATH"
+    }
+  },
+  "roots": {
+    "appRoot": "E:/All/Repos/Halos/Halos",
+    "gateRoot": "Halos/Architecture/Gates"
+  },
+  "paths": {
+    "solution": "Halos.sln",
+    "sharedProject": "Halos/Halos.csproj",
+    "startupProject": "Halos/Halos.csproj",
+    "appSettings": "Halos/appsettings.Development.json",
+    "resultsDir": "Halos/Halos/Architecture/Gates/results",
+    "toolsDir": "Halos/Halos/Architecture/Gates/tools",
+    "schemas": {
+      "gate": "Halos/Halos/Architecture/Gates/lumina-gate.schema.json",
+      "envelope": "Halos/Halos/Architecture/Gates/helix-lumina-envelope.schema.json",
+      "runnerConfig": "Halos/Halos/Architecture/Gates/lumina-gate.config.schema.json",
+      "naming": "Halos/Halos/Architecture/Gates/naming.schema.json",
+      "freezeShot": "Halos/Halos/Architecture/Gates/freeze-shot.schema.json"
+    },
+    "runner": {
+      "powershell": "Halos/Halos/Architecture/Gates/tools/lumina-gate.ps1",
+      "validator": "Halos/Halos/Architecture/Gates/tools/validate-gate.mjs",
+      "fenceCheck": "Halos/Halos/Architecture/Gates/tools/check-markdown-fences.ps1"
+    },
+    "ciWorkflowParked": "Halos/Halos/Architecture/Gates/git/workflows/lumina-gate.yaml"
+  },
+  "security": {
+    "redactConnectionStrings": true,
+    "fingerprintHash": "SHA-256",
+    "artifactPolicy": {
+      "storeGateResults": true,
+      "resultsGlob": "Halos/Halos/Architecture/Gates/results/*.json"
+    }
+  },
+  "gatePolicy": {
+    "uiFenceWarningsDowngradeStatusToWarn": true,
+    "schemaValidationIsHardFail": true,
+    "dbCheck": {
+      "default": "SkipInCI",
+      "local": "BestEffort"
+    }
+  },
+  "commands": {
+    "localRun": [ "pwsh Halos/Architecture/Gates/tools/lumina-gate.ps1 -SolutionPath \"Halos.sln\" -SharedProject \"Halos/Halos.csproj\" -StartupProject \"Halos/Halos.csproj\" -AppSettingsPath \"Halos/appsettings.Development.json\" -Environment \"Development\" -SkipDbCheck -TreatUiAsError" ],
+    "validateLatest": [ "npm --prefix Halos/Architecture/Gates install", "npm --prefix Halos/Architecture/Gates run gate:validate" ],
+    "validateSpecific": [ "npm --prefix Halos/Architecture/Gates run gate:validate:file -- --file \"Halos/Halos/Architecture/Gates/results/lumina-result.<timestamp>.json\"" ]
+  },
+  "npmScripts": {
+    "packageJsonLocation": "Halos/Halos/Architecture/Gates/package.json",
+    "scripts": {
+      "gate:validate": "node ./tools/validate-gate.mjs",
+      "gate:validate:file": "node ./tools/validate-gate.mjs --file",
+      "gate:validate:envelope": "node ./tools/validate-gate.mjs --schema envelope --file",
+      "gate:validate:runner": "node ./tools/validate-gate.mjs --schema runner --file",
+      "gate:validate:naming": "node ./tools/validate-gate.mjs --schema naming --file",
+      "gate:validate:freeze": "node ./tools/validate-gate.mjs --schema freeze --file"
+    },
+    "devDependencies": {
+      "ajv": "^8.17.1",
+      "ajv-formats": "^3.0.1"
+    }
+  },
+  "resultContract": {
+    "schema": "lumina-gate.schema.json",
+    "statusField": "gateStatus",
+    "passField": "pass",
+    "warningsField": "warnings",
+    "timestampField": "timestampUtc",
+    "sampleResult": "Halos/Halos/Architecture/Gates/results/lumina-result.sample.json"
+  },
+  "ciModes": [
+    {
+      "name": "nonBlocking",
+      "continueOnError": true,
+      "uploadArtifacts": true,
+      "enforcePass": false
+    },
+    {
+      "name": "enforcing",
+      "continueOnError": false,
+      "uploadArtifacts": true,
+      "enforcePass": true
+    }
+  ],
+  "freezeShot": {
+    "enabled": true,
+    "schema": "freeze-shot.schema.json",
+    "notes": [ "When freezing, snapshot the latest gate result and key script/schema SHAs.", "Store under results/freeze-*.json" ]
+  }
+}

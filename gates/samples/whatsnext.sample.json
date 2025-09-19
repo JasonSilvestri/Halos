@@ -1,0 +1,174 @@
+{
+  //"CREATED",
+  //"QUEUED",
+  //"IN_PROGRESS",
+  //"WAITING",
+  //"PASSED",
+  //"FAILED",
+  //"REJECTED",
+  //"CANCELLED",
+  //"SKIPPED",
+  //"TIMEOUT",
+  //"NETWORK_ERROR",
+  //"VALIDATION_ERROR",
+  //"RETRYING",
+  //"BLOCKED"
+
+  "manifestId": "halos-workitem-001",
+  "createdUtc": "2025-09-18T00:00:00Z",
+  "owner": "jason",
+  "tags": [ "self-health", "halos", "gates" ],
+  "items": [
+    {
+      "id": "wire-up-enums",
+      "title": "Wire up workflow enum in runner",
+      "description": "Expose state mixin on each gate execution result.",
+      "priority": 1,
+      "labels": [ "engine", "schema" ],
+      "state": "IN_PROGRESS",
+      "stateCode": 3,
+      "updatedUtc": "2025-09-18T00:10:00Z",
+      "updatedBy": "lumina",
+      "stateHistory": [
+        {
+          "stateCode": 1,
+          "state": "CREATED",
+          "timestampUtc": "2025-09-17T23:55:00Z"
+        },
+        {
+          "stateCode": 2,
+          "state": "QUEUED",
+          "timestampUtc": "2025-09-17T23:56:00Z"
+        },
+        {
+          "stateCode": 3,
+          "state": "IN_PROGRESS",
+          "timestampUtc": "2025-09-18T00:10:00Z"
+        }
+      ],
+      "links": [
+        {
+          "rel": "repo",
+          "href": "https://github.com/JasonSilvestri/Halos",
+          "note": "root"
+        },
+        {
+          "rel": "runner",
+          "href": "Halos/Halos/Architecture/Gates/tools/lumina-gate.ps1"
+        }
+      ],
+      "metrics": { "attempts": 1 }
+    },
+    {
+      "id": "sample-results",
+      "title": "Create sample result with tally fields workflows",
+      "priority": 2,
+      "labels": [ "schemas" ],
+      "state": "PASSED",
+      "stateCode": 5,
+      "links": [
+        {
+          "rel": "schema",
+          "href": "Halos/Halos/Architecture/Gates/schemas/halos-workflow.schema.json"
+        }
+      ]
+    },
+    {
+      "id": "sample-results-halos-workitem.schema.json",
+      "title": "Create sample result with tally fields using halos-workitem.schema.json",
+      "priority": 2,
+      "labels": [ "samples" ],
+      "state": "PASSED",
+      "stateCode": 5,
+      "links": [
+        {
+          "rel": "schema",
+          "href": "Halos/Halos/Architecture/Gates/schemas/halos-workitem.schema.json"
+        }
+      ]
+    },
+    {
+      "id": "sample-results-halos-workitem.sample.json",
+      "title": "Create sample result with tally fields using workitem.sample.json",
+      "priority": 2,
+      "labels": [ "samples" ],
+      "state": "PASSED",
+      "stateCode": 5,
+      "links": [
+        {
+          "rel": "sample",
+          "href": "Halos/Halos/Architecture/Gates/samples/workitem.sample.json"
+        }
+      ]
+    },
+    {
+      "id": "sample-results-halos-workitem.schema.json",
+      "title": "Create sample result with tally fields using halos-workitem.schema.json",
+      "priority": 2,
+      "labels": [ "samples" ],
+      "state": "PASSED",
+      "stateCode": 5,
+      "links": [
+        {
+          "rel": "schema",
+          "href": "Halos/Halos/Architecture/Gates/schemas/halos-workitem.schema.json"
+        }
+      ]
+    },
+    {
+      "id": "sample-results-halos-workitem.sample.json",
+      "title": "Create sample result with tally fields using workitem.sample.json",
+      "priority": 2,
+      "labels": [ "samples" ],
+      "state": "PASSED",
+      "stateCode": 5,
+      "links": [
+        {
+          "rel": "sample",
+          "href": "Halos/Halos/Architecture/Gates/samples/workitem.sample.json"
+        }
+      ]
+    },
+    {
+      "id": "sample-results-halos-validate-gate.mjs",
+      "title": "Create samples, schemas and validate result with tally fields using validate-gate.mjs",
+      "priority": 1,
+      "labels": [ "Validators" ],
+      "state": "FAILED",
+      "stateCode": 6,
+      "links": [
+        {
+          "rel": "validators",
+          "href": "Halos/Halos/Architecture/Gates/samples/workitem.sample.json"
+        }
+      ]
+    },
+    {
+      "id": "Halos.SchemaValidator.sln",
+      "title": "Try to validate result with new .NET Halos.SchemaValidator project, and to replace validate-gate.mjs.",
+      "priority": 1,
+      "labels": [ "Validators" ],
+      "state": "FAILED",
+      "stateCode": 6,
+      "links": [
+        {
+          "rel": "net-validators",
+          "href": "Halos/Halos.SchemaValidator.sln"
+        }
+      ]
+    },
+    {
+      "id": "cdn-retry",
+      "title": "CDN upload retry",
+      "priority": 3,
+      "labels": [ "ops", "network" ],
+      "state": "RETRYING",
+      "stateCode": 13,
+      "reason": "previous NETWORK_ERROR; backoff=PT30S",
+      "metrics": {
+        "attempts": 2,
+        "elapsedMs": 4200
+      }
+    }
+  ]
+}

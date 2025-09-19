@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "freeze-shot.schema.json",
+  "title": "Freeze Shot",
+  "type": "object",
+  "required": [ "frozenAtUtc", "artifacts" ],
+  "properties": {
+    "frozenAtUtc": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "artifacts": {
+      "type": "object",
+      "properties": {
+        "latestGateResult": { "type": "string" },
+        "scriptsSha": { "type": "string" },
+        "schemasSha": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "notes": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "additionalProperties": false
+}

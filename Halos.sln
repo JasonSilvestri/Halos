@@ -1,0 +1,117 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36511.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
+	ProjectSection(SolutionItems) = preProject
+		CODE_OF_CONDUCT.md = CODE_OF_CONDUCT.md
+		CONTRIBUTING.md = CONTRIBUTING.md
+		LICENSE.txt = LICENSE.txt
+		READHISTORY.md = READHISTORY.md
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Halos.App", "src\Halos.App\Halos.App.csproj", "{8B186D60-C81C-477C-B778-0FC6C09EE920}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Halos.GateRunner", "src\Halos.GateRunner\Halos.GateRunner.csproj", "{A09AC7E7-B864-4EB0-BD3C-D25B5B0D4C9B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Halos.SchemaValidator", "src\Halos.SchemaValidator\Halos.SchemaValidator.csproj", "{DF833D3B-F62A-4E26-A727-95A2A4242810}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Halos.Shared", "src\Halos.Shared\Halos.Shared.csproj", "{748D5C30-5743-4758-88E8-2CFBD9BC32AA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "gates", "gates", "{1D499BCD-9448-4942-A688-64D4B3FECF55}"
+	ProjectSection(SolutionItems) = preProject
+		gates\package.json = gates\package.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{C01479E7-E606-46CD-BADD-6F9C2AC1B430}"
+	ProjectSection(SolutionItems) = preProject
+		gates\tools\check-markdown-fences.ps1 = gates\tools\check-markdown-fences.ps1
+		gates\tools\lumina-gate.ps1 = gates\tools\lumina-gate.ps1
+		gates\tools\README.md = gates\tools\README.md
+		gates\tools\sanitize-results.ps1 = gates\tools\sanitize-results.ps1
+		gates\tools\seed-materialize.mjs = gates\tools\seed-materialize.mjs
+		gates\tools\validate-gate.mjs = gates\tools\validate-gate.mjs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "about", "about", "{6D80BF85-CFE3-4658-82AD-398E0C600272}"
+	ProjectSection(SolutionItems) = preProject
+		gates\about\former-lumina-gate.json.md = gates\about\former-lumina-gate.json.md
+		gates\about\halo.lumina.seed.json.md = gates\about\halo.lumina.seed.json.md
+		gates\about\package.json.md = gates\about\package.json.md
+		gates\about\README.md = gates\about\README.md
+		gates\about\validate-gate.mjs.md = gates\about\validate-gate.mjs.md
+		gates\about\whatsnext.json.md = gates\about\whatsnext.json.md
+		gates\about\workflow.json.md = gates\about\workflow.json.md
+		gates\about\workitem.json.md = gates\about\workitem.json.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{3254C9C8-0BCC-43FD-BA82-E4D3D6161A8F}"
+	ProjectSection(SolutionItems) = preProject
+		gates\samples\halo-lumina-envelope.json = gates\samples\halo-lumina-envelope.json
+		gates\samples\halo-lumina-envelope.meta.json = gates\samples\halo-lumina-envelope.meta.json
+		gates\samples\lumina-gate.config.json = gates\samples\lumina-gate.config.json
+		gates\samples\lumina-result.fail.sample.json = gates\samples\lumina-result.fail.sample.json
+		gates\samples\lumina-result.sample.json = gates\samples\lumina-result.sample.json
+		gates\samples\naming.json = gates\samples\naming.json
+		gates\samples\whatsnext.sample.json = gates\samples\whatsnext.sample.json
+		gates\samples\workitem.sample.item.json = gates\samples\workitem.sample.item.json
+		gates\samples\workitem.sample.json = gates\samples\workitem.sample.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "schema", "schema", "{270A8B5F-3877-4501-994B-E438CE37EA13}"
+	ProjectSection(SolutionItems) = preProject
+		gates\schemas\freeze-shot.schema.json = gates\schemas\freeze-shot.schema.json
+		gates\schemas\halo-lumina-envelope.schema.json = gates\schemas\halo-lumina-envelope.schema.json
+		gates\schemas\halos-whatsnext.schema.json = gates\schemas\halos-whatsnext.schema.json
+		gates\schemas\halos-workflow.schema.json = gates\schemas\halos-workflow.schema.json
+		gates\schemas\lumina-gate.config.schema.json = gates\schemas\lumina-gate.config.schema.json
+		gates\schemas\lumina-gate.schema.json = gates\schemas\lumina-gate.schema.json
+		gates\schemas\naming.schema.json = gates\schemas\naming.schema.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "seed", "seed", "{0490CD25-EE2A-4FC6-8E3D-B2A1E43AEE74}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8B186D60-C81C-477C-B778-0FC6C09EE920}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B186D60-C81C-477C-B778-0FC6C09EE920}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B186D60-C81C-477C-B778-0FC6C09EE920}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B186D60-C81C-477C-B778-0FC6C09EE920}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A09AC7E7-B864-4EB0-BD3C-D25B5B0D4C9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A09AC7E7-B864-4EB0-BD3C-D25B5B0D4C9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A09AC7E7-B864-4EB0-BD3C-D25B5B0D4C9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A09AC7E7-B864-4EB0-BD3C-D25B5B0D4C9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF833D3B-F62A-4E26-A727-95A2A4242810}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF833D3B-F62A-4E26-A727-95A2A4242810}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF833D3B-F62A-4E26-A727-95A2A4242810}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF833D3B-F62A-4E26-A727-95A2A4242810}.Release|Any CPU.Build.0 = Release|Any CPU
+		{748D5C30-5743-4758-88E8-2CFBD9BC32AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{748D5C30-5743-4758-88E8-2CFBD9BC32AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{748D5C30-5743-4758-88E8-2CFBD9BC32AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{748D5C30-5743-4758-88E8-2CFBD9BC32AA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8B186D60-C81C-477C-B778-0FC6C09EE920} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{A09AC7E7-B864-4EB0-BD3C-D25B5B0D4C9B} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{DF833D3B-F62A-4E26-A727-95A2A4242810} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{748D5C30-5743-4758-88E8-2CFBD9BC32AA} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{C01479E7-E606-46CD-BADD-6F9C2AC1B430} = {1D499BCD-9448-4942-A688-64D4B3FECF55}
+		{6D80BF85-CFE3-4658-82AD-398E0C600272} = {1D499BCD-9448-4942-A688-64D4B3FECF55}
+		{3254C9C8-0BCC-43FD-BA82-E4D3D6161A8F} = {1D499BCD-9448-4942-A688-64D4B3FECF55}
+		{270A8B5F-3877-4501-994B-E438CE37EA13} = {1D499BCD-9448-4942-A688-64D4B3FECF55}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6C068CBA-F3FA-454D-92B1-467A233D1ACA}
+	EndGlobalSection
+EndGlobal

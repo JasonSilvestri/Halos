@@ -1,0 +1,115 @@
+{
+  "manifestId": "halos-demo-001",
+  "createdUtc": "2025-09-17T12:00:00Z",
+  "workItems": [
+    {
+      "id": "draft-article",
+      "type": "content",
+      "stateCode": 3,
+      "state": "IN_PROGRESS",
+      "reason": "Generating first draft",
+      "updatedUtc": "2025-09-17T12:05:00Z",
+      "updatedBy": "lumina",
+      "stateHistory": [
+        {
+          "stateCode": 1,
+          "state": "CREATED",
+          "timestampUtc": "2025-09-17T12:00:00Z",
+          "by": "jason"
+        },
+        {
+          "stateCode": 2,
+          "state": "QUEUED",
+          "timestampUtc": "2025-09-17T12:01:00Z",
+          "by": "halos-runner"
+        },
+        {
+          "stateCode": 3,
+          "state": "IN_PROGRESS",
+          "timestampUtc": "2025-09-17T12:05:00Z",
+          "by": "lumina",
+          "reason": "prompt accepted"
+        }
+      ],
+      "payload": {
+        "topic": "Universal AI Design Pattern",
+        "outline": [ "Intro", "Design Goals", "Gating", "Validation" ]
+      }
+    },
+    {
+      "id": "review-gate",
+      "type": "gate",
+      "stateCode": 5,
+      "state": "PASSED",
+      "reason": "Auto-approval threshold >= 0.85",
+      "updatedUtc": "2025-09-17T12:07:00Z",
+      "updatedBy": "therealjasonsilvestri@gmail.com",
+      "stateHistory": [
+        {
+          "stateCode": 4,
+          "state": "WAITING",
+          "timestampUtc": "2025-09-17T12:06:00Z",
+          "by": "therealjasonsilvestri@gmail.com",
+          "reason": "awaiting score"
+        },
+        {
+          "stateCode": 5,
+          "state": "PASSED",
+          "timestampUtc": "2025-09-17T12:07:00Z",
+          "by": "therealjasonsilvestri@gmail.com"
+        }
+      ],
+      "gate": {
+        "name": "quality-score",
+        "threshold": 0.85,
+        "observedScore": 0.91,
+        "transitions": [
+          {
+            "target": "publish-phase",
+            "on": "score>=threshold",
+            "default": false
+          },
+          {
+            "target": "revise-phase",
+            "default": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "cdn-upload",
+      "type": "ops",
+      "stateCode": 11,
+      "state": "NETWORK_ERROR",
+      "reason": "TLS handshake failed; retry scheduled",
+      "updatedUtc": "2025-09-17T12:08:00Z",
+      "updatedBy": "ops@halos",
+      "stateHistory": [
+        {
+          "stateCode": 2,
+          "state": "QUEUED",
+          "timestampUtc": "2025-09-17T12:07:10Z",
+          "by": "ops@halos"
+        },
+        {
+          "stateCode": 11,
+          "state": "NETWORK_ERROR",
+          "timestampUtc": "2025-09-17T12:08:00Z",
+          "by": "ops@halos"
+        },
+        {
+          "stateCode": 13,
+          "state": "RETRYING",
+          "timestampUtc": "2025-09-17T12:08:05Z",
+          "by": "ops@halos",
+          "reason": "backoff=PT30S"
+        }
+      ],
+      "retry": {
+        "max": 3,
+        "attempt": 1,
+        "backoff": "PT30S"
+      }
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "lumina-gate.config.schema.json",
+  "title": "Runner Config",
+  "type": "object",
+  "properties": {
+    "uiFenceWarningsDowngradeStatusToWarn": { "type": "boolean" },
+    "schemaValidationIsHardFail": { "type": "boolean" },
+    "dbCheck": {
+      "type": "object",
+      "properties": {
+        "default": {
+          "type": "string",
+          "enum": [ "SkipInCI", "BestEffort", "Required" ]
+        },
+        "local": {
+          "type": "string",
+          "enum": [ "SkipInCI", "BestEffort", "Required" ]
+        }
+      }
+    }
+  },
+  "additionalProperties": true
+}

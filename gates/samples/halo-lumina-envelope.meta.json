@@ -1,0 +1,26 @@
+{
+  "version": "0.2",
+  "provenance": {
+    "partnerA": "user:JasonSilvestri",
+    "partnerB": "agent:PaLMs-runtime",
+    "sessionId": "seed-YYYYMMDDTHHMMSSZ",
+    "nonce": "00000000-0000-4000-8000-000000000000"
+  },
+  "renderingHints": {
+    "snippetLanguage": "json",
+    "outerFence": "````",
+    "treatAsPlainTextUntilParsed": true,
+    "markdownRiskFlags": [
+      "codeFence.nested",
+      "codeFence.mismatch",
+      "ui.genericStylesRisk"
+    ]
+  },
+  "warnings": [
+    "Force display language=json for all code blocks.",
+    "Use 4-backtick outer fences when nesting.",
+    "Do not include raw connection strings; artifacts are redacted."
+  ],
+  "status_checklist_markdown": "| Step | Status | Notes |\n|---|---|---|\n| Restore | ⏳ | queued |\n| Build | ⏳ | queued |\n| EF: Add Migration | ⏳ | queued |\n| EF: Update DB | ⏳ | queued |\n| Schema Validate | ⏳ | queued |\n| Markdown Fence Check | ⏳ | queued |\n| Secrets Redaction | ⏳ | queued |",
+  "display_banner_markdown": "⚠️ **Rendering Safety**: This object is JSON. Display code blocks as `json`. Use outer 4 backticks for nested fences. Connection strings are redacted."
+}

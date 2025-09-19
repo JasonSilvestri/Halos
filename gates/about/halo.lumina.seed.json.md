@@ -1,0 +1,536 @@
+﻿# Halo\{\} - `halo.lumina.seed`
+
+This folder contains **scripts and helper utilities** used to run, get and/or set `halo.lumina.seed` checks locally or in CI/CD.
+
+--- 
+
+# File Structure
+
+```
+Halos/Architecture/Gates/
+├─ package.json
+├─ tools/
+│  └─ validate-gate.mjs
+├─ schemas/
+│  ├─ ...
+│  └─ ...
+└─ samples/
+   ├─ halo.lumina.seed.json
+
+```
+
+---
+
+###### Halo\{\} Script Creation Lifecycle
+
+Here is the mapping of `Halo{}` terminology to existing file names and locations.
+
+**From a script lifecycle perspective:**
+
+1. **Schema**: `Halos/Architecture/Gates/schemas/halo.lumina.seed.schema.json`
+2. **Sample**: `Halos/Architecture/Gates/samples/halo.lumina.seed.*.json`
+3. **Validators**: `Halos/Architecture/Gates/tools/validate-gate.mjs`
+4. **Packages**: `Halos/Architecture/Gates/package.json`
+
+This mapping **above** preserves CI paths and developer muscle memory while letting documentation use the PaLMs{} terminology.
+
+---
+
+## `Halos/Architecture/Gates/schemas/halo.lumina.seed.schema.json`
+
+```json
+{
+  "halo_seed_header": {
+    "version": "1.0",
+    "project": "Halos",
+    "determinism": {
+      "uuid_namespace": "6f0e5f9f-7f3a-41bf-b969-9e2b7d2f9b21",
+      "hash": "sha256"
+    },
+    "notes": [
+      "This is the canonical Cold-Start seed (halo.lumina.seed.json).",
+      "It embeds schemas, samples, validator script, and about docs.",
+      "Materialize the bundled_files to disk under Halos/Architecture/Gates/**."
+    ]
+  },
+
+  "envelope": {
+    "_meta": {
+      "version": "1.0.0",
+      "kind": "Halos",
+      "createdUtc": "2025-09-16T00:00:00Z",
+      "uuid_namespace": "6f0e5f9f-7f3a-41bf-b969-9e2b7d2f9b21",
+      "notes": [
+        "Self-contained description of the gate, schemas, runner, and enforcement policy.",
+        "Use this as the contract between docs, devs, and CI.",
+        "Repository: https://github.com/JasonSilvestri/Halos/"
+      ]
+    },
+    "project": {
+      "name": "Halos",
+      "envTargets": ["LOCAL", "CI"],
+      "requirements": {
+        "dotnetSdk": ">=9.0",
+        "node": ">=20.0",
+        "powershell": ">=7.0",
+        "dotnetEf": "global or local tool available on PATH"
+      }
+    },
+    "roots": {
+      "appRoot": "E:/All/Repos/Halos",
+      "gateRoot": "Halos/Architecture/Gates"
+    },
+    "paths": {
+      "solution": "Halos.sln",
+      "sharedProject": "Halos/Halos.csproj",
+      "startupProject": "Halos/Halos.csproj",
+      "appSettings": "Halos/appsettings.Development.json",
+      "resultsDir": "Halos/Halos/Architecture/Gates/results",
+      "toolsDir": "Halos/Halos/Architecture/Gates/tools",
+      "schemas": {
+        "gate": "Halos/Halos/Architecture/Gates/lumina-gate.schema.json",
+        "envelope": "Halos/Halos/Architecture/Gates/helix-lumina-envelope.schema.json",
+        "runnerConfig": "Halos/Halos/Architecture/Gates/lumina-gate.config.schema.json",
+        "naming": "Halos/Halos/Architecture/Gates/naming.schema.json",
+        "freezeShot": "Halos/Halos/Architecture/Gates/freeze-shot.schema.json",
+        "workflow": "Halos/Halos/Architecture/Gates/schemas/halos-workflow.schema.json",
+        "whatsnext": "Halos/Halos/Architecture/Gates/schemas/halos-whatsnext.schema.json"
+      },
+      "runner": {
+        "powershell": "Halos/Halos/Architecture/Gates/tools/lumina-gate.ps1",
+        "validator": "Halos/Halos/Architecture/Gates/tools/validate-gate.mjs",
+        "fenceCheck": "Halos/Halos/Architecture/Gates/tools/check-markdown-fences.ps1"
+      },
+      "ciWorkflowParked": "Halos/Halos/Architecture/Gates/git/workflows/lumina-gate.yaml"
+    },
+    "security": {
+      "redactConnectionStrings": true,
+      "fingerprintHash": "SHA-256",
+      "artifactPolicy": {
+        "storeGateResults": true,
+        "resultsGlob": "Halos/Halos/Architecture/Gates/results/*.json"
+      }
+    },
+    "gatePolicy": {
+      "uiFenceWarningsDowngradeStatusToWarn": true,
+      "schemaValidationIsHardFail": true,
+      "dbCheck": {
+        "default": "SkipInCI",
+        "local": "BestEffort"
+      }
+    },
+    "commands": {
+      "localRun": [
+        "pwsh Halos/Architecture/Gates/tools/lumina-gate.ps1 -SolutionPath \"Halos.sln\" -SharedProject \"Halos/Halos.csproj\" -StartupProject \"Halos/Halos.csproj\" -AppSettingsPath \"Halos/appsettings.Development.json\" -Environment \"Development\" -SkipDbCheck -TreatUiAsError"
+      ],
+      "validateLatest": [
+        "npm --prefix Halos/Architecture/Gates install",
+        "npm --prefix Halos/Architecture/Gates run gate:validate"
+      ],
+      "validateSpecific": [
+        "npm --prefix Halos/Architecture/Gates run gate:validate:file -- --file \"Halos/Halos/Architecture/Gates/results/lumina-result.<timestamp>.json\""
+      ],
+      "validateWorkflow": [
+        "npm --prefix Halos/Architecture/Gates run wf:validate:file -- --file \"Halos/Halos/Architecture/Gates/samples/workitem.sample.json\""
+      ],
+      "validateWhatsNext": [
+        "npm --prefix Halos/Architecture/Gates run next:validate:file -- --file \"Halos/Halos/Architecture/Gates/samples/whatsnext.sample.json\""
+      ]
+    },
+    "npmScripts": {
+      "packageJsonLocation": "Halos/Halos/Architecture/Gates/package.json",
+      "scripts": {
+        "gate:validate": "node ./tools/validate-gate.mjs",
+        "gate:validate:file": "node ./tools/validate-gate.mjs --file",
+        "gate:validate:envelope": "node ./tools/validate-gate.mjs --schema envelope --file",
+        "gate:validate:runner": "node ./tools/validate-gate.mjs --schema runner --file",
+        "gate:validate:naming": "node ./tools/validate-gate.mjs --schema naming --file",
+        "gate:validate:freeze": "node ./tools/validate-gate.mjs --schema freeze --file",
+        "wf:validate:file": "node ./tools/validate-gate.mjs --schema workflow --file",
+        "next:validate:file": "node ./tools/validate-gate.mjs --schema whatsnext --file"
+      },
+      "devDependencies": {
+        "ajv": "^8.17.1",
+        "ajv-formats": "^3.0.1"
+      }
+    },
+    "resultContract": {
+      "schema": "lumina-gate.schema.json",
+      "statusField": "gateStatus",
+      "passField": "pass",
+      "warningsField": "warnings",
+      "timestampField": "timestampUtc",
+      "sampleResult": "Halos/Halos/Architecture/Gates/results/lumina-result.sample.json"
+    },
+    "ciModes": [
+      { "name": "nonBlocking", "continueOnError": true, "uploadArtifacts": true, "enforcePass": false },
+      { "name": "enforcing", "continueOnError": false, "uploadArtifacts": true, "enforcePass": true }
+    ],
+    "freezeShot": {
+      "enabled": true,
+      "schema": "freeze-shot.schema.json",
+      "notes": [
+        "When freezing, snapshot the latest gate result and key script/schema SHAs.",
+        "Store under results/freeze-*.json"
+      ]
+    }
+  },
+
+  "bundled_files": [
+    {
+      "path": "Halos/Halos/Architecture/Gates/schemas/halos-workflow.schema.json",
+      "kind": "json",
+      "json": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "$id": "halos-workflow.schema.json",
+        "title": "Halos Workflow State Mixin",
+        "description": "Reusable state mixin you can $ref into any object.",
+        "type": "object",
+        "required": ["state", "stateCode"],
+        "properties": {
+          "stateCode": {
+            "type": "integer",
+            "enum": [1,2,3,4,5,6,7,8,9,10,11,12,13,14],
+            "description": "Canonical state code (stable, source of truth)."
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "CREATED","QUEUED","IN_PROGRESS","WAITING","PASSED","FAILED",
+              "REJECTED","CANCELLED","SKIPPED","TIMEOUT","NETWORK_ERROR",
+              "VALIDATION_ERROR","RETRYING","BLOCKED"
+            ],
+            "description": "Human-friendly label normalized to the code."
+          },
+          "reason": { "type": "string", "maxLength": 2000 },
+          "updatedUtc": { "type": "string", "format": "date-time" },
+          "updatedBy": { "type": "string", "description": "Actor/system id" },
+          "stateHistory": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["stateCode", "state", "timestampUtc"],
+              "properties": {
+                "stateCode": { "type": "integer", "enum": [1,2,3,4,5,6,7,8,9,10,11,12,13,14] },
+                "state": {
+                  "type": "string",
+                  "enum": [
+                    "CREATED","QUEUED","IN_PROGRESS","WAITING","PASSED","FAILED",
+                    "REJECTED","CANCELLED","SKIPPED","TIMEOUT","NETWORK_ERROR",
+                    "VALIDATION_ERROR","RETRYING","BLOCKED"
+                  ]
+                },
+                "timestampUtc": { "type": "string", "format": "date-time" },
+                "reason": { "type": "string", "maxLength": 2000 },
+                "by": { "type": "string" }
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "allOf": [
+          { "if": { "properties": { "state": { "const": "PASSED" } }, "required": ["state"] }, "then": { "properties": { "stateCode": { "const": 5 } } } },
+          { "if": { "properties": { "state": { "const": "FAILED" } }, "required": ["state"] }, "then": { "properties": { "stateCode": { "const": 6 } } } },
+          { "if": { "properties": { "state": { "const": "REJECTED" } }, "required": ["state"] }, "then": { "properties": { "stateCode": { "const": 7 } } } },
+          { "if": { "properties": { "state": { "const": "WAITING" } }, "required": ["state"] }, "then": { "properties": { "stateCode": { "const": 4 } } } },
+          { "if": { "properties": { "state": { "const": "NETWORK_ERROR" } }, "required": ["state"] }, "then": { "properties": { "stateCode": { "const": 11 } } } }
+        ],
+        "additionalProperties": true
+      }
+    },
+
+    {
+      "path": "Halos/Halos/Architecture/Gates/schemas/halos-whatsnext.schema.json",
+      "kind": "json",
+      "json": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "$id": "halos-whatsnext.schema.json",
+        "title": "Halos What's Next List",
+        "description": "Appendable next-actions list; each item carries the workflow state mixin.",
+        "type": "object",
+        "required": ["manifestId", "createdUtc", "items"],
+        "properties": {
+          "manifestId": { "type": "string", "minLength": 1 },
+          "createdUtc": { "type": "string", "format": "date-time" },
+          "owner": { "type": "string" },
+          "tags": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "items": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "allOf": [ { "$ref": "halos-workflow.schema.json" } ],
+              "required": ["id", "title", "priority", "state", "stateCode"],
+              "properties": {
+                "id": { "type": "string", "minLength": 1 },
+                "title": { "type": "string", "minLength": 1 },
+                "description": { "type": "string" },
+                "priority": { "type": "integer", "minimum": 1, "maximum": 9 },
+                "labels": { "type": "array", "items": { "type": "string" } },
+                "dueUtc": { "type": "string", "format": "date-time" },
+                "links": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": ["rel","href"],
+                    "properties": {
+                      "rel": { "type": "string" },
+                      "href": { "type": "string", "minLength": 1 },
+                      "note": { "type": "string" }
+                    },
+                    "additionalProperties": false
+                  }
+                },
+                "metrics": {
+                  "type": "object",
+                  "properties": {
+                    "attempts": { "type": "integer", "minimum": 0 },
+                    "elapsedMs": { "type": "integer", "minimum": 0 },
+                    "score": { "type": "number" }
+                  },
+                  "additionalProperties": true
+                }
+              },
+              "additionalProperties": true
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+
+    {
+      "path": "Halos/Halos/Architecture/Gates/samples/workitem.sample.json",
+      "kind": "json",
+      "json": {
+        "manifestId": "halos-demo-001",
+        "createdUtc": "2025-09-17T12:00:00Z",
+        "workItems": [
+          {
+            "id": "draft-article",
+            "type": "content",
+            "stateCode": 3,
+            "state": "IN_PROGRESS",
+            "reason": "Generating first draft",
+            "updatedUtc": "2025-09-17T12:05:00Z",
+            "updatedBy": "lumina",
+            "stateHistory": [
+              { "stateCode": 1, "state": "CREATED", "timestampUtc": "2025-09-17T12:00:00Z", "by": "jason" },
+              { "stateCode": 2, "state": "QUEUED", "timestampUtc": "2025-09-17T12:01:00Z", "by": "halos-runner" },
+              { "stateCode": 3, "state": "IN_PROGRESS", "timestampUtc": "2025-09-17T12:05:00Z", "by": "lumina", "reason": "prompt accepted" }
+            ],
+            "payload": {
+              "topic": "Universal AI Design Pattern",
+              "outline": ["Intro","Design Goals","Gating","Validation"]
+            }
+          },
+          {
+            "id": "review-gate",
+            "type": "gate",
+            "stateCode": 5,
+            "state": "PASSED",
+            "reason": "Auto-approval threshold >= 0.85",
+            "updatedUtc": "2025-09-17T12:07:00Z",
+            "updatedBy": "gate@halos",
+            "stateHistory": [
+              { "stateCode": 4, "state": "WAITING", "timestampUtc": "2025-09-17T12:06:00Z", "by": "gate@halos", "reason": "awaiting score" },
+              { "stateCode": 5, "state": "PASSED", "timestampUtc": "2025-09-17T12:07:00Z", "by": "gate@halos" }
+            ],
+            "gate": {
+              "name": "quality-score",
+              "threshold": 0.85,
+              "observedScore": 0.91,
+              "transitions": [
+                { "target": "publish-phase", "on": "score>=threshold", "default": false },
+                { "target": "revise-phase", "default": true }
+              ]
+            }
+          },
+          {
+            "id": "cdn-upload",
+            "type": "ops",
+            "stateCode": 11,
+            "state": "NETWORK_ERROR",
+            "reason": "TLS handshake failed; retry scheduled",
+            "updatedUtc": "2025-09-17T12:08:00Z",
+            "updatedBy": "ops@halos",
+            "stateHistory": [
+              { "stateCode": 2, "state": "QUEUED", "timestampUtc": "2025-09-17T12:07:10Z", "by": "ops@halos" },
+              { "stateCode": 11, "state": "NETWORK_ERROR", "timestampUtc": "2025-09-17T12:08:00Z", "by": "ops@halos" },
+              { "stateCode": 13, "state": "RETRYING", "timestampUtc": "2025-09-17T12:08:05Z", "by": "ops@halos", "reason": "backoff=PT30S" }
+            ],
+            "retry": { "max": 3, "attempt": 1, "backoff": "PT30S" }
+          }
+        ]
+      }
+    },
+
+    {
+      "path": "Halos/Halos/Architecture/Gates/samples/whatsnext.sample.json",
+      "kind": "json",
+      "json": {
+        "manifestId": "halos-whatsnext-001",
+        "createdUtc": "2025-09-18T00:00:00Z",
+        "owner": "jason",
+        "tags": ["self-health","halos","gates"],
+        "items": [
+          {
+            "id": "wire-up-enums",
+            "title": "Wire up workflow enum in runner",
+            "description": "Expose state mixin on each gate execution result.",
+            "priority": 1,
+            "labels": ["engine","schema"],
+            "state": "IN_PROGRESS",
+            "stateCode": 3,
+            "updatedUtc": "2025-09-18T00:10:00Z",
+            "updatedBy": "lumina",
+            "stateHistory": [
+              { "stateCode": 1, "state": "CREATED", "timestampUtc": "2025-09-17T23:55:00Z" },
+              { "stateCode": 2, "state": "QUEUED", "timestampUtc": "2025-09-17T23:56:00Z" },
+              { "stateCode": 3, "state": "IN_PROGRESS", "timestampUtc": "2025-09-18T00:10:00Z" }
+            ],
+            "links": [
+              { "rel": "repo", "href": "https://github.com/JasonSilvestri/Halos", "note": "root" },
+              { "rel": "runner", "href": "Halos/Halos/Architecture/Gates/tools/lumina-gate.ps1" }
+            ],
+            "metrics": { "attempts": 1 }
+          },
+          {
+            "id": "sample-results",
+            "title": "Create sample result with tally fields",
+            "priority": 2,
+            "labels": ["samples"],
+            "state": "QUEUED",
+            "stateCode": 2,
+            "links": [
+              { "rel": "schema", "href": "Halos/Halos/Architecture/Gates/schemas/halos-workflow.schema.json" }
+            ]
+          },
+          {
+            "id": "cdn-retry",
+            "title": "CDN upload retry",
+            "priority": 3,
+            "labels": ["ops","network"],
+            "state": "RETRYING",
+            "stateCode": 13,
+            "reason": "previous NETWORK_ERROR; backoff=PT30S",
+            "metrics": { "attempts": 2, "elapsedMs": 4200 }
+          }
+        ]
+      }
+    },
+
+    {
+      "path": "Halos/Halos/Architecture/Gates/tools/validate-gate.mjs",
+      "kind": "text",
+      "text": "#!/usr/bin/env node\n// Simple AJV-based validator for Halos Gates + custom mixins.\n// Node 20.x compatible (ESM). No network fetch; local file $refs only.\n\nimport fs from \"node:fs\";\nimport path from \"node:path\";\nimport process from \"node:process\";\nimport Ajv from \"ajv\";\nimport addFormats from \"ajv-formats\";\n\n// ---------------------\n// CLI args\n// ---------------------\nconst args = process.argv.slice(2);\nlet schemaKey = \"gate\";\nlet filePath = null;\n\nfor (let i = 0; i < args.length; i++) {\n  const a = args[i];\n  if (a === \"--schema\" && args[i+1]) {\n    schemaKey = args[i+1];\n    i++;\n  } else if (a === \"--file\" && args[i+1]) {\n    filePath = args[i+1];\n    i++;\n  }\n}\n\n// If --file passed without path, try to read next arg or fall back to samples\nif (args.includes(\"--file\") && !filePath) {\n  if (schemaKey === \"workflow\") filePath = \"./samples/workitem.sample.json\";\n  else if (schemaKey === \"whatsnext\") filePath = \"./samples/whatsnext.sample.json\";\n}\n\n// ---------------------\n// Resolve paths\n// ---------------------\nconst ROOT = process.cwd(); // expect cwd = Halos/Architecture/Gates\nconst schemasDir = path.join(ROOT, \"schemas\");\n\n// Map logical names to local schema files\nconst schemaMap = {\n  gate: \"lumina-gate.schema.json\",\n  envelope: \"helix-lumina-envelope.schema.json\",\n  runner: \"lumina-gate.config.schema.json\",\n  naming: \"naming.schema.json\",\n  freeze: \"freeze-shot.schema.json\",\n  workflow: \"halos-workflow.schema.json\",\n  whatsnext: \"halos-whatsnext.schema.json\"\n};\n\nif (!schemaMap[schemaKey]) {\n  console.error(`[ERROR] Unknown --schema '${schemaKey}'. Known keys: ${Object.keys(schemaMap).join(\", \")}`);\n  process.exit(2);\n}\n\nconst schemaFilename = schemaMap[schemaKey];\nconst schemaPath = path.join(schemasDir, schemaFilename);\n\nif (!fs.existsSync(schemaPath)) {\n  console.error(`[ERROR] Schema not found: ${schemaPath}`);\n  process.exit(2);\n}\n\nif (args.includes(\"--file\") && !filePath) {\n  console.error(\"[ERROR] --file requires a path or a schema-provided default.\");\n  process.exit(2);\n}\n\nlet data = null;\nif (filePath) {\n  const absFile = path.isAbsolute(filePath) ? filePath : path.join(ROOT, filePath);\n  if (!fs.existsSync(absFile)) {\n    console.error(`[ERROR] Data file not found: ${absFile}`);\n    process.exit(2);\n  }\n  data = JSON.parse(fs.readFileSync(absFile, \"utf8\"));\n}\n\n// ---------------------\n// AJV setup (local $ref)\n// ---------------------\nconst ajv = new Ajv({\n  strict: false,\n  allErrors: true,\n  allowUnionTypes: true,\n  loadSchema: undefined\n});\naddFormats(ajv);\n\n// Preload all schemas in the directory so local $refs resolve\nfor (const entry of fs.readdirSync(schemasDir)) {\n  if (entry.endsWith(\".json\")) {\n    try {\n      const raw = fs.readFileSync(path.join(schemasDir, entry), \"utf8\");\n      const schema = JSON.parse(raw);\n      const id = schema.$id || entry;\n      ajv.addSchema(schema, id);\n    } catch (e) {\n      console.warn(`[WARN] Skipping invalid schema file: ${entry} (${e.message})`);\n    }\n  }\n}\n\n// Compile the requested schema\nlet validate;\ntry {\n  const primarySchemaRaw = JSON.parse(fs.readFileSync(schemaPath, \"utf8\"));\n  const primaryId = primarySchemaRaw.$id || schemaFilename;\n  validate = ajv.getSchema(primaryId) || ajv.compile(primarySchemaRaw);\n} catch (e) {\n  console.error(`[ERROR] Failed to compile schema '${schemaFilename}': ${e.message}`);\n  process.exit(2);\n}\n\n// Validate (if data provided) or just compile-check\nif (data) {\n  const ok = validate(data);\n  if (ok) {\n    console.log(`[OK] ${schemaKey} ✓  (${schemaFilename})`);\n    process.exit(0);\n  } else {\n    console.error(`[FAIL] ${schemaKey} ✗  (${schemaFilename})`);\n    for (const err of validate.errors ?? []) {\n      console.error(`- ${err.instancePath || \"/\"} ${err.message}`);\n      if (err.params) console.error(`  params: ${JSON.stringify(err.params)}`);\n    }\n    process.exit(1);\n  }\n} else {\n  console.log(`[OK] Schema '${schemaFilename}' compiled successfully.`);\n  process.exit(0);\n}\n"
+    },
+
+    {
+      "path": "Halos/Halos/Architecture/Gates/package.json",
+      "kind": "json",
+      "json": {
+        "name": "halos-gates",
+        "version": "1.0.0",
+        "private": true,
+        "description": "Halos Architecture Gates tooling (schemas, validators, utilities).",
+        "type": "module",
+        "scripts": {
+          "gate:validate": "node ./tools/validate-gate.mjs",
+          "gate:validate:file": "node ./tools/validate-gate.mjs --file",
+          "gate:validate:envelope": "node ./tools/validate-gate.mjs --schema envelope --file",
+          "gate:validate:runner": "node ./tools/validate-gate.mjs --schema runner --file",
+          "gate:validate:naming": "node ./tools/validate-gate.mjs --schema naming --file",
+          "gate:validate:freeze": "node ./tools/validate-gate.mjs --schema freeze --file",
+          "wf:validate:file": "node ./tools/validate-gate.mjs --schema workflow --file",
+          "next:validate:file": "node ./tools/validate-gate.mjs --schema whatsnext --file"
+        },
+        "devDependencies": {
+          "ajv": "^8.17.1",
+          "ajv-formats": "^3.0.1"
+        }
+      }
+    },
+
+    {
+      "path": "Halos/Halos/Architecture/Gates/samples/halo-lumina-envelope.json",
+      "kind": "json",
+      "json": { "$ref": "#/envelope" }
+    },
+
+    {
+      "path": "Halos/Halos/Architecture/Gates/about/halos-workflow.schema.json.md",
+      "kind": "text",
+      "text": "# halos-workflow.schema.json\n\n**What it is:** A reusable state mixin you can `$ref` into any JSON object.\n\n**Fields:** `stateCode` (int), `state` (label), optional `reason`, `updatedUtc`, `updatedBy`, `stateHistory[]`.\n\n**Why:** Gives every unit of work a deterministic status without bloating your contracts.\n\n**Validate:**\n```powershell\nnpm --prefix \"Halos/Architecture/Gates\" run wf:validate:file -- --file \"Halos/Halos/Architecture/Gates/samples/workitem.sample.json\"\n```\n"
+    },
+
+    {
+      "path": "Halos/Halos/Architecture/Gates/about/halos-whatsnext.schema.json.md",
+      "kind": "text",
+      "text": "# halos-whatsnext.schema.json\n\n**What it is:** A compact \"What's Next\" manifest. Each item includes the workflow mixin, priorities, labels, links.\n\n**Why:** A safe, appendable backlog that travels with seeds and envelopes.\n\n**Validate:**\n```powershell\nnpm --prefix \"Halos/Architecture/Gates\" run next:validate:file -- --file \"Halos/Halos/Architecture/Gates/samples/whatsnext.sample.json\"\n```\n"
+    },
+
+    {
+      "path": "Halos/Halos/Architecture/Gates/about/workitem.sample.json.md",
+      "kind": "text",
+      "text": "# workitem.sample.json\n\n**Shows:** Three work items (content draft, review gate, CDN op) carrying the state mixin and realistic histories.\n\n**Use as template:** Duplicate and tweak `id`, `type`, and `state` fields.\n"
+    },
+
+    {
+      "path": "Halos/Halos/Architecture/Gates/about/whatsnext.sample.json.md",
+      "kind": "text",
+      "text": "# whatsnext.sample.json\n\n**Shows:** A minimal next-actions stack (`wire-up-enums`, `sample-results`, `cdn-retry`) using priorities 1–3.\n\n**Tip:** Keep it append-only; transitions are recorded via the mixin.\n"
+    },
+
+    {
+      "path": "Halos/Halos/Architecture/Gates/about/halo.lumina.seed.json.md",
+      "kind": "text",
+      "text": "# halo.lumina.seed.json (Cold-Start)\n\n**Purpose:** One file to rehydrate Gates tooling: header, envelope, schemas, samples, validator, and docs.\n\n**Materialize:** Write each `bundled_files[].path` with its `json` or `text` content.\n\n**After writing:**\n```powershell\ncd Halos/Architecture/Gates\nnpm install\nnpm run wf:validate:file -- --file ./samples/workitem.sample.json\nnpm run next:validate:file -- --file ./samples/whatsnext.sample.json\n```\n"
+    }
+  ]
+}
+
+```
+
+---
+
+## `Halos/Architecture/Gates/package.json`
+
+```json
+{
+  "name": "halos-gates",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Halos Architecture Gates tooling (schemas, validators, utilities).",
+  "type": "module",
+  "scripts": {
+    "gate:validate": "node ./tools/validate-gate.mjs",
+    "gate:validate:file": "node ./tools/validate-gate.mjs --file",
+    "gate:validate:envelope": "node ./tools/validate-gate.mjs --schema envelope --file",
+    "gate:validate:runner": "node ./tools/validate-gate.mjs --schema runner --file",
+    "gate:validate:naming": "node ./tools/validate-gate.mjs --schema naming --file",
+    "gate:validate:freeze": "node ./tools/validate-gate.mjs --schema freeze --file",
+    "wf:validate:file": "node ./tools/validate-gate.mjs --schema workflow --file",
+    "next:validate:file": "node ./tools/validate-gate.mjs --schema whatsnext --file"
+  },
+  "devDependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1"
+  }
+}
+```
+
+---
+
+## Navigation
+
+- **Back to Home (repo root):** [`./README.md`](./README.md)
+
+---
+
+##### [Halos\{\} GitHub](https://github.com/JasonSilvestri/Halos)
+
+###### Copyright © 2025 — All Rights Reserved by Jason Silvestri
