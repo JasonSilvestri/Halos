@@ -54,7 +54,7 @@
         },
         {
           "rel": "runner",
-          "href": "Halos/Halos/Architecture/Gates/tools/lumina-gate.ps1"
+          "href": "Halos/gates/tools/lumina-gate.ps1"
         }
       ],
       "metrics": { "attempts": 1 }
@@ -69,7 +69,7 @@
       "links": [
         {
           "rel": "schema",
-          "href": "Halos/Halos/Architecture/Gates/schemas/halos-workflow.schema.json"
+          "href": "Halos/gates/schemas/halos-workflow.schema.json"
         }
       ]
     },
@@ -83,7 +83,7 @@
       "links": [
         {
           "rel": "schema",
-          "href": "Halos/Halos/Architecture/Gates/schemas/halos-workitem.schema.json"
+          "href": "Halos/gates/schemas/halos-workitem.schema.json"
         }
       ]
     },
@@ -97,7 +97,7 @@
       "links": [
         {
           "rel": "sample",
-          "href": "Halos/Halos/Architecture/Gates/samples/workitem.sample.json"
+          "href": "Halos/gates/samples/workitem.sample.json"
         }
       ]
     },
@@ -111,7 +111,7 @@
       "links": [
         {
           "rel": "schema",
-          "href": "Halos/Halos/Architecture/Gates/schemas/halos-workitem.schema.json"
+          "href": "Halos/gates/schemas/halos-workitem.schema.json"
         }
       ]
     },
@@ -125,7 +125,7 @@
       "links": [
         {
           "rel": "sample",
-          "href": "Halos/Halos/Architecture/Gates/samples/workitem.sample.json"
+          "href": "Halos/gates/samples/workitem.sample.json"
         }
       ]
     },
@@ -139,7 +139,7 @@
       "links": [
         {
           "rel": "validators",
-          "href": "Halos/Halos/Architecture/Gates/samples/workitem.sample.json"
+          "href": "Halos/gates/samples/workitem.sample.json"
         }
       ]
     },

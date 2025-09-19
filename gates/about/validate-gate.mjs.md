@@ -2,7 +2,7 @@
 
 A `Halo{}` uses AJV for JSON Schema validation. Below is a simple, reusable validator script you can run from the command line to validate any of the provided schemas or your own custom mixins.
 
-### 1. Script `Halos/Architecture/Gates/tools/validate-gate.mjs`:
+### 1. Script `Halos/gates/tools/validate-gate.mjs`:
 
 ```js
  
@@ -44,7 +44,7 @@ if (args.includes("--file") && !filePath) {
 // ---------------------
 // Resolve paths
 // ---------------------
-const ROOT = process.cwd(); // expect cwd = Halos/Architecture/Gates
+const ROOT = process.cwd(); // expect cwd = Halos/gates
 const schemasDir = path.join(ROOT, "schemas");
 
 // Map logical names to local schema files
@@ -149,7 +149,7 @@ if (data) {
  ```
  
 - Results write to:
-  `Halos/Architecture/Gates/samples/<timestamp>.sample.json`
+  `Halos/gates/samples/<timestamp>.sample.json`
 
 - Schema is enforced; connection strings are redacted with a stable fingerprint hash.
 - Markdown fence issues are reported in `warnings[]` to catch UI rendering hazards early.
@@ -163,13 +163,13 @@ if (data) {
 
 ```powershell
 # validate workflow sample
-npm --prefix "Halos/Architecture/Gates" run wf:validate:file -- --file "Halos/Halos/Architecture/Gates/samples/workitem.sample.json"
+npm --prefix "Halos/gates" run wf:validate:file -- --file "Halos/gates/samples/workitem.sample.json"
 
 # validate what's-next sample
-npm --prefix "Halos/Architecture/Gates" run next:validate:file -- --file "Halos/Halos/Architecture/Gates/samples/whatsnext.sample.json"
+npm --prefix "Halos/gates" run next:validate:file -- --file "Halos/gates/samples/whatsnext.sample.json"
 ```
 
-#### 2. From `Halos/Architecture/Gates/`:
+#### 2. From `Halos/gates/`:
 
 ```powershell
 npm run wf:validate:file -- --file "./samples/workitem.sample.json"

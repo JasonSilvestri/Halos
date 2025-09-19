@@ -7,7 +7,7 @@ This folder contains **scripts and helper utilities** used to run, get and/or se
 # File Structure
 
 ```
-Halos/Architecture/Gates/
+Halos/gates/
 ├─ package.json
 ├─ tools/
 │  └─ validate-gate.mjs
@@ -27,16 +27,16 @@ Here is the mapping of `Halo{}` terminology to existing file names and locations
 
 **From a script lifecycle perspective:**
 
-1. **Schema**: `Halos/Architecture/Gates/schemas/halo.lumina.seed.schema.json`
-2. **Sample**: `Halos/Architecture/Gates/samples/halo.lumina.seed.*.json`
-3. **Validators**: `Halos/Architecture/Gates/tools/validate-gate.mjs`
-4. **Packages**: `Halos/Architecture/Gates/package.json`
+1. **Schema**: `Halos/gates/schemas/halo.lumina.seed.schema.json`
+2. **Sample**: `Halos/gates/samples/halo.lumina.seed.*.json`
+3. **Validators**: `Halos/gates/tools/validate-gate.mjs`
+4. **Packages**: `Halos/gates/package.json`
 
 This mapping **above** preserves CI paths and developer muscle memory while letting documentation use the PaLMs{} terminology.
 
 ---
 
-## `Halos/Architecture/Gates/schemas/halo.lumina.seed.schema.json`
+## `Halos/gates/schemas/halo.lumina.seed.schema.json`
 
 ```json
 {
@@ -50,7 +50,7 @@ This mapping **above** preserves CI paths and developer muscle memory while lett
     "notes": [
       "This is the canonical Cold-Start seed (halo.lumina.seed.json).",
       "It embeds schemas, samples, validator script, and about docs.",
-      "Materialize the bundled_files to disk under Halos/Architecture/Gates/**."
+      "Materialize the bundled_files to disk under Halos/gates/**."
     ]
   },
 
@@ -78,37 +78,37 @@ This mapping **above** preserves CI paths and developer muscle memory while lett
     },
     "roots": {
       "appRoot": "E:/All/Repos/Halos",
-      "gateRoot": "Halos/Architecture/Gates"
+      "gateRoot": "Halos/gates"
     },
     "paths": {
       "solution": "Halos.sln",
-      "sharedProject": "Halos/Halos.csproj",
-      "startupProject": "Halos/Halos.csproj",
-      "appSettings": "Halos/appsettings.Development.json",
-      "resultsDir": "Halos/Halos/Architecture/Gates/results",
-      "toolsDir": "Halos/Halos/Architecture/Gates/tools",
+      "sharedProject": "Halos/src/Halos.Shared.csproj",
+      "startupProject": "Halos/src/Halos.App.csproj",
+      "appSettings": "Halos/src/Halos.App/appsettings.Development.json",
+      "resultsDir": "Halos/gates/results",
+      "toolsDir": "Halos/gates/tools",
       "schemas": {
-        "gate": "Halos/Halos/Architecture/Gates/lumina-gate.schema.json",
-        "envelope": "Halos/Halos/Architecture/Gates/helix-lumina-envelope.schema.json",
-        "runnerConfig": "Halos/Halos/Architecture/Gates/lumina-gate.config.schema.json",
-        "naming": "Halos/Halos/Architecture/Gates/naming.schema.json",
-        "freezeShot": "Halos/Halos/Architecture/Gates/freeze-shot.schema.json",
-        "workflow": "Halos/Halos/Architecture/Gates/schemas/halos-workflow.schema.json",
-        "whatsnext": "Halos/Halos/Architecture/Gates/schemas/halos-whatsnext.schema.json"
+        "gate": "Halos/gates/lumina-gate.schema.json",
+        "envelope": "Halos/gates/helix-lumina-envelope.schema.json",
+        "runnerConfig": "Halos/gates/lumina-gate.config.schema.json",
+        "naming": "Halos/gates/naming.schema.json",
+        "freezeShot": "Halos/gates/freeze-shot.schema.json",
+        "workflow": "Halos/gates/schemas/halos-workflow.schema.json",
+        "whatsnext": "Halos/gates/schemas/halos-whatsnext.schema.json"
       },
       "runner": {
-        "powershell": "Halos/Halos/Architecture/Gates/tools/lumina-gate.ps1",
-        "validator": "Halos/Halos/Architecture/Gates/tools/validate-gate.mjs",
-        "fenceCheck": "Halos/Halos/Architecture/Gates/tools/check-markdown-fences.ps1"
+        "powershell": "Halos/gates/tools/lumina-gate.ps1",
+        "validator": "Halos/gates/tools/validate-gate.mjs",
+        "fenceCheck": "Halos/gates/tools/check-markdown-fences.ps1"
       },
-      "ciWorkflowParked": "Halos/Halos/Architecture/Gates/git/workflows/lumina-gate.yaml"
+      "ciWorkflowParked": "Halos/gates/git/workflows/lumina-gate.yaml"
     },
     "security": {
       "redactConnectionStrings": true,
       "fingerprintHash": "SHA-256",
       "artifactPolicy": {
         "storeGateResults": true,
-        "resultsGlob": "Halos/Halos/Architecture/Gates/results/*.json"
+        "resultsGlob": "Halos/gates/sql/*.json"
       }
     },
     "gatePolicy": {
@@ -121,33 +121,33 @@ This mapping **above** preserves CI paths and developer muscle memory while lett
     },
     "commands": {
       "localRun": [
-        "pwsh Halos/Architecture/Gates/tools/lumina-gate.ps1 -SolutionPath \"Halos.sln\" -SharedProject \"Halos/Halos.csproj\" -StartupProject \"Halos/Halos.csproj\" -AppSettingsPath \"Halos/appsettings.Development.json\" -Environment \"Development\" -SkipDbCheck -TreatUiAsError"
+        "pwsh Halos/gates/tools/lumina-gate.ps1 -SolutionPath \"Halos.sln\" -SharedProject \"Halos/src/Halos.App.csproj\" -StartupProject \"Halos/src/Halos.App.csproj\" -AppSettingsPath \"Halos/src/Halos.App/appsettings.Development.json\" -Environment \"Development\" -SkipDbCheck -TreatUiAsError"
       ],
       "validateLatest": [
-        "npm --prefix Halos/Architecture/Gates install",
-        "npm --prefix Halos/Architecture/Gates run gate:validate"
+        "npm --prefix Halos/gates install",
+        "npm --prefix Halos/gates run gate:validate"
       ],
       "validateSpecific": [
-        "npm --prefix Halos/Architecture/Gates run gate:validate:file -- --file \"Halos/Halos/Architecture/Gates/results/lumina-result.<timestamp>.json\""
+        "npm --prefix Halos/gates run gate:validate:file -- --file \"Halos/gates/sql/lumina-result.<timestamp>.json\""
       ],
       "validateWorkflow": [
-        "npm --prefix Halos/Architecture/Gates run wf:validate:file -- --file \"Halos/Halos/Architecture/Gates/samples/workitem.sample.json\""
+        "npm --prefix Halos/gates run wf:validate:file -- --file \"Halos/gates/samples/workitem.sample.json\""
       ],
       "validateWhatsNext": [
-        "npm --prefix Halos/Architecture/Gates run next:validate:file -- --file \"Halos/Halos/Architecture/Gates/samples/whatsnext.sample.json\""
+        "npm --prefix Halos/gates run next:validate:file -- --file \"Halos/gates/samples/whatsnext.sample.json\""
       ]
     },
     "npmScripts": {
-      "packageJsonLocation": "Halos/Halos/Architecture/Gates/package.json",
+      "packageJsonLocation": "Halos/gates/package.json",
       "scripts": {
-        "gate:validate": "node ./tools/validate-gate.mjs",
-        "gate:validate:file": "node ./tools/validate-gate.mjs --file",
-        "gate:validate:envelope": "node ./tools/validate-gate.mjs --schema envelope --file",
-        "gate:validate:runner": "node ./tools/validate-gate.mjs --schema runner --file",
-        "gate:validate:naming": "node ./tools/validate-gate.mjs --schema naming --file",
-        "gate:validate:freeze": "node ./tools/validate-gate.mjs --schema freeze --file",
-        "wf:validate:file": "node ./tools/validate-gate.mjs --schema workflow --file",
-        "next:validate:file": "node ./tools/validate-gate.mjs --schema whatsnext --file"
+        "gate:validate": "node ./gates/tools/validate-gate.mjs",
+        "gate:validate:file": "node ./gates/tools/validate-gate.mjs --file",
+        "gate:validate:envelope": "node ./gates/tools/validate-gate.mjs --schema envelope --file",
+        "gate:validate:runner": "node ./gates/tools/validate-gate.mjs --schema runner --file",
+        "gate:validate:naming": "node ./gates/tools/validate-gate.mjs --schema naming --file",
+        "gate:validate:freeze": "node ./gates/tools/validate-gate.mjs --schema freeze --file",
+        "wf:validate:file": "node ./gates/tools/validate-gate.mjs --schema workflow --file",
+        "next:validate:file": "node ./gates/tools/validate-gate.mjs --schema whatsnext --file"
       },
       "devDependencies": {
         "ajv": "^8.17.1",
@@ -160,7 +160,7 @@ This mapping **above** preserves CI paths and developer muscle memory while lett
       "passField": "pass",
       "warningsField": "warnings",
       "timestampField": "timestampUtc",
-      "sampleResult": "Halos/Halos/Architecture/Gates/results/lumina-result.sample.json"
+      "sampleResult": "Halos/gates/sql/lumina-result.sample.json"
     },
     "ciModes": [
       { "name": "nonBlocking", "continueOnError": true, "uploadArtifacts": true, "enforcePass": false },
@@ -178,7 +178,7 @@ This mapping **above** preserves CI paths and developer muscle memory while lett
 
   "bundled_files": [
     {
-      "path": "Halos/Halos/Architecture/Gates/schemas/halos-workflow.schema.json",
+      "path": "Halos/gates/schemas/halos-workflow.schema.json",
       "kind": "json",
       "json": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -240,7 +240,7 @@ This mapping **above** preserves CI paths and developer muscle memory while lett
     },
 
     {
-      "path": "Halos/Halos/Architecture/Gates/schemas/halos-whatsnext.schema.json",
+      "path": "Halos/gates/schemas/halos-whatsnext.schema.json",
       "kind": "json",
       "json": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -303,7 +303,7 @@ This mapping **above** preserves CI paths and developer muscle memory while lett
     },
 
     {
-      "path": "Halos/Halos/Architecture/Gates/samples/workitem.sample.json",
+      "path": "Halos/gates/samples/workitem.sample.json",
       "kind": "json",
       "json": {
         "manifestId": "halos-demo-001",
@@ -334,10 +334,10 @@ This mapping **above** preserves CI paths and developer muscle memory while lett
             "state": "PASSED",
             "reason": "Auto-approval threshold >= 0.85",
             "updatedUtc": "2025-09-17T12:07:00Z",
-            "updatedBy": "gate@halos",
+            "updatedBy": "therealjasonsilvestri@gmail.com",
             "stateHistory": [
-              { "stateCode": 4, "state": "WAITING", "timestampUtc": "2025-09-17T12:06:00Z", "by": "gate@halos", "reason": "awaiting score" },
-              { "stateCode": 5, "state": "PASSED", "timestampUtc": "2025-09-17T12:07:00Z", "by": "gate@halos" }
+              { "stateCode": 4, "state": "WAITING", "timestampUtc": "2025-09-17T12:06:00Z", "by": "therealjasonsilvestri@gmail.com", "reason": "awaiting score" },
+              { "stateCode": 5, "state": "PASSED", "timestampUtc": "2025-09-17T12:07:00Z", "by": "therealjasonsilvestri@gmail.com" }
             ],
             "gate": {
               "name": "quality-score",
@@ -369,7 +369,7 @@ This mapping **above** preserves CI paths and developer muscle memory while lett
     },
 
     {
-      "path": "Halos/Halos/Architecture/Gates/samples/whatsnext.sample.json",
+      "path": "Halos/gates/samples/whatsnext.sample.json",
       "kind": "json",
       "json": {
         "manifestId": "halos-whatsnext-001",
@@ -394,7 +394,7 @@ This mapping **above** preserves CI paths and developer muscle memory while lett
             ],
             "links": [
               { "rel": "repo", "href": "https://github.com/JasonSilvestri/Halos", "note": "root" },
-              { "rel": "runner", "href": "Halos/Halos/Architecture/Gates/tools/lumina-gate.ps1" }
+              { "rel": "runner", "href": "Halos/gates/tools/lumina-gate.ps1" }
             ],
             "metrics": { "attempts": 1 }
           },
@@ -406,7 +406,7 @@ This mapping **above** preserves CI paths and developer muscle memory while lett
             "state": "QUEUED",
             "stateCode": 2,
             "links": [
-              { "rel": "schema", "href": "Halos/Halos/Architecture/Gates/schemas/halos-workflow.schema.json" }
+              { "rel": "schema", "href": "Halos/gates/schemas/halos-workflow.schema.json" }
             ]
           },
           {
@@ -424,13 +424,13 @@ This mapping **above** preserves CI paths and developer muscle memory while lett
     },
 
     {
-      "path": "Halos/Halos/Architecture/Gates/tools/validate-gate.mjs",
+      "path": "Halos/gates/tools/validate-gate.mjs",
       "kind": "text",
-      "text": "#!/usr/bin/env node\n// Simple AJV-based validator for Halos Gates + custom mixins.\n// Node 20.x compatible (ESM). No network fetch; local file $refs only.\n\nimport fs from \"node:fs\";\nimport path from \"node:path\";\nimport process from \"node:process\";\nimport Ajv from \"ajv\";\nimport addFormats from \"ajv-formats\";\n\n// ---------------------\n// CLI args\n// ---------------------\nconst args = process.argv.slice(2);\nlet schemaKey = \"gate\";\nlet filePath = null;\n\nfor (let i = 0; i < args.length; i++) {\n  const a = args[i];\n  if (a === \"--schema\" && args[i+1]) {\n    schemaKey = args[i+1];\n    i++;\n  } else if (a === \"--file\" && args[i+1]) {\n    filePath = args[i+1];\n    i++;\n  }\n}\n\n// If --file passed without path, try to read next arg or fall back to samples\nif (args.includes(\"--file\") && !filePath) {\n  if (schemaKey === \"workflow\") filePath = \"./samples/workitem.sample.json\";\n  else if (schemaKey === \"whatsnext\") filePath = \"./samples/whatsnext.sample.json\";\n}\n\n// ---------------------\n// Resolve paths\n// ---------------------\nconst ROOT = process.cwd(); // expect cwd = Halos/Architecture/Gates\nconst schemasDir = path.join(ROOT, \"schemas\");\n\n// Map logical names to local schema files\nconst schemaMap = {\n  gate: \"lumina-gate.schema.json\",\n  envelope: \"helix-lumina-envelope.schema.json\",\n  runner: \"lumina-gate.config.schema.json\",\n  naming: \"naming.schema.json\",\n  freeze: \"freeze-shot.schema.json\",\n  workflow: \"halos-workflow.schema.json\",\n  whatsnext: \"halos-whatsnext.schema.json\"\n};\n\nif (!schemaMap[schemaKey]) {\n  console.error(`[ERROR] Unknown --schema '${schemaKey}'. Known keys: ${Object.keys(schemaMap).join(\", \")}`);\n  process.exit(2);\n}\n\nconst schemaFilename = schemaMap[schemaKey];\nconst schemaPath = path.join(schemasDir, schemaFilename);\n\nif (!fs.existsSync(schemaPath)) {\n  console.error(`[ERROR] Schema not found: ${schemaPath}`);\n  process.exit(2);\n}\n\nif (args.includes(\"--file\") && !filePath) {\n  console.error(\"[ERROR] --file requires a path or a schema-provided default.\");\n  process.exit(2);\n}\n\nlet data = null;\nif (filePath) {\n  const absFile = path.isAbsolute(filePath) ? filePath : path.join(ROOT, filePath);\n  if (!fs.existsSync(absFile)) {\n    console.error(`[ERROR] Data file not found: ${absFile}`);\n    process.exit(2);\n  }\n  data = JSON.parse(fs.readFileSync(absFile, \"utf8\"));\n}\n\n// ---------------------\n// AJV setup (local $ref)\n// ---------------------\nconst ajv = new Ajv({\n  strict: false,\n  allErrors: true,\n  allowUnionTypes: true,\n  loadSchema: undefined\n});\naddFormats(ajv);\n\n// Preload all schemas in the directory so local $refs resolve\nfor (const entry of fs.readdirSync(schemasDir)) {\n  if (entry.endsWith(\".json\")) {\n    try {\n      const raw = fs.readFileSync(path.join(schemasDir, entry), \"utf8\");\n      const schema = JSON.parse(raw);\n      const id = schema.$id || entry;\n      ajv.addSchema(schema, id);\n    } catch (e) {\n      console.warn(`[WARN] Skipping invalid schema file: ${entry} (${e.message})`);\n    }\n  }\n}\n\n// Compile the requested schema\nlet validate;\ntry {\n  const primarySchemaRaw = JSON.parse(fs.readFileSync(schemaPath, \"utf8\"));\n  const primaryId = primarySchemaRaw.$id || schemaFilename;\n  validate = ajv.getSchema(primaryId) || ajv.compile(primarySchemaRaw);\n} catch (e) {\n  console.error(`[ERROR] Failed to compile schema '${schemaFilename}': ${e.message}`);\n  process.exit(2);\n}\n\n// Validate (if data provided) or just compile-check\nif (data) {\n  const ok = validate(data);\n  if (ok) {\n    console.log(`[OK] ${schemaKey} ✓  (${schemaFilename})`);\n    process.exit(0);\n  } else {\n    console.error(`[FAIL] ${schemaKey} ✗  (${schemaFilename})`);\n    for (const err of validate.errors ?? []) {\n      console.error(`- ${err.instancePath || \"/\"} ${err.message}`);\n      if (err.params) console.error(`  params: ${JSON.stringify(err.params)}`);\n    }\n    process.exit(1);\n  }\n} else {\n  console.log(`[OK] Schema '${schemaFilename}' compiled successfully.`);\n  process.exit(0);\n}\n"
+      "text": "#!/usr/bin/env node\n// Simple AJV-based validator for Halos Gates + custom mixins.\n// Node 20.x compatible (ESM). No network fetch; local file $refs only.\n\nimport fs from \"node:fs\";\nimport path from \"node:path\";\nimport process from \"node:process\";\nimport Ajv from \"ajv\";\nimport addFormats from \"ajv-formats\";\n\n// ---------------------\n// CLI args\n// ---------------------\nconst args = process.argv.slice(2);\nlet schemaKey = \"gate\";\nlet filePath = null;\n\nfor (let i = 0; i < args.length; i++) {\n  const a = args[i];\n  if (a === \"--schema\" && args[i+1]) {\n    schemaKey = args[i+1];\n    i++;\n  } else if (a === \"--file\" && args[i+1]) {\n    filePath = args[i+1];\n    i++;\n  }\n}\n\n// If --file passed without path, try to read next arg or fall back to samples\nif (args.includes(\"--file\") && !filePath) {\n  if (schemaKey === \"workflow\") filePath = \"./samples/workitem.sample.json\";\n  else if (schemaKey === \"whatsnext\") filePath = \"./samples/whatsnext.sample.json\";\n}\n\n// ---------------------\n// Resolve paths\n// ---------------------\nconst ROOT = process.cwd(); // expect cwd = Halos/gates\nconst schemasDir = path.join(ROOT, \"schemas\");\n\n// Map logical names to local schema files\nconst schemaMap = {\n  gate: \"lumina-gate.schema.json\",\n  envelope: \"helix-lumina-envelope.schema.json\",\n  runner: \"lumina-gate.config.schema.json\",\n  naming: \"naming.schema.json\",\n  freeze: \"freeze-shot.schema.json\",\n  workflow: \"halos-workflow.schema.json\",\n  whatsnext: \"halos-whatsnext.schema.json\"\n};\n\nif (!schemaMap[schemaKey]) {\n  console.error(`[ERROR] Unknown --schema '${schemaKey}'. Known keys: ${Object.keys(schemaMap).join(\", \")}`);\n  process.exit(2);\n}\n\nconst schemaFilename = schemaMap[schemaKey];\nconst schemaPath = path.join(schemasDir, schemaFilename);\n\nif (!fs.existsSync(schemaPath)) {\n  console.error(`[ERROR] Schema not found: ${schemaPath}`);\n  process.exit(2);\n}\n\nif (args.includes(\"--file\") && !filePath) {\n  console.error(\"[ERROR] --file requires a path or a schema-provided default.\");\n  process.exit(2);\n}\n\nlet data = null;\nif (filePath) {\n  const absFile = path.isAbsolute(filePath) ? filePath : path.join(ROOT, filePath);\n  if (!fs.existsSync(absFile)) {\n    console.error(`[ERROR] Data file not found: ${absFile}`);\n    process.exit(2);\n  }\n  data = JSON.parse(fs.readFileSync(absFile, \"utf8\"));\n}\n\n// ---------------------\n// AJV setup (local $ref)\n// ---------------------\nconst ajv = new Ajv({\n  strict: false,\n  allErrors: true,\n  allowUnionTypes: true,\n  loadSchema: undefined\n});\naddFormats(ajv);\n\n// Preload all schemas in the directory so local $refs resolve\nfor (const entry of fs.readdirSync(schemasDir)) {\n  if (entry.endsWith(\".json\")) {\n    try {\n      const raw = fs.readFileSync(path.join(schemasDir, entry), \"utf8\");\n      const schema = JSON.parse(raw);\n      const id = schema.$id || entry;\n      ajv.addSchema(schema, id);\n    } catch (e) {\n      console.warn(`[WARN] Skipping invalid schema file: ${entry} (${e.message})`);\n    }\n  }\n}\n\n// Compile the requested schema\nlet validate;\ntry {\n  const primarySchemaRaw = JSON.parse(fs.readFileSync(schemaPath, \"utf8\"));\n  const primaryId = primarySchemaRaw.$id || schemaFilename;\n  validate = ajv.getSchema(primaryId) || ajv.compile(primarySchemaRaw);\n} catch (e) {\n  console.error(`[ERROR] Failed to compile schema '${schemaFilename}': ${e.message}`);\n  process.exit(2);\n}\n\n// Validate (if data provided) or just compile-check\nif (data) {\n  const ok = validate(data);\n  if (ok) {\n    console.log(`[OK] ${schemaKey} ✓  (${schemaFilename})`);\n    process.exit(0);\n  } else {\n    console.error(`[FAIL] ${schemaKey} ✗  (${schemaFilename})`);\n    for (const err of validate.errors ?? []) {\n      console.error(`- ${err.instancePath || \"/\"} ${err.message}`);\n      if (err.params) console.error(`  params: ${JSON.stringify(err.params)}`);\n    }\n    process.exit(1);\n  }\n} else {\n  console.log(`[OK] Schema '${schemaFilename}' compiled successfully.`);\n  process.exit(0);\n}\n"
     },
 
     {
-      "path": "Halos/Halos/Architecture/Gates/package.json",
+      "path": "Halos/gates/package.json",
       "kind": "json",
       "json": {
         "name": "halos-gates",
@@ -439,14 +439,14 @@ This mapping **above** preserves CI paths and developer muscle memory while lett
         "description": "Halos Architecture Gates tooling (schemas, validators, utilities).",
         "type": "module",
         "scripts": {
-          "gate:validate": "node ./tools/validate-gate.mjs",
-          "gate:validate:file": "node ./tools/validate-gate.mjs --file",
-          "gate:validate:envelope": "node ./tools/validate-gate.mjs --schema envelope --file",
-          "gate:validate:runner": "node ./tools/validate-gate.mjs --schema runner --file",
-          "gate:validate:naming": "node ./tools/validate-gate.mjs --schema naming --file",
-          "gate:validate:freeze": "node ./tools/validate-gate.mjs --schema freeze --file",
-          "wf:validate:file": "node ./tools/validate-gate.mjs --schema workflow --file",
-          "next:validate:file": "node ./tools/validate-gate.mjs --schema whatsnext --file"
+          "gate:validate": "node ./gates/tools/validate-gate.mjs",
+          "gate:validate:file": "node ./gates/tools/validate-gate.mjs --file",
+          "gate:validate:envelope": "node ./gates/tools/validate-gate.mjs --schema envelope --file",
+          "gate:validate:runner": "node ./gates/tools/validate-gate.mjs --schema runner --file",
+          "gate:validate:naming": "node ./gates/tools/validate-gate.mjs --schema naming --file",
+          "gate:validate:freeze": "node ./gates/tools/validate-gate.mjs --schema freeze --file",
+          "wf:validate:file": "node ./gates/tools/validate-gate.mjs --schema workflow --file",
+          "next:validate:file": "node ./gates/tools/validate-gate.mjs --schema whatsnext --file"
         },
         "devDependencies": {
           "ajv": "^8.17.1",
@@ -456,39 +456,39 @@ This mapping **above** preserves CI paths and developer muscle memory while lett
     },
 
     {
-      "path": "Halos/Halos/Architecture/Gates/samples/halo-lumina-envelope.json",
+      "path": "Halos/gates/samples/halo-lumina-envelope.json",
       "kind": "json",
       "json": { "$ref": "#/envelope" }
     },
 
     {
-      "path": "Halos/Halos/Architecture/Gates/about/halos-workflow.schema.json.md",
+      "path": "Halos/gates/about/halos-workflow.schema.json.md",
       "kind": "text",
-      "text": "# halos-workflow.schema.json\n\n**What it is:** A reusable state mixin you can `$ref` into any JSON object.\n\n**Fields:** `stateCode` (int), `state` (label), optional `reason`, `updatedUtc`, `updatedBy`, `stateHistory[]`.\n\n**Why:** Gives every unit of work a deterministic status without bloating your contracts.\n\n**Validate:**\n```powershell\nnpm --prefix \"Halos/Architecture/Gates\" run wf:validate:file -- --file \"Halos/Halos/Architecture/Gates/samples/workitem.sample.json\"\n```\n"
+      "text": "# halos-workflow.schema.json\n\n**What it is:** A reusable state mixin you can `$ref` into any JSON object.\n\n**Fields:** `stateCode` (int), `state` (label), optional `reason`, `updatedUtc`, `updatedBy`, `stateHistory[]`.\n\n**Why:** Gives every unit of work a deterministic status without bloating your contracts.\n\n**Validate:**\n```powershell\nnpm --prefix \"Halos/gates\" run wf:validate:file -- --file \"Halos/gates/samples/workitem.sample.json\"\n```\n"
     },
 
     {
-      "path": "Halos/Halos/Architecture/Gates/about/halos-whatsnext.schema.json.md",
+      "path": "Halos/gates/about/halos-whatsnext.schema.json.md",
       "kind": "text",
-      "text": "# halos-whatsnext.schema.json\n\n**What it is:** A compact \"What's Next\" manifest. Each item includes the workflow mixin, priorities, labels, links.\n\n**Why:** A safe, appendable backlog that travels with seeds and envelopes.\n\n**Validate:**\n```powershell\nnpm --prefix \"Halos/Architecture/Gates\" run next:validate:file -- --file \"Halos/Halos/Architecture/Gates/samples/whatsnext.sample.json\"\n```\n"
+      "text": "# halos-whatsnext.schema.json\n\n**What it is:** A compact \"What's Next\" manifest. Each item includes the workflow mixin, priorities, labels, links.\n\n**Why:** A safe, appendable backlog that travels with seeds and envelopes.\n\n**Validate:**\n```powershell\nnpm --prefix \"Halos/gates\" run next:validate:file -- --file \"Halos/gates/samples/whatsnext.sample.json\"\n```\n"
     },
 
     {
-      "path": "Halos/Halos/Architecture/Gates/about/workitem.sample.json.md",
+      "path": "Halos/gates/about/workitem.sample.json.md",
       "kind": "text",
       "text": "# workitem.sample.json\n\n**Shows:** Three work items (content draft, review gate, CDN op) carrying the state mixin and realistic histories.\n\n**Use as template:** Duplicate and tweak `id`, `type`, and `state` fields.\n"
     },
 
     {
-      "path": "Halos/Halos/Architecture/Gates/about/whatsnext.sample.json.md",
+      "path": "Halos/gates/about/whatsnext.sample.json.md",
       "kind": "text",
       "text": "# whatsnext.sample.json\n\n**Shows:** A minimal next-actions stack (`wire-up-enums`, `sample-results`, `cdn-retry`) using priorities 1–3.\n\n**Tip:** Keep it append-only; transitions are recorded via the mixin.\n"
     },
 
     {
-      "path": "Halos/Halos/Architecture/Gates/about/halo.lumina.seed.json.md",
+      "path": "Halos/gates/about/halo.lumina.seed.json.md",
       "kind": "text",
-      "text": "# halo.lumina.seed.json (Cold-Start)\n\n**Purpose:** One file to rehydrate Gates tooling: header, envelope, schemas, samples, validator, and docs.\n\n**Materialize:** Write each `bundled_files[].path` with its `json` or `text` content.\n\n**After writing:**\n```powershell\ncd Halos/Architecture/Gates\nnpm install\nnpm run wf:validate:file -- --file ./samples/workitem.sample.json\nnpm run next:validate:file -- --file ./samples/whatsnext.sample.json\n```\n"
+      "text": "# halo.lumina.seed.json (Cold-Start)\n\n**Purpose:** One file to rehydrate Gates tooling: header, envelope, schemas, samples, validator, and docs.\n\n**Materialize:** Write each `bundled_files[].path` with its `json` or `text` content.\n\n**After writing:**\n```powershell\ncd Halos/gates\nnpm install\nnpm run wf:validate:file -- --file ./samples/workitem.sample.json\nnpm run next:validate:file -- --file ./samples/whatsnext.sample.json\n```\n"
     }
   ]
 }
@@ -497,7 +497,7 @@ This mapping **above** preserves CI paths and developer muscle memory while lett
 
 ---
 
-## `Halos/Architecture/Gates/package.json`
+## `Halos/gates/package.json`
 
 ```json
 {
@@ -507,14 +507,14 @@ This mapping **above** preserves CI paths and developer muscle memory while lett
   "description": "Halos Architecture Gates tooling (schemas, validators, utilities).",
   "type": "module",
   "scripts": {
-    "gate:validate": "node ./tools/validate-gate.mjs",
-    "gate:validate:file": "node ./tools/validate-gate.mjs --file",
-    "gate:validate:envelope": "node ./tools/validate-gate.mjs --schema envelope --file",
-    "gate:validate:runner": "node ./tools/validate-gate.mjs --schema runner --file",
-    "gate:validate:naming": "node ./tools/validate-gate.mjs --schema naming --file",
-    "gate:validate:freeze": "node ./tools/validate-gate.mjs --schema freeze --file",
-    "wf:validate:file": "node ./tools/validate-gate.mjs --schema workflow --file",
-    "next:validate:file": "node ./tools/validate-gate.mjs --schema whatsnext --file"
+    "gate:validate": "node ./gates/tools/validate-gate.mjs",
+    "gate:validate:file": "node ./gates/tools/validate-gate.mjs --file",
+    "gate:validate:envelope": "node ./gates/tools/validate-gate.mjs --schema envelope --file",
+    "gate:validate:runner": "node ./gates/tools/validate-gate.mjs --schema runner --file",
+    "gate:validate:naming": "node ./gates/tools/validate-gate.mjs --schema naming --file",
+    "gate:validate:freeze": "node ./gates/tools/validate-gate.mjs --schema freeze --file",
+    "wf:validate:file": "node ./gates/tools/validate-gate.mjs --schema workflow --file",
+    "next:validate:file": "node ./gates/tools/validate-gate.mjs --schema whatsnext --file"
   },
   "devDependencies": {
     "ajv": "^8.17.1",

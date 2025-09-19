@@ -2,7 +2,7 @@
 
 Here are the `package.json` and scripts to run the validators.
 
-### 1. Script `Halos/Architecture/Gates/package.json`:
+### 1. Script `Halos/gates/package.json`:
 
 ```json
  
@@ -13,14 +13,14 @@ Here are the `package.json` and scripts to run the validators.
   "description": "Halos Architecture Gates tooling (schemas, validators, utilities).",
   "type": "module",
   "scripts": {
-    "gate:validate": "node ./tools/validate-gate.mjs",
-    "gate:validate:file": "node ./tools/validate-gate.mjs --file",
-    "gate:validate:envelope": "node ./tools/validate-gate.mjs --schema envelope --file",
-    "gate:validate:runner": "node ./tools/validate-gate.mjs --schema runner --file",
-    "gate:validate:naming": "node ./tools/validate-gate.mjs --schema naming --file",
-    "gate:validate:freeze": "node ./tools/validate-gate.mjs --schema freeze --file",
-    "wf:validate:file": "node ./tools/validate-gate.mjs --schema workflow --file",
-    "next:validate:file": "node ./tools/validate-gate.mjs --schema whatsnext --file"
+    "gate:validate": "node ./gates/tools/validate-gate.mjs",
+    "gate:validate:file": "node ./gates/tools/validate-gate.mjs --file",
+    "gate:validate:envelope": "node ./gates/tools/validate-gate.mjs --schema envelope --file",
+    "gate:validate:runner": "node ./gates/tools/validate-gate.mjs --schema runner --file",
+    "gate:validate:naming": "node ./gates/tools/validate-gate.mjs --schema naming --file",
+    "gate:validate:freeze": "node ./gates/tools/validate-gate.mjs --schema freeze --file",
+    "wf:validate:file": "node ./gates/tools/validate-gate.mjs --schema workflow --file",
+    "next:validate:file": "node ./gates/tools/validate-gate.mjs --schema whatsnext --file"
   },
   "devDependencies": {
     "ajv": "^8.17.1",
@@ -34,19 +34,19 @@ Here are the `package.json` and scripts to run the validators.
 ---
 
 
-### 2. Validators `Halos/Architecture/Gates/tools/validate-gate.mjs`:
+### 2. Validators `Halos/gates/tools/validate-gate.mjs`:
 
 **From repo root:**
 
 ```powershell
 # validate workflow sample
-npm --prefix "Halos/Architecture/Gates" run wf:validate:file -- --file "Halos/Halos/Architecture/Gates/samples/workitem.sample.json"
+npm --prefix "Halos/gates" run wf:validate:file -- --file "Halos/gates/samples/workitem.sample.json"
 
 # validate what's-next sample
-npm --prefix "Halos/Architecture/Gates" run next:validate:file -- --file "Halos/Halos/Architecture/Gates/samples/whatsnext.sample.json"
+npm --prefix "Halos/gates" run next:validate:file -- --file "Halos/gates/samples/whatsnext.sample.json"
 ```
 
-From `Halos/Architecture/Gates/`:
+From `Halos/gates/`:
 
 ```powershell
 npm run wf:validate:file -- --file "./samples/workitem.sample.json"

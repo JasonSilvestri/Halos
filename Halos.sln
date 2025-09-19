@@ -78,6 +78,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "seeds", "seeds", "{0490CD25
 		seeds\halo.lumina.seed.json = seeds\halo.lumina.seed.json
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sql", "sql", "{5ABB12A6-0922-4D42-BD1D-30BD6A4CE64B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -113,6 +115,7 @@ Global
 		{6D80BF85-CFE3-4658-82AD-398E0C600272} = {1D499BCD-9448-4942-A688-64D4B3FECF55}
 		{3254C9C8-0BCC-43FD-BA82-E4D3D6161A8F} = {1D499BCD-9448-4942-A688-64D4B3FECF55}
 		{270A8B5F-3877-4501-994B-E438CE37EA13} = {1D499BCD-9448-4942-A688-64D4B3FECF55}
+		{5ABB12A6-0922-4D42-BD1D-30BD6A4CE64B} = {1D499BCD-9448-4942-A688-64D4B3FECF55}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6C068CBA-F3FA-454D-92B1-467A233D1ACA}

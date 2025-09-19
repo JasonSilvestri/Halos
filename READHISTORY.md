@@ -428,29 +428,29 @@ The gate report uses a small, stable schema (example shown for reference—your 
 
   "roots": {
     "appRoot": "E:/All/Repos/Halos",
-    "gateRoot": "Halos/Architecture/Gates"
+    "gateRoot": "Halos/gates"
   },
 
   "paths": {
     "solution": "Halos.sln",
-    "sharedProject": "Halos/Halos.csproj",
-    "startupProject": "Halos/Halos.csproj",
-    "appSettings": "Halos/appsettings.Development.json",
-    "resultsDir": "Halos/Halos/Architecture/Gates/results",
-    "toolsDir": "Halos/Halos/Architecture/Gates/tools",
+    "sharedProject": "Halos/src/Halos.Shared.csproj",
+    "startupProject": "Halos/src/Halos.App.csproj",
+    "appSettings": "Halos/src/Halos.App/appsettings.Development.json",
+    "resultsDir": "Halos/gates/results",
+    "toolsDir": "Halos/gates/tools",
     "schemas": {
-      "gate": "Halos/Halos/Architecture/Gates/lumina-gate.schema.json",
-      "envelope": "Halos/Halos/Architecture/Gates/helix-lumina-envelope.schema.json",
-      "runnerConfig": "Halos/Halos/Architecture/Gates/lumina-gate.config.schema.json",
-      "naming": "Halos/Halos/Architecture/Gates/naming.schema.json",
-      "freezeShot": "Halos/Halos/Architecture/Gates/freeze-shot.schema.json"
+      "gate": "Halos/gates/lumina-gate.schema.json",
+      "envelope": "Halos/gates/helix-lumina-envelope.schema.json",
+      "runnerConfig": "Halos/gates/lumina-gate.config.schema.json",
+      "naming": "Halos/gates/naming.schema.json",
+      "freezeShot": "Halos/gates/freeze-shot.schema.json"
     },
     "runner": {
-      "powershell": "Halos/Halos/Architecture/Gates/tools/lumina-gate.ps1",
-      "validator": "Halos/Halos/Architecture/Gates/tools/validate-gate.mjs",
-      "fenceCheck": "Halos/Halos/Architecture/Gates/tools/check-markdown-fences.ps1"
+      "powershell": "Halos/gates/tools/lumina-gate.ps1",
+      "validator": "Halos/gates/tools/validate-gate.mjs",
+      "fenceCheck": "Halos/gates/tools/check-markdown-fences.ps1"
     },
-    "ciWorkflowParked": "Halos/Halos/Architecture/Gates/git/workflows/lumina-gate.yaml"
+    "ciWorkflowParked": "Halos/gates/git/workflows/lumina-gate.yaml"
   },
 
   "security": {
@@ -458,7 +458,7 @@ The gate report uses a small, stable schema (example shown for reference—your 
     "fingerprintHash": "SHA-256",
     "artifactPolicy": {
       "storeGateResults": true,
-      "resultsGlob": "Halos/Halos/Architecture/Gates/results/*.json"
+      "resultsGlob": "Halos/gates/sql/*.json"
     }
   },
 
@@ -473,26 +473,26 @@ The gate report uses a small, stable schema (example shown for reference—your 
 
   "commands": {
     "localRun": [
-      "pwsh Halos/Architecture/Gates/tools/lumina-gate.ps1 -SolutionPath \"Halos.sln\" -SharedProject \"Halos/Halos.csproj\" -StartupProject \"Halos/Halos.csproj\" -AppSettingsPath \"Halos/appsettings.Development.json\" -Environment \"Development\" -SkipDbCheck -TreatUiAsError"
+      "pwsh Halos/gates/tools/lumina-gate.ps1 -SolutionPath \"Halos.sln\" -SharedProject \"Halos/src/Halos.App.csproj\" -StartupProject \"Halos/src/Halos.App.csproj\" -AppSettingsPath \"Halos/src/Halos.App/appsettings.Development.json\" -Environment \"Development\" -SkipDbCheck -TreatUiAsError"
     ],
     "validateLatest": [
-      "npm --prefix Halos/Architecture/Gates install",
-      "npm --prefix Halos/Architecture/Gates run gate:validate"
+      "npm --prefix Halos/gates install",
+      "npm --prefix Halos/gates run gate:validate"
     ],
     "validateSpecific": [
-      "npm --prefix Halos/Architecture/Gates run gate:validate:file -- --file \"Halos/Halos/Architecture/Gates/results/lumina-result.<timestamp>.json\""
+      "npm --prefix Halos/gates run gate:validate:file -- --file \"Halos/gates/sql/lumina-result.<timestamp>.json\""
     ]
   },
 
   "npmScripts": {
-    "packageJsonLocation": "Halos/Halos/Architecture/Gates/package.json",
+    "packageJsonLocation": "Halos/gates/package.json",
     "scripts": {
-      "gate:validate": "node ./tools/validate-gate.mjs",
-      "gate:validate:file": "node ./tools/validate-gate.mjs --file",
-      "gate:validate:envelope": "node ./tools/validate-gate.mjs --schema envelope --file",
-      "gate:validate:runner": "node ./tools/validate-gate.mjs --schema runner --file",
-      "gate:validate:naming": "node ./tools/validate-gate.mjs --schema naming --file",
-      "gate:validate:freeze": "node ./tools/validate-gate.mjs --schema freeze --file"
+      "gate:validate": "node ./gates/tools/validate-gate.mjs",
+      "gate:validate:file": "node ./gates/tools/validate-gate.mjs --file",
+      "gate:validate:envelope": "node ./gates/tools/validate-gate.mjs --schema envelope --file",
+      "gate:validate:runner": "node ./gates/tools/validate-gate.mjs --schema runner --file",
+      "gate:validate:naming": "node ./gates/tools/validate-gate.mjs --schema naming --file",
+      "gate:validate:freeze": "node ./gates/tools/validate-gate.mjs --schema freeze --file"
     },
     "devDependencies": {
       "ajv": "^8.17.1",
@@ -506,7 +506,7 @@ The gate report uses a small, stable schema (example shown for reference—your 
     "passField": "pass",
     "warningsField": "warnings",
     "timestampField": "timestampUtc",
-    "sampleResult": "Halos/Halos/Architecture/Gates/results/lumina-result.sample.json"
+    "sampleResult": "Halos/gates/sql/lumina-result.sample.json"
   },
 
   "ciModes": [
@@ -687,12 +687,12 @@ The gate report uses a small, stable schema (example shown for reference—your 
   "npmScripts": {
     "packageJsonLocation": "InCareSys.SelfHealth.Shared/wwwroot/docs/Architecture/Gates/package.json",
     "scripts": {
-      "gate:validate": "node ./tools/validate-gate.mjs",
-      "gate:validate:file": "node ./tools/validate-gate.mjs --file",
-      "gate:validate:envelope": "node ./tools/validate-gate.mjs --schema envelope --file",
-      "gate:validate:runner": "node ./tools/validate-gate.mjs --schema runner --file",
-      "gate:validate:naming": "node ./tools/validate-gate.mjs --schema naming --file",
-      "gate:validate:freeze": "node ./tools/validate-gate.mjs --schema freeze --file"
+      "gate:validate": "node ./gates/tools/validate-gate.mjs",
+      "gate:validate:file": "node ./gates/tools/validate-gate.mjs --file",
+      "gate:validate:envelope": "node ./gates/tools/validate-gate.mjs --schema envelope --file",
+      "gate:validate:runner": "node ./gates/tools/validate-gate.mjs --schema runner --file",
+      "gate:validate:naming": "node ./gates/tools/validate-gate.mjs --schema naming --file",
+      "gate:validate:freeze": "node ./gates/tools/validate-gate.mjs --schema freeze --file"
     },
     "devDependencies": {
       "ajv": "^8.17.1",

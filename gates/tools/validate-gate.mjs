@@ -22,7 +22,7 @@ for (let i = 0; i < args.length; i++) {
 // ---------------------
 // Locate Gates root (robust): walk up until we find a /schemas folder
 // ---------------------
-let ROOT = process.cwd(); // prefer running inside Halos/Architecture/Gates
+let ROOT = process.cwd(); // prefer running inside Halos/gates
 const findSchemasDir = (start) => {
     let cur = start;
     for (let i = 0; i < 6; i++) {

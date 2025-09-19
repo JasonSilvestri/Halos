@@ -25,7 +25,7 @@ if (!fs.existsSync(seedPath)) {
 const raw = fs.readFileSync(seedPath, "utf8");
 const seed = JSON.parse(raw);
 
-// Normalize any incoming "Halos/Halos/Architecture/Gates/**" or "Halos/Architecture/Gates/**"
+// Normalize any incoming "Halos/gates/**" or "Halos/gates/**"
 // and reroot under TARGET_DIR/**.
 const reroot = (p) => {
   let s = p.replace(/^[\\/]/, "").replace(/\\/g, "/");

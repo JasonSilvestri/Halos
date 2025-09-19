@@ -9,7 +9,7 @@ This folder contains **scripts and helper utilities** used to run Lumina Gate ch
 # File Structure
 
 ```
-Halos/Architecture/Gates/
+Halos/gates/
 ├─ package.json
 ├─ tools/
 │  └─ validate-gate.mjs
@@ -28,15 +28,15 @@ Here is the mapping of `Halo{}` terminology to existing file names and locations
 
 **From a script lifecycle perspective:**
 
-1. **Schema**: `Halos/Architecture/Gates/schemas/halo-whatsnext.schema.json`
-2. **Sample**: `Halos/Architecture/Gates/samples/halo-whatsnext.*.json`
-3. **Validators**: `Halos/Architecture/Gates/tools/validate-gate.mjs`
-4. **Packages**: `Halos/Architecture/Gates/package.json`
+1. **Schema**: `Halos/gates/schemas/halo-whatsnext.schema.json`
+2. **Sample**: `Halos/gates/samples/halo-whatsnext.*.json`
+3. **Validators**: `Halos/gates/tools/validate-gate.mjs`
+4. **Packages**: `Halos/gates/package.json`
 
 This mapping **above** preserves CI paths and developer muscle memory while letting documentation use the PaLMs{} terminology.
 
 
-> **Results (_Deprecated_)**: `Halos/Architecture/Gates/results/halo-whatsnext.*.json`
+> **Results (_Deprecated_)**: `Halos/gates/results/halo-whatsnext.*.json`
 
 ---
 
@@ -44,7 +44,7 @@ This mapping **above** preserves CI paths and developer muscle memory while lett
 
 > 🔥 This `schema` needs to be `validated`.
 
-### `Halos/Architecture/Gates/schemas/halos-halo-whatsnext.schema.json`
+### `Halos/gates/schemas/halos-halo-whatsnext.schema.json`
 
 ```json
 {
@@ -121,7 +121,7 @@ This mapping **above** preserves CI paths and developer muscle memory while lett
 
 > 🔥 This `sample` needs to be `validated`.
 
-### `Halos/Architecture/Gates/samples/whatsnext.sample.json`
+### `Halos/gates/samples/whatsnext.sample.json`
 
 ```json
 {
@@ -147,7 +147,7 @@ This mapping **above** preserves CI paths and developer muscle memory while lett
       ],
       "links": [
         { "rel": "repo", "href": "https://github.com/JasonSilvestri/Halos", "note": "root" },
-        { "rel": "runner", "href": "Halos/Halos/Architecture/Gates/tools/lumina-gate.ps1" }
+        { "rel": "runner", "href": "Halos/gates/tools/lumina-gate.ps1" }
       ],
       "metrics": { "attempts": 1 }
     },
@@ -159,7 +159,7 @@ This mapping **above** preserves CI paths and developer muscle memory while lett
       "state": "QUEUED",
       "stateCode": 2,
       "links": [
-        { "rel": "schema", "href": "Halos/Halos/Architecture/Gates/schemas/halos-workflow.schema.json" }
+        { "rel": "schema", "href": "Halos/gates/schemas/halos-workflow.schema.json" }
       ]
     },
     {
@@ -186,13 +186,13 @@ This mapping **above** preserves CI paths and developer muscle memory while lett
 
 ```powershell
 # validate workflow sample
-npm --prefix "Halos/Architecture/Gates" run wf:validate:file -- --file "Halos/Halos/Architecture/Gates/samples/workitem.sample.json"
+npm --prefix "Halos/gates" run wf:validate:file -- --file "Halos/gates/samples/workitem.sample.json"
 
 # validate what's-next sample
-npm --prefix "Halos/Architecture/Gates" run next:validate:file -- --file "Halos/Halos/Architecture/Gates/samples/whatsnext.sample.json"
+npm --prefix "Halos/gates" run next:validate:file -- --file "Halos/gates/samples/whatsnext.sample.json"
 ```
 
-#### 2. From `Halos/Architecture/Gates/`:
+#### 2. From `Halos/gates/`:
 
 ```powershell
 npm run wf:validate:file -- --file "./samples/workitem.sample.json"

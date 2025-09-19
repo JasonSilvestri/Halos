@@ -9,7 +9,7 @@ This folder contains **scripts and helper utilities** used to run Lumina Gate ch
 # File Structure
 
 ```
-Halos/Architecture/Gates/
+Halos/gates/
 ├─ package.json
 ├─ tools/
 │  └─ validate-gate.mjs
@@ -28,15 +28,15 @@ Here is the mapping of `Halo{}` terminology to existing file names and locations
 
 **From a script lifecycle perspective:**
 
-1. **Schema**: `Halos/Architecture/Gates/schemas/halo-workitem.schema.json`
-2. **Sample**: `Halos/Architecture/Gates/samples/halo-workitem.*.json`
-3. **Validators**: `Halos/Architecture/Gates/tools/validate-gate.mjs`
-4. **Packages**: `Halos/Architecture/Gates/package.json`
+1. **Schema**: `Halos/gates/schemas/halo-workitem.schema.json`
+2. **Sample**: `Halos/gates/samples/halo-workitem.*.json`
+3. **Validators**: `Halos/gates/tools/validate-gate.mjs`
+4. **Packages**: `Halos/gates/package.json`
 
 This mapping **above** preserves CI paths and developer muscle memory while letting documentation use the PaLMs{} terminology.
 
 
-> **Results (_Deprecated_)**: `Halos/Architecture/Gates/results/halo-workitem.*.json`
+> **Results (_Deprecated_)**: `Halos/gates/results/halo-workitem.*.json`
 
 ---
 
@@ -44,7 +44,7 @@ This mapping **above** preserves CI paths and developer muscle memory while lett
 
 > 🔥 This `schema` needs to be `validated`.
 
-### `Halos/Architecture/Gates/schemas/workitem.schema.json`
+### `Halos/gates/schemas/workitem.schema.json`
 
 ```json
 {
@@ -121,7 +121,7 @@ This mapping **above** preserves CI paths and developer muscle memory while lett
 
 > 🔥 This `sample` needs to be `validated`.
 
-## `Halos/Architecture/Gates/samples/workitem.sample.json`
+## `Halos/gates/samples/workitem.sample.json`
 
 ```json
 {
@@ -199,13 +199,13 @@ This mapping **above** preserves CI paths and developer muscle memory while lett
 
 ```powershell
 # validate workflow sample
-npm --prefix "Halos/Architecture/Gates" run wf:validate:file -- --file "Halos/Halos/Architecture/Gates/samples/workitem.sample.json"
+npm --prefix "Halos/gates" run wf:validate:file -- --file "Halos/gates/samples/workitem.sample.json"
 
 # validate what's-next sample
-npm --prefix "Halos/Architecture/Gates" run next:validate:file -- --file "Halos/Halos/Architecture/Gates/samples/workitem.sample.json"
+npm --prefix "Halos/gates" run next:validate:file -- --file "Halos/gates/samples/workitem.sample.json"
 ```
 
-#### 2. From `Halos/Architecture/Gates/`:
+#### 2. From `Halos/gates/`:
 
 ```powershell
 npm run wf:validate:file -- --file "./samples/workitem.sample.json"

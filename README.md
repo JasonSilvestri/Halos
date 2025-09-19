@@ -191,14 +191,14 @@ Halos/
   "type": "module",
   "description": "Halos Architecture Gates tooling (schemas, validators, utilities).",
   "scripts": {
-    "gate:validate": "node ./tools/validate-gate.mjs",
-    "gate:validate:file": "node ./tools/validate-gate.mjs --file",
-    "gate:validate:envelope": "node ./tools/validate-gate.mjs --schema envelope --file",
-    "gate:validate:runner": "node ./tools/validate-gate.mjs --schema runner --file",
-    "gate:validate:naming": "node ./tools/validate-gate.mjs --schema naming --file",
-    "gate:validate:freeze": "node ./tools/validate-gate.mjs --schema freeze --file",
-    "wf:validate:file": "node ./tools/validate-gate.mjs --schema workflow --file",
-    "next:validate:file": "node ./tools/validate-gate.mjs --schema whatsnext --file"
+    "gate:validate": "node ./gates/tools/validate-gate.mjs",
+    "gate:validate:file": "node ./gates/tools/validate-gate.mjs --file",
+    "gate:validate:envelope": "node ./gates/tools/validate-gate.mjs --schema envelope --file",
+    "gate:validate:runner": "node ./gates/tools/validate-gate.mjs --schema runner --file",
+    "gate:validate:naming": "node ./gates/tools/validate-gate.mjs --schema naming --file",
+    "gate:validate:freeze": "node ./gates/tools/validate-gate.mjs --schema freeze --file",
+    "wf:validate:file": "node ./gates/tools/validate-gate.mjs --schema workflow --file",
+    "next:validate:file": "node ./gates/tools/validate-gate.mjs --schema whatsnext --file"
   },
   "devDependencies": {
     "ajv": "^8.17.1",
@@ -212,12 +212,12 @@ Halos/
 * `roots.gateRoot`: `"gates"`
 * `paths.schemas.*`: `"gates/schemas/…"`
 * `paths.runner.validator`: `"gates/tools/validate-gate.mjs"`
-* `commands.localRun` scripts that referenced `Halos/Architecture/Gates` → update to `gates`.
+* `commands.localRun` scripts that referenced `Halos/gates` → update to `gates`.
 
 ## Why your Node commands didn’t work
 
-* VS launched you inside a project folder (e.g., `src/Halos.SchemaValidator/Pages`) where `npm --prefix Halos/Architecture/Gates` didn’t exist.
-* The seed scattered files under `Halos/Halos/Architecture/Gates/**` which don’t match your `--prefix`.
+* VS launched you inside a project folder (e.g., `src/Halos.SchemaValidator/Pages`) where `npm --prefix Halos/gates` didn’t exist.
+* The seed scattered files under `Halos/gates/**` which don’t match your `--prefix`.
 * By centralizing Node under `/gates` and **always** using `--prefix gates`, you remove the ambiguity.
 
 ## Quickstart with this layout
