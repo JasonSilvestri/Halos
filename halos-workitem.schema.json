@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "halos-workitem.schema.json",
+  "title": "Halos Work Item",
+  "type": "object",
+  "allOf": [ { "$ref": "halos-workflow.schema.json" } ],
+  "required": [ "id", "type", "state", "stateCode" ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "type": {
+      "type": "string",
+      "minLength": 1
+    },
+    "payload": { "type": "object" }
+  },
+  "additionalProperties": true
+}

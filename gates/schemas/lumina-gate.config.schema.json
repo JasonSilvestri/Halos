@@ -4,21 +4,11 @@
   "title": "Runner Config",
   "type": "object",
   "properties": {
-    "uiFenceWarningsDowngradeStatusToWarn": { "type": "boolean" },
-    "schemaValidationIsHardFail": { "type": "boolean" },
-    "dbCheck": {
-      "type": "object",
-      "properties": {
-        "default": {
-          "type": "string",
-          "enum": [ "SkipInCI", "BestEffort", "Required" ]
-        },
-        "local": {
-          "type": "string",
-          "enum": [ "SkipInCI", "BestEffort", "Required" ]
-        }
-      }
-    }
+    "mode": {
+      "type": "string",
+      "enum": [ "nonBlocking", "enforcing" ]
+    },
+    "uploadArtifacts": { "type": "boolean" }
   },
   "additionalProperties": true
 }

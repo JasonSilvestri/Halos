@@ -3,25 +3,20 @@
   "$id": "freeze-shot.schema.json",
   "title": "Freeze Shot",
   "type": "object",
-  "required": [ "frozenAtUtc", "artifacts" ],
+  "required": [ "createdUtc" ],
   "properties": {
-    "frozenAtUtc": {
+    "createdUtc": {
       "type": "string",
       "format": "date-time"
     },
     "artifacts": {
-      "type": "object",
-      "properties": {
-        "latestGateResult": { "type": "string" },
-        "scriptsSha": { "type": "string" },
-        "schemasSha": { "type": "string" }
-      },
-      "additionalProperties": true
-    },
-    "notes": {
       "type": "array",
       "items": { "type": "string" }
+    },
+    "shas": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
     }
   },
-  "additionalProperties": false
+  "additionalProperties": true
 }

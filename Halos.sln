@@ -68,6 +68,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "schema", "schema", "{270A8B
 		gates\schemas\halo-lumina-envelope.schema.json = gates\schemas\halo-lumina-envelope.schema.json
 		gates\schemas\halos-whatsnext.schema.json = gates\schemas\halos-whatsnext.schema.json
 		gates\schemas\halos-workflow.schema.json = gates\schemas\halos-workflow.schema.json
+		halos-workitem.schema.json = halos-workitem.schema.json
 		gates\schemas\lumina-gate.config.schema.json = gates\schemas\lumina-gate.config.schema.json
 		gates\schemas\lumina-gate.schema.json = gates\schemas\lumina-gate.schema.json
 		gates\schemas\naming.schema.json = gates\schemas\naming.schema.json
