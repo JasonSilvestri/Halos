@@ -1,31 +1,13 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "helix-lumina-envelope.schema.json",
-  "title": "Task Envelope",
+  "$id": "halo-lumina-envelope.schema.json",
+  "title": "Halo/Lumina Envelope",
   "type": "object",
-  "required": [ "envelope_id", "created_at", "owner", "context" ],
+  "required": [ "_meta", "project", "paths" ],
   "properties": {
-    "envelope_id": { "type": "string" },
-    "created_at": {
-      "type": "string",
-      "format": "date-time"
-    },
-    "owner": { "type": "string" },
-    "context": {
-      "type": "object",
-      "required": [ "goal" ],
-      "properties": {
-        "goal": { "type": "string" },
-        "constraints": {
-          "type": "array",
-          "items": { "type": "string" }
-        },
-        "success_metrics": {
-          "type": "array",
-          "items": { "type": "string" }
-        }
-      }
-    }
+    "_meta": { "type": "object" },
+    "project": { "type": "object" },
+    "paths": { "type": "object" }
   },
   "additionalProperties": true
 }

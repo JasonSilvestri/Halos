@@ -67,10 +67,10 @@ ensureSchema("lumina-gate.schema.json", {
   "type": "object",
   "additionalProperties": true
 });
-ensureSchema("helix-lumina-envelope.schema.json", {
+ensureSchema("halo-lumina-envelope.schema.json", {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "helix-lumina-envelope.schema.json",
-  "title": "Helix-Lumina Envelope (placeholder)",
+  "$id": "halo-lumina-envelope.schema.json",
+  "title": "Halo-Lumina Envelope (placeholder)",
   "type": "object",
   "additionalProperties": true
 });

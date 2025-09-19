@@ -270,7 +270,7 @@ try {
 
   # load meta from sidecar or envelope (if present)
   $meta = $null
-  foreach ($p in @("helix-lumina-envelope.meta.json","helix-lumina-envelope.json")) {
+  foreach ($p in @("halo-lumina-envelope.meta.json","halo-lumina-envelope.json")) {
     if (Test-Path $p) {
       try {
         $doc = Get-Content -Raw -Path $p | ConvertFrom-Json

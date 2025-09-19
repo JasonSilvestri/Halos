@@ -1,4 +1,4 @@
-﻿# Lumina Gate \{\} – Build/EF/DB Snapshot (Halo, Helix, Palm)
+﻿# Lumina Gate \{\} – Build/EF/DB Snapshot (Halo, Halo, Palm)
 
 **Purpose:** At least in this example, a fast, machine-checkable diagnostics for builds, EF Core readiness, and config hygiene—without blocking development (until you flip the switch).
 

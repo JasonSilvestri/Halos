@@ -50,7 +50,7 @@ const schemasDir = path.join(ROOT, "schemas");
 // Map logical names to local schema files
 const schemaMap = {
     gate: "lumina-gate.schema.json",
-    envelope: "helix-lumina-envelope.schema.json",
+    envelope: "halo-lumina-envelope.schema.json",
     runner: "lumina-gate.config.schema.json",
     naming: "naming.schema.json",
     freeze: "freeze-shot.schema.json",

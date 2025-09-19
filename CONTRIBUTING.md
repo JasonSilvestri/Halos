@@ -1,13 +1,13 @@
-# Helix\{\} – A Universal AI Design Pattern for Dual-Partner Incremental Redesign (v1)
+# Halo\{\} – A Universal AI Design Pattern for Dual-Partner Incremental Redesign (v1)
 
 **Invented by Jason Silvestri & Mark Silvestri**  
 **With system design assistance by “Lumina” (ChatGPT collaborator)**
 
-> Helix\{\} is a technology-agnostic design pattern that fuses a language partner (Partner-L) with quantitative engines (Partner-Q) under strict, machine-checkable contracts. The universal loop is: **Envelope → Proposal → Results → Decision**.
+> Halo\{\} is a technology-agnostic design pattern that fuses a language partner (Partner-L) with quantitative engines (Partner-Q) under strict, machine-checkable contracts. The universal loop is: **Envelope → Proposal → Results → Decision**.
 
 ---
 
-[`Home`](./README.md) » [`Helix{}™ Discovery`](./docs/Discovery/README.md)
+[`Home`](./README.md) » [`Halo{}™ Discovery`](./docs/Discovery/README.md)
 
 ---
 
@@ -15,17 +15,17 @@
 1. [Overview](#overview) 
 2. [Prerequisites](#prerequisites)
 3. [Platform Scope (v1)](#platform-scope-v1)  
-4. [Helix\{\} Repository File Structure (v1)](#helix-repository-file-structure-v1)
+4. [Halo\{\} Repository File Structure (v1)](#halo-repository-file-structure-v1)
 5. [North-Star Principles (non-negotiables)](#north-star-principles-non-negotiables)  
-6. [The Helix\{\} Loop](#the-helix-loop)  
+6. [The Halo\{\} Loop](#the-halo-loop)  
 7. [Task Envelope (universal spine)](#task-envelope-universal-spine)  
 8. [Canonical Message Contracts](#canonical-message-contracts)  
    - [Proposal (Partner-L → Partner-Q)](#proposal-partner-l--partner-q)  
    - [Results (Partner-Q → Partner-L / Envelope)](#results-partner-q--partner-l--envelope)  
-   - [Decision (Helix\{\} Gate + Dual sign-off)](#decision-helix-gate--dual-sign-off)  
+   - [Decision (Halo\{\} Gate + Dual sign-off)](#decision-halo-gate--dual-sign-off)  
    - [Gate Policy (machine-checkable)](#gate-policy-machine-checkable)  
 9. [Cold-Start Protocol](#cold-start-protocol)  
-10. [Reference Orchestrator (“helix-hub”)](#reference-orchestrator-helix-hub)  
+10. [Reference Orchestrator (“halo-hub”)](#reference-orchestrator-halo-hub)  
 11. [Windows 10 (early prototype) constraints](#windows-10-early-prototype-constraints)  
 12. [Heritage Appendix: PaLMs\{\} Mapping](#heritage-appendix-palms-mapping)  
 13. [License / Attribution](#license--attribution)
@@ -34,9 +34,9 @@
 
 ## Overview
 
-**Helix\{\} is a Universal AI Design Pattern for Dual-Partner Incremental Redesign**, a 2025 modern **LLM + Quant** backbone pattern for rapid, *reproducible* AI-powered development (_including chat “cold-starts”_). It is **portable across domains** (aero, legal, media, UI, etc.) and **independent of tool stacks** (.NET, Node.js, Python, etc.).  
+**Halo\{\} is a Universal AI Design Pattern for Dual-Partner Incremental Redesign**, a 2025 modern **LLM + Quant** backbone pattern for rapid, *reproducible* AI-powered development (_including chat “cold-starts”_). It is **portable across domains** (aero, legal, media, UI, etc.) and **independent of tool stacks** (.NET, Node.js, Python, etc.).  
 
-A `Helix{}` separates **contracts** (JSON schemas; reproducible) from **narratives** (explanations; human-readable). Adapters can change; **contracts and gates do not**.
+A `Halo{}` separates **contracts** (JSON schemas; reproducible) from **narratives** (explanations; human-readable). Adapters can change; **contracts and gates do not**.
 
 
 [`⇧ Back to Top`](#table-of-contents)  
@@ -45,9 +45,9 @@ A `Helix{}` separates **contracts** (JSON schemas; reproducible) from **narrativ
 
 ## **Prerequisites**
 
-The **Helix\{\}™**, requires **nothing** but your ChatGPT AI Text Prompt to explore what is possible. 
+The **Halo\{\}™**, requires **nothing** but your ChatGPT AI Text Prompt to explore what is possible. 
 
-Conversely, before you can get started using the **Helix\{\}™** in the ways we outline in all examples, you need to ensure you have the following prerequisites installed and configured on your system:
+Conversely, before you can get started using the **Halo\{\}™** in the ways we outline in all examples, you need to ensure you have the following prerequisites installed and configured on your system:
 
 - [Visual Studio (v 17.14.8)](https://github.com/JasonSilvestri/JSopX.BridgeTooFar/tree/master/JSopX.BridgeTooFar/DocsOpenX/Technologies/#visual-studio)
 - [.NET Framework (v 9.0.1)](https://github.com/JasonSilvestri/JSopX.BridgeTooFar/tree/master/JSopX.BridgeTooFar/DocsOpenX/Technologies/#net-framework)
@@ -62,9 +62,9 @@ Conversely, before you can get started using the **Helix\{\}™** in the ways we
 
 ## Platform Scope (v1)
 
-Helix\{\} v1 is **ChatGPT-native by design**, authored and proven in collaboration with **Lumina (ChatGPT)**.  
+Halo\{\} v1 is **ChatGPT-native by design**, authored and proven in collaboration with **Lumina (ChatGPT)**.  
 - Focus: ChatGPT cold-starts, envelopes, contracts, gates, provenance—**battle-tested here first**.  
-- Portability: Helix\{\} can be adapted to other models via adapters, **deferred intentionally** to protect the origin story and discipline.  
+- Portability: Halo\{\} can be adapted to other models via adapters, **deferred intentionally** to protect the origin story and discipline.  
 - Attribution: Any future ports must retain credit to **Jason Silvestri, Mark Silvestri, and Lumina (ChatGPT)**.
 
 
@@ -72,25 +72,25 @@ Helix\{\} v1 is **ChatGPT-native by design**, authored and proven in collaborati
 
 ---
 
-## Helix\{\} Repository File Structure (v1)
+## Halo\{\} Repository File Structure (v1)
 
 > [!WARNING]
-> This file structure is a **"_Draft_" _Variant_** of this **Helix\{\} Project** and will undoubtedly evolve over time. 
+> This file structure is a **"_Draft_" _Variant_** of this **Halo\{\} Project** and will undoubtedly evolve over time. 
 >
 > More information soon to be expected.
 
 ```
 
-Helix/
+Halo/
 ├─ README.md                          # Root-facing intro (project landing)
 ├─ LICENSE
 ├─ CONTRIBUTING.md
 ├─ CODE_OF_CONDUCT.md
 ├─ SECURITY.md
 ├─ .gitignore
-├─ Helix.sln                          # (optional) VS solution; can be generated
-├─ Helix/                             # Project directory (Web SDK)
-│  ├─ Helix.csproj
+├─ Halo.sln                          # (optional) VS solution; can be generated
+├─ Halo/                             # Project directory (Web SDK)
+│  ├─ Halo.csproj
 │  ├─ Program.cs
 │  ├─ appsettings.json
 │  ├─ wwwroot/                        # Web root (static site + docs + samples)
@@ -115,7 +115,7 @@ Helix/
 │  │     ├─ css/site.css
 │  │     └─ js/README (placeholder)
 └─ tools/
-   └─ helix-hub/                      # Node-only utilities (schemas/gates/lint)
+   └─ halo-hub/                      # Node-only utilities (schemas/gates/lint)
       ├─ package.json
       ├─ tsconfig.json
       ├─ src/
@@ -135,9 +135,9 @@ Helix/
 ## North-Star Principles (non-negotiables)
 
 > [!CRITICAL]
->  These principles are **non-negotiable**. They are the foundation of Helix\{\} and must be upheld in every implementation.
+>  These principles are **non-negotiable**. They are the foundation of Halo\{\} and must be upheld in every implementation.
 
-Like most design patterns, Helix\{\} is a set of **non-negotiable principles** that define the discipline. These principles are **technology-agnostic** and must be upheld in every implementation.
+Like most design patterns, Halo\{\} is a set of **non-negotiable principles** that define the discipline. These principles are **technology-agnostic** and must be upheld in every implementation.
 
 1. **Single source of truth:** A self-describing **Task Envelope** carries goals, constraints, baselines, policies, and outputs.  
 2. **Dual-partner discipline:** **Partner-L** (Language) proposes; **Partner-Q** (Quantitative) verifies. No promotion without numeric/evaluative gates.  
@@ -152,7 +152,7 @@ Like most design patterns, Helix\{\} is a set of **non-negotiable principles** t
 
 ---
 
-## The Helix\{\} Loop
+## The Halo\{\} Loop
 **Envelope → Proposal → Results → Decision**  
 - **Envelope** defines context, baseline, constraints, policies, and partners.  
 - **Proposal** (Partner-L) suggests small, justified deltas + DOE plan.  
@@ -166,7 +166,7 @@ Like most design patterns, Helix\{\} is a set of **non-negotiable principles** t
 
 ## Task Envelope (_Universal Spine_)
 
-The **Task Envelope** is the universal spine of every Helix\{\} lifecycle. It defines the problem, constraints, partners, policies, and provenance. 
+The **Task Envelope** is the universal spine of every Halo\{\} lifecycle. It defines the problem, constraints, partners, policies, and provenance. 
 
 Every message references the envelope by ID.
 
@@ -210,7 +210,7 @@ Every message references the envelope by ID.
   "provenance": {
     "prompt_bundle_hash": "sha256-PROMPTS",
     "solver_manifest_hash": "sha256-SOLVERS",
-    "orchestrator_version": "helix-hub 1.0.0"
+    "orchestrator_version": "halo-hub 1.0.0"
   }
 }
 ```
@@ -286,7 +286,7 @@ Results bundle (one or more runs) with metrics, uncertainties, violations, and e
 
 ---
 
-### Decision (Helix\{\} Gate + Dual sign-off)
+### Decision (Halo\{\} Gate + Dual sign-off)
 
 Decision record with accepted/rejected deltas, justification, dual sign-off, and promoted baseline.
 
@@ -336,9 +336,9 @@ Paste this **Seed Header** at the top of any ChatGPT thread/repo to lock alignme
 
 ```json
 {
-  "helix_seed_header": {
+  "halo_seed_header": {
     "version": "1.0",
-    "project": "Helix-Universal",
+    "project": "Halo-Universal",
     "capabilities": ["dual-partner", "json-contracts", "numeric-gates", "roundtrip"],
     "preferred_outputs": ["proposal.json", "gate-policy.json", "results.schema.json", "decision.json"],
     "determinism": {
@@ -355,13 +355,13 @@ Paste this **Seed Header** at the top of any ChatGPT thread/repo to lock alignme
 
 ---
 
-## Reference Orchestrator (“helix-hub”)
-A tiny Node 20 reference that validates contracts, evaluates gates, and emits a manifest. See `helix-hub/` for full source and `npm` scripts.
+## Reference Orchestrator (“halo-hub”)
+A tiny Node 20 reference that validates contracts, evaluates gates, and emits a manifest. See `halo-hub/` for full source and `npm` scripts.
 
 ---
 
 ## Windows 10 (early prototype) constraints
-- Tested on **Node.js v20.14.0** on **Windows 10**. Helix\{\} is platform-agnostic; these constraints will relax as v1 hardens.  
+- Tested on **Node.js v20.14.0** on **Windows 10**. Halo\{\} is platform-agnostic; these constraints will relax as v1 hardens.  
 - Enforce CRLF if needed.  
 - End-to-end: `npm run build && npm run validate && npm run gate && npm run manifest`.
 
@@ -373,9 +373,9 @@ A tiny Node 20 reference that validates contracts, evaluates gates, and emits a 
 
 ## Heritage Appendix: PaLMs\{\} Mapping
 
-Helix\{\} stands on PaLMs\{\} (_Jason Silvestri's prior orchestration discipline for handling PLM AI Lifecycle Models_).
+Halo\{\} stands on PaLMs\{\} (_Jason Silvestri's prior orchestration discipline for handling PLM AI Lifecycle Models_).
 
-The **PaLMs\{\}** system is designed to be highly autonomous. A `Helix{}` leverages its own variant of the `PaLMs{}` design pattern. 
+The **PaLMs\{\}** system is designed to be highly autonomous. A `Halo{}` leverages its own variant of the `PaLMs{}` design pattern. 
 
 In short, once a lifecycle is defined and validated, it can manage its own state transitions based on predefined rules and conditions. This allows for dynamic adaptation to changing requirements and scenarios.
 
@@ -383,9 +383,9 @@ In short, once a lifecycle is defined and validated, it can manage its own state
 
 
 For lineage:
-- **States/Phases/Gates** map to Helix\{\} gate policies and decision records.  
-- Replace PaLMs\{\}-specific pipelines with thin adapters that read/write Helix\{\} contracts.  
-- Keep PaLMs\{\} mentions for history; **all live examples use Helix\{\}**.
+- **States/Phases/Gates** map to Halo\{\} gate policies and decision records.  
+- Replace PaLMs\{\}-specific pipelines with thin adapters that read/write Halo\{\} contracts.  
+- Keep PaLMs\{\} mentions for history; **all live examples use Halo\{\}**.
 
 
 [`⇧ Back to Top`](#table-of-contents)  
@@ -396,7 +396,7 @@ For lineage:
 Notes:
 
 * **Everything user-facing** (docs, schemas, samples) lives under `wwwroot` so it’s automatically served by ASP.NET Core and visible in GH Pages–style static hosting if you ever want it.
-* The **Node utility** (`tools/helix-hub`) is intentionally outside the web root to keep your .NET app pure static hosting while still letting you run schema/gate/lint in CI.
+* The **Node utility** (`tools/halo-hub`) is intentionally outside the web root to keep your .NET app pure static hosting while still letting you run schema/gate/lint in CI.
 
 
 [`⇧ Back to Top`](#table-of-contents)  
@@ -409,14 +409,14 @@ Notes:
 * **Cold-Start Protocol (Seed Header)**
   Lives in docs as a canonical snippet and is not persisted server-side by default. Put it in:
 
-  * `Helix/wwwroot/docs/README.md` (canonical)
-  * `Helix/wwwroot/docs/Discovery/README.md` (historical)
-    Optional convenience copy: `Helix/wwwroot/samples/seed-header.json` for quick copy/paste.
+  * `Halo/wwwroot/docs/README.md` (canonical)
+  * `Halo/wwwroot/docs/Discovery/README.md` (historical)
+    Optional convenience copy: `Halo/wwwroot/samples/seed-header.json` for quick copy/paste.
 
 * **Primary Task Envelope**
   The envelope *is* the unit of work. Each live envelope belongs in a repo/workspace *or* a storage namespace per project. For the reference repo, keep a gold sample at:
 
-  * `Helix/wwwroot/samples/envelope.json`
+  * `Halo/wwwroot/samples/envelope.json`
     In production, you’ll have per-task folders, e.g. `/data/envelopes/{envelope_id}/…` (outside web root).
 
 * **Identities & AuthZ**
@@ -430,7 +430,7 @@ Notes:
 
 ## 🧩 Minimal Web Project (full files)
 
-### Helix/Helix.csproj
+### Halo/Halo.csproj
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk.Web">
@@ -439,8 +439,8 @@ Notes:
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <InvariantGlobalization>true</InvariantGlobalization>
-    <AssemblyName>Helix</AssemblyName>
-    <RootNamespace>Helix</RootNamespace>
+    <AssemblyName>Halo</AssemblyName>
+    <RootNamespace>Halo</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -454,7 +454,7 @@ Notes:
 
 ---
 
-### Helix/Program.cs
+### Halo/Program.cs
 
 ```csharp
 using Microsoft.AspNetCore.Http.Headers;
@@ -491,7 +491,7 @@ app.Run();
 
 ---
 
-### Helix/appsettings.json
+### Halo/appsettings.json
 
 ```json
 {
@@ -509,20 +509,20 @@ app.Run();
 
 ---
 
-### Helix/wwwroot/index.html
+### Halo/wwwroot/index.html
 
 ```html
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Helix{} v1</title>
+  <title>Halo{} v1</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="/assets/css/site.css" rel="stylesheet" />
 </head>
 <body>
   <main class="wrap">
-    <h1>Helix{}™ v1</h1>
+    <h1>Halo{}™ v1</h1>
     <p>Universal LLM+Quant backbone for rapid AI development and cold-starts — ChatGPT-first.</p>
     <nav>
       <ul>
@@ -546,7 +546,7 @@ app.Run();
 
 ---
 
-### Helix/wwwroot/docs/README.md
+### Halo/wwwroot/docs/README.md
 
 > Use the **Root README** content we finalized (the “clean spec”), including the **Identities** and **AuthZ** sections and the **Glossary Guardrails** reference.
 
@@ -554,7 +554,7 @@ app.Run();
 
 ---
 
-### Helix/wwwroot/docs/Discovery/README.md
+### Halo/wwwroot/docs/Discovery/README.md
 
 > Use the **Discovery README** we finalized (history + “early guardrails”), now including Identities/AuthZ and the glossary note.
 
@@ -562,7 +562,7 @@ app.Run();
 
 ---
 
-### Helix/wwwroot/docs/glossary.json
+### Halo/wwwroot/docs/glossary.json
 
 ```json
 {
@@ -591,7 +591,7 @@ app.Run();
 
 ## 🧪 Node Utilities (unchanged, just relocated)
 
-Place the `helix-hub` Node project under `tools/helix-hub/` exactly as we authored. It provides:
+Place the `halo-hub` Node project under `tools/halo-hub/` exactly as we authored. It provides:
 
 * JSON Schema validation
 * Gate policy evaluation
@@ -632,16 +632,16 @@ That split keeps **session bootstrap** separate from **governed work**—exactly
 
 ## License / Attribution
 
-**`Helix{}` v1 is ChatGPT-Native**. If open-sourced, retain attribution:  
-**“Helix\{\} invented by Jason Silvestri & Mark Silvestri, with system design assistance by Lumina (ChatGPT).”**
+**`Halo{}` v1 is ChatGPT-Native**. If open-sourced, retain attribution:  
+**“Halo\{\} invented by Jason Silvestri & Mark Silvestri, with system design assistance by Lumina (ChatGPT).”**
 
 ---
 
-[`Home`](./README.md) » [`Helix{}™ Discovery`](./docs/Discovery/README.md) · · [`⇧ Back to Top`](#table-of-contents)
+[`Home`](./README.md) » [`Halo{}™ Discovery`](./docs/Discovery/README.md) · · [`⇧ Back to Top`](#table-of-contents)
 
 ---
 
-[1]: https://github.com/JasonSilvestri/Helix "HELIX REPOSITORY ..."
+[1]: https://github.com/JasonSilvestri/Halo "HELIX REPOSITORY ..."
 [2]: https://www.sciencedirect.com/science/article/abs/pii/B9780080926025500184?utm_source=chatgpt.com "DUAL DESIGN PARTNERS IN AN INCREMENTAL ..."
 
-###### Copyright © 2025 [Helix\{\}][1] — All Rights Reserved by Jason Silvestri & Mark Silvestri
+###### Copyright © 2025 [Halo\{\}][1] — All Rights Reserved by Jason Silvestri & Mark Silvestri

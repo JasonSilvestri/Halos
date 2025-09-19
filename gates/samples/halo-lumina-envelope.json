@@ -29,7 +29,7 @@
     "toolsDir": "Halos/gates/tools",
     "schemas": {
       "gate": "Halos/gates/lumina-gate.schema.json",
-      "envelope": "Halos/gates/helix-lumina-envelope.schema.json",
+      "envelope": "Halos/gates/halo-lumina-envelope.schema.json",
       "runnerConfig": "Halos/gates/lumina-gate.config.schema.json",
       "naming": "Halos/gates/naming.schema.json",
       "freezeShot": "Halos/gates/freeze-shot.schema.json"

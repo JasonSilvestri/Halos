@@ -1,6 +1,6 @@
 ﻿# Halo\{\} - A Universal AI Design Pattern for Dual-Partner Gate Lifecycle Management (v1)
 
-**Purpose:** Conclude the final iteration of a design pattern, now called, `Halo{}`, forged by there other competing ideas, `Lumina Gates{}` which is almost there, `Helix{}` with the right idea with preferred json, schema & manifest approach, to the `PaLMs{}` which was too complex and never really worked out due to the true dual partnership that must occur.
+**Purpose:** Conclude the final iteration of a design pattern, now called, `Halo{}`, forged by there other competing ideas, `Lumina Gates{}` which is almost there, `Halo{}` with the right idea with preferred json, schema & manifest approach, to the `PaLMs{}` which was too complex and never really worked out due to the true dual partnership that must occur.
 
 Halo\{\} is the simplest, most elegant solution to a very complex problem.
 
@@ -90,7 +90,7 @@ Halos/
 │  │  ├─ halos-workitem.schema.json
 │  │  ├─ halos-workitem-list.schema.json
 │  │  ├─ lumina-gate.schema.json
-│  │  ├─ helix-lumina-envelope.schema.json
+│  │  ├─ halo-lumina-envelope.schema.json
 │  │  ├─ lumina-gate.config.schema.json
 │  │  └─ naming.schema.json
 │  ├─ samples/

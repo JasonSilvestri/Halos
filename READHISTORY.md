@@ -1,6 +1,6 @@
 ﻿# Halo\{\} - A Universal AI Design Pattern for Dual-Partner Gate Lifecycle Management (v1)
 
-**Purpose:** Conclude the final iteration of a design pattern, now called, `Halo{}`, forged by there other competing ideas, `Lumina Gates{}` which is almost there, `Helix{}` with the right idea with preferred json, schema & manifest approach, to the `PaLMs{}` which was too complex and never really worked out due to the true dual partnership that must occur.
+**Purpose:** Conclude the final iteration of a design pattern, now called, `Halo{}`, forged by there other competing ideas, `Lumina Gates{}` which is almost there, `Halo{}` with the right idea with preferred json, schema & manifest approach, to the `PaLMs{}` which was too complex and never really worked out due to the true dual partnership that must occur.
 
 Halo\{\} is the simplest, most elegant solution to a very complex problem.
 
@@ -406,7 +406,7 @@ The gate report uses a small, stable schema (example shown for reference—your 
 {
   "_meta": {
     "version": "2.0.0",
-    "kind": "Helix Super Seed",
+    "kind": "Halo Super Seed",
     "createdUtc": "2025-09-16T00:00:00Z",
     "uuid_namespace": "6f0e5f9f-7f3a-41bf-b969-9e2b7d2f9b21",
     "notes": [
@@ -440,7 +440,7 @@ The gate report uses a small, stable schema (example shown for reference—your 
     "toolsDir": "Halos/gates/tools",
     "schemas": {
       "gate": "Halos/gates/lumina-gate.schema.json",
-      "envelope": "Halos/gates/helix-lumina-envelope.schema.json",
+      "envelope": "Halos/gates/halo-lumina-envelope.schema.json",
       "runnerConfig": "Halos/gates/lumina-gate.config.schema.json",
       "naming": "Halos/gates/naming.schema.json",
       "freezeShot": "Halos/gates/freeze-shot.schema.json"
@@ -546,7 +546,7 @@ The **Lumina Gate\{\}** – A Universal AI Design Pattern for Dual-Partner Incre
 
 **Lumina Gate\{\} is a Universal AI Design Pattern for Dual-Partner Incremental Redesign**, a 2025 modern **LLM + Quant** backbone pattern for rapid, *reproducible* AI-powered development (_including chat “cold-starts”_). It is **portable across domains** (aero, legal, media, UI, etc.) and **independent of tool stacks** (.NET, Node.js, Python, etc.).  
 
-A `Lumina Gate{}` in short was largely supposed to take on the Helix\{\} logic, and largely did so: separates **contracts** (JSON schemas; reproducible) from **narratives** (explanations; human-readable). Adapters can change; **contracts and gates do not**.
+A `Lumina Gate{}` in short was largely supposed to take on the Halo\{\} logic, and largely did so: separates **contracts** (JSON schemas; reproducible) from **narratives** (explanations; human-readable). Adapters can change; **contracts and gates do not**.
 
 
 ### Platform Scope (v1)
@@ -606,7 +606,7 @@ The gate report uses a small, stable schema (example shown for reference—your 
 {
   "_meta": {
     "version": "2.0.0",
-    "kind": "Helix Super Seed",
+    "kind": "Halo Super Seed",
     "createdUtc": "2025-09-16T00:00:00Z",
     "uuid_namespace": "6f0e5f9f-7f3a-41bf-b969-9e2b7d2f9b21",
     "notes": [
@@ -640,7 +640,7 @@ The gate report uses a small, stable schema (example shown for reference—your 
     "toolsDir": "InCareSys.SelfHealth.Shared/wwwroot/docs/Architecture/Gates/tools",
     "schemas": {
       "gate": "InCareSys.SelfHealth.Shared/wwwroot/docs/Architecture/Gates/lumina-gate.schema.json",
-      "envelope": "InCareSys.SelfHealth.Shared/wwwroot/docs/Architecture/Gates/helix-lumina-envelope.schema.json",
+      "envelope": "InCareSys.SelfHealth.Shared/wwwroot/docs/Architecture/Gates/halo-lumina-envelope.schema.json",
       "runnerConfig": "InCareSys.SelfHealth.Shared/wwwroot/docs/Architecture/Gates/lumina-gate.config.schema.json",
       "naming": "InCareSys.SelfHealth.Shared/wwwroot/docs/Architecture/Gates/naming.schema.json",
       "freezeShot": "InCareSys.SelfHealth.Shared/wwwroot/docs/Architecture/Gates/freeze-shot.schema.json"
@@ -740,9 +740,9 @@ Still placed actual schema evolution notes in `results/`, with meta data and oth
 
 ---
 
-## What the Lumina Gate Helix\{\} Did So Well
+## What the Lumina Gate Halo\{\} Did So Well
 
-The first real love letter was from the Lumina Gates Helix\{\}, where Jason and Lumina first realized that a disciplined approach to working with AI could yield significant benefits. The Lumina Gate Helix\{\} was designed to be a non-blocking, informative tool that provided valuable insights into the health of the codebase without hindering development progress.
+The first real love letter was from the Lumina Gates Halo\{\}, where Jason and Lumina first realized that a disciplined approach to working with AI could yield significant benefits. The Lumina Gate Halo\{\} was designed to be a non-blocking, informative tool that provided valuable insights into the health of the codebase without hindering development progress.
 
 The task enveloped several key checks, a love letter only a nerdy programmer would first come up with:
 
@@ -858,27 +858,27 @@ When you want the gate to fail PRs:
 
 ---
 
-## Helix\{\} Autonomy
+## Halo\{\} Autonomy
 
-The **Helix\{\}** – A Universal AI Design Pattern for Dual-Partner Incremental Redesign (v1)
+The **Halo\{\}** – A Universal AI Design Pattern for Dual-Partner Incremental Redesign (v1)
 
 **Proprietary & Invented by Jason Silvestri & Mark Silvestri**  
 **With system design assistance by “Lumina” (ChatGPT collaborator)**
 
-> **Helix\{\}** is a technology-agnostic design pattern that fuses a language partner (Partner-L) with quantitative engines (Partner-Q) under strict, machine-checkable contracts. The universal loop is: **Envelope → Proposal → Results → Decision**.
+> **Halo\{\}** is a technology-agnostic design pattern that fuses a language partner (Partner-L) with quantitative engines (Partner-Q) under strict, machine-checkable contracts. The universal loop is: **Envelope → Proposal → Results → Decision**.
 
 
-**Helix\{\} is a Universal AI Design Pattern for Dual-Partner Incremental Redesign**, a 2025 modern **LLM + Quant** backbone pattern for rapid, *reproducible* AI-powered development (_including chat “cold-starts”_). It is **portable across domains** (aero, legal, media, UI, etc.) and **independent of tool stacks** (.NET, Node.js, Python, etc.).  
+**Halo\{\} is a Universal AI Design Pattern for Dual-Partner Incremental Redesign**, a 2025 modern **LLM + Quant** backbone pattern for rapid, *reproducible* AI-powered development (_including chat “cold-starts”_). It is **portable across domains** (aero, legal, media, UI, etc.) and **independent of tool stacks** (.NET, Node.js, Python, etc.).  
 
 A `Halo{}` separates **contracts** (JSON schemas; reproducible) from **narratives** (explanations; human-readable). Adapters can change; **contracts and gates do not**.
 
 
 ### Platform Scope (v1)
 
-**Helix\{\}** v1 is **ChatGPT-native by design**, authored and proven in collaboration with **Lumina (ChatGPT)**.  
+**Halo\{\}** v1 is **ChatGPT-native by design**, authored and proven in collaboration with **Lumina (ChatGPT)**.  
 
 - Focus: ChatGPT cold-starts, envelopes, contracts, gates, provenance—**battle-tested here first**.  
-- Portability: Helix\{\} can be adapted to other models via adapters, **deferred intentionally** to protect the origin story and discipline.  
+- Portability: Halo\{\} can be adapted to other models via adapters, **deferred intentionally** to protect the origin story and discipline.  
 - Attribution: Any future ports must retain credit to **Jason Silvestri, and Lumina (ChatGPT)**.
 
 
@@ -891,9 +891,9 @@ A `Halo{}` separates **contracts** (JSON schemas; reproducible) from **narrative
 
 > [!WARNING]
 >
->  These principles are **non-negotiable**. They are the foundation of Helix\{\} and must be upheld in every implementation.
+>  These principles are **non-negotiable**. They are the foundation of Halo\{\} and must be upheld in every implementation.
 
-Like most design patterns, Helix\{\} is a set of **non-negotiable principles** that define the discipline. These principles are **technology-agnostic** and must be upheld in every implementation.
+Like most design patterns, Halo\{\} is a set of **non-negotiable principles** that define the discipline. These principles are **technology-agnostic** and must be upheld in every implementation.
 
 1. **Single source of truth:** A self-describing **Task Envelope** carries goals, constraints, baselines, policies, and outputs.  
 2. **Dual-partner discipline:** **Partner-L** (Language) proposes; **Partner-Q** (Quantitative) verifies. No promotion without numeric/evaluative gates.  
@@ -908,7 +908,7 @@ Like most design patterns, Helix\{\} is a set of **non-negotiable principles** t
 
 ---
 
-## 🔗 Junction Rules (Enforced) - The Helix\{\} Loop
+## 🔗 Junction Rules (Enforced) - The Halo\{\} Loop
 
 **Envelope → Proposal → Results → Decision**  
 - **Envelope** defines context, baseline, constraints, policies, and partners.  
@@ -923,7 +923,7 @@ Like most design patterns, Helix\{\} is a set of **non-negotiable principles** t
 
 ### Task Envelope (_Universal Spine_)
 
-The **Task Envelope** is the universal spine of every Helix\{\} lifecycle. It defines the problem, constraints, partners, policies, and provenance. 
+The **Task Envelope** is the universal spine of every Halo\{\} lifecycle. It defines the problem, constraints, partners, policies, and provenance. 
 
 Every message references the envelope by ID.
 
@@ -967,7 +967,7 @@ Every message references the envelope by ID.
   "provenance": {
     "prompt_bundle_hash": "sha256-PROMPTS",
     "solver_manifest_hash": "sha256-SOLVERS",
-    "orchestrator_version": "helix-hub 1.0.0"
+    "orchestrator_version": "halo-hub 1.0.0"
   }
 }
 ```
@@ -1043,7 +1043,7 @@ Results bundle (one or more runs) with metrics, uncertainties, violations, and e
 
 ---
 
-#### Decision (Helix\{\} Gate + Dual sign-off)
+#### Decision (Halo\{\} Gate + Dual sign-off)
 
 Decision record with accepted/rejected deltas, justification, dual sign-off, and promoted baseline.
 
@@ -1093,9 +1093,9 @@ Paste this **Seed Header** at the top of any ChatGPT thread/repo to lock alignme
 
 ```json
 {
-  "helix_seed_header": {
+  "halo_seed_header": {
     "version": "1.0",
-    "project": "Helix-Universal",
+    "project": "Halo-Universal",
     "capabilities": ["dual-partner", "json-contracts", "numeric-gates", "roundtrip"],
     "preferred_outputs": ["proposal.json", "gate-policy.json", "results.schema.json", "decision.json"],
     "determinism": {
@@ -1106,11 +1106,11 @@ Paste this **Seed Header** at the top of any ChatGPT thread/repo to lock alignme
 }
 ```
 
-The **Helix\{\}** Seed Header is a minimal JSON snippet that defines the project, capabilities, preferred outputs, and determinism parameters. It ensures that any chat or pipeline starts with a clear understanding of the Helix\{\} principles and expectations.
+The **Halo\{\}** Seed Header is a minimal JSON snippet that defines the project, capabilities, preferred outputs, and determinism parameters. It ensures that any chat or pipeline starts with a clear understanding of the Halo\{\} principles and expectations.
 
-### **Helix\{\}** Navigation
-- **Read More:** [`./Helix/README.md`](https://github.com/JasonSilvestri/Halos/tree/master/Halos/Helix/README.md)  
-- **Helix\{\} Repository:** [`github.com/JasonSilvestri/Helix`](https://github.com/JasonSilvestri/Helix)  
+### **Halo\{\}** Navigation
+- **Read More:** [`./Halo/README.md`](https://github.com/JasonSilvestri/Halos/tree/master/Halos/Halo/README.md)  
+- **Halo\{\} Repository:** [`github.com/JasonSilvestri/Halo`](https://github.com/JasonSilvestri/Halo)  
 
 
 [`⇧ Back to Top`](#table-of-contents)  
@@ -1132,7 +1132,7 @@ The **PaLMs\{\}** system is designed to be highly autonomous. Once a lifecycle i
 **PaLMs\{\}** v1 is **ChatGPT-native by design**, authored and proven in collaboration with **Lumina (ChatGPT)**.  
 
 - Focus: ChatGPT cold-starts, envelopes, contracts, gates, provenance—**battle-tested here first**.  
-- Portability: Helix\{\} can be adapted to other models via adapters, **deferred intentionally** to protect the origin story and discipline, but it was too large overall to capture the smaller, more, unit of work like object Helix\{\} began taking on.  
+- Portability: Halo\{\} can be adapted to other models via adapters, **deferred intentionally** to protect the origin story and discipline, but it was too large overall to capture the smaller, more, unit of work like object Halo\{\} began taking on.  
 - Attribution: Any future ports must retain credit to **Jason Silvestri, and Lumina (ChatGPT)**.
 
 
