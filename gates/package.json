@@ -4,15 +4,17 @@
   "private": true,
   "type": "module",
   "description": "Halos Architecture Gates tooling (schemas, validators, utilities).",
-  "scripts": {
-    "gate:validate": "node ./gates/tools/validate-gate.mjs",
-    "gate:validate:file": "node ./gates/tools/validate-gate.mjs --file",
-    "gate:validate:envelope": "node ./gates/tools/validate-gate.mjs --schema envelope --file",
-    "gate:validate:runner": "node ./gates/tools/validate-gate.mjs --schema runner --file",
-    "gate:validate:naming": "node ./gates/tools/validate-gate.mjs --schema naming --file",
-    "gate:validate:freeze": "node ./gates/tools/validate-gate.mjs --schema freeze --file",
-    "wf:validate:file": "node ./gates/tools/validate-gate.mjs --schema workflow --file",
-    "next:validate:file": "node ./gates/tools/validate-gate.mjs --schema whatsnext --file"
+  {
+    "scripts": {
+      "gate:validate": "node ./tools/validate-gate.mjs",
+      "gate:validate:file": "node ./tools/validate-gate.mjs --file",
+      "gate:validate:envelope": "node ./tools/validate-gate.mjs --schema envelope --file",
+      "gate:validate:runner": "node ./tools/validate-gate.mjs --schema runner --file",
+      "gate:validate:naming": "node ./tools/validate-gate.mjs --schema naming --file",
+      "gate:validate:freeze": "node ./tools/validate-gate.mjs --schema freeze --file",
+      "wf:validate:file": "node ./tools/validate-gate.mjs --schema workflow --file",
+      "next:validate:file": "node ./tools/validate-gate.mjs --schema whatsnext --file"
+    }
   },
   "devDependencies": {
     "ajv": "^8.17.1",
@@ -22,3 +24,4 @@
     "halos-gates": "file:.."
   }
 }
+
