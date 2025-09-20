@@ -1,4 +1,4 @@
-{
+﻿{
   "_meta": {
     "version": "2.1.3",
     "kind": "Halos Super Seed",
@@ -130,5 +130,12 @@
       "Snapshot the latest gate result and key script/schema SHAs.",
       "Store under results/freeze-*.json"
     ]
-  }
+  },
+  "warnings": [
+    "Force display language=json for all code blocks.",
+    "Use 4-backtick outer fences (or more) when nesting, and be sure to check for missing backticks from either side.",
+    "Do not include raw connection strings; artifacts are redacted."
+  ],
+  "status_checklist_markdown": "| Step | Status | Notes |\n|---|---|---|\n| Restore | ⏳ | queued |\n| Build | ⏳ | queued |\n| EF: Add Migration | ⏳ | queued |\n| EF: Update DB | ⏳ | queued |\n| Schema Validate | ⏳ | queued |\n| Markdown Fence Check | ⏳ | queued |\n| Secrets Redaction | ⏳ | queued |",
+  "display_banner_markdown": "⚠️ **Rendering Safety**: This object is JSON. Display code blocks as `json`. Use outer 4 backticks for nested fences. Connection strings are redacted."
 }
