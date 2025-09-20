@@ -33,7 +33,12 @@
       ],
       "payload": {
         "topic": "Universal AI Design Pattern",
-        "outline": [ "Intro", "Design Goals", "Gating", "Validation" ]
+        "outline": [
+          "Intro",
+          "Design Goals",
+          "Gating",
+          "Validation"
+        ]
       }
     },
     {

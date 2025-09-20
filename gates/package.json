@@ -1,4 +1,9 @@
 {
+  "name": "halos-gates",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Halos Architecture Gates tooling (schemas, validators, utilities).",
+  "type": "module",
   "scripts": {
     "gate:validate": "node ./tools/validate-gate.mjs",
     "gate:validate:file": "node ./tools/validate-gate.mjs --file",
@@ -8,5 +13,12 @@
     "gate:validate:freeze": "node ./tools/validate-gate.mjs --schema freeze --file",
     "wf:validate:file": "node ./tools/validate-gate.mjs --schema workflow --file",
     "next:validate:file": "node ./tools/validate-gate.mjs --schema whatsnext --file"
+  },
+  "devDependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1"
+  },
+  "dependencies": {
+    "halos-gates": "file:.."
   }
 }

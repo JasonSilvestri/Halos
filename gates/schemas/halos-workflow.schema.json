@@ -4,11 +4,29 @@
   "title": "Halos Workflow State Mixin",
   "description": "Reusable state mixin you can $ref into any object.",
   "type": "object",
-  "required": [ "state", "stateCode" ],
+  "required": [
+    "state",
+    "stateCode"
+  ],
   "properties": {
     "stateCode": {
       "type": "integer",
-      "enum": [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ],
+      "enum": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
       "description": "Canonical state code (stable, source of truth)."
     },
     "state": {
@@ -47,11 +65,30 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": [ "stateCode", "state", "timestampUtc" ],
+        "required": [
+          "stateCode",
+          "state",
+          "timestampUtc"
+        ],
         "properties": {
           "stateCode": {
             "type": "integer",
-            "enum": [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ]
+            "enum": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14
+            ]
           },
           "state": {
             "type": "string",
@@ -80,7 +117,9 @@
             "type": "string",
             "maxLength": 2000
           },
-          "by": { "type": "string" }
+          "by": {
+            "type": "string"
+          }
         },
         "additionalProperties": false
       }
@@ -89,38 +128,98 @@
   "allOf": [
     {
       "if": {
-        "properties": { "state": { "const": "PASSED" } },
-        "required": [ "state" ]
+        "properties": {
+          "state": {
+            "const": "PASSED"
+          }
+        },
+        "required": [
+          "state"
+        ]
       },
-      "then": { "properties": { "stateCode": { "const": 5 } } }
+      "then": {
+        "properties": {
+          "stateCode": {
+            "const": 5
+          }
+        }
+      }
     },
     {
       "if": {
-        "properties": { "state": { "const": "FAILED" } },
-        "required": [ "state" ]
+        "properties": {
+          "state": {
+            "const": "FAILED"
+          }
+        },
+        "required": [
+          "state"
+        ]
       },
-      "then": { "properties": { "stateCode": { "const": 6 } } }
+      "then": {
+        "properties": {
+          "stateCode": {
+            "const": 6
+          }
+        }
+      }
     },
     {
       "if": {
-        "properties": { "state": { "const": "REJECTED" } },
-        "required": [ "state" ]
+        "properties": {
+          "state": {
+            "const": "REJECTED"
+          }
+        },
+        "required": [
+          "state"
+        ]
       },
-      "then": { "properties": { "stateCode": { "const": 7 } } }
+      "then": {
+        "properties": {
+          "stateCode": {
+            "const": 7
+          }
+        }
+      }
     },
     {
       "if": {
-        "properties": { "state": { "const": "WAITING" } },
-        "required": [ "state" ]
+        "properties": {
+          "state": {
+            "const": "WAITING"
+          }
+        },
+        "required": [
+          "state"
+        ]
       },
-      "then": { "properties": { "stateCode": { "const": 4 } } }
+      "then": {
+        "properties": {
+          "stateCode": {
+            "const": 4
+          }
+        }
+      }
     },
     {
       "if": {
-        "properties": { "state": { "const": "NETWORK_ERROR" } },
-        "required": [ "state" ]
+        "properties": {
+          "state": {
+            "const": "NETWORK_ERROR"
+          }
+        },
+        "required": [
+          "state"
+        ]
       },
-      "then": { "properties": { "stateCode": { "const": 11 } } }
+      "then": {
+        "properties": {
+          "stateCode": {
+            "const": 11
+          }
+        }
+      }
     }
   ],
   "additionalProperties": true

@@ -2,9 +2,13 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "halos-whatsnext.schema.json",
   "title": "Halos What's Next List",
-  "description": "A safe, append-only list of next actions; each item carries the workflow state mixin.",
+  "description": "Appendable next-actions list; each item carries the workflow state mixin.",
   "type": "object",
-  "required": [ "manifestId", "createdUtc", "items" ],
+  "required": [
+    "manifestId",
+    "createdUtc",
+    "items"
+  ],
   "properties": {
     "manifestId": {
       "type": "string",
@@ -15,20 +19,31 @@
       "format": "date-time"
     },
     "owner": {
-      "type": "string",
-      "description": "persona, team, or system"
+      "type": "string"
     },
     "tags": {
       "type": "array",
-      "items": { "type": "string" }
+      "items": {
+        "type": "string"
+      }
     },
     "items": {
       "type": "array",
       "minItems": 1,
       "items": {
         "type": "object",
-        "allOf": [ { "$ref": "halos-workflow.schema.json" } ],
-        "required": [ "id", "title", "priority", "state", "stateCode" ],
+        "allOf": [
+          {
+            "$ref": "halos-workflow.schema.json"
+          }
+        ],
+        "required": [
+          "id",
+          "title",
+          "priority",
+          "state",
+          "stateCode"
+        ],
         "properties": {
           "id": {
             "type": "string",
@@ -38,16 +53,19 @@
             "type": "string",
             "minLength": 1
           },
-          "description": { "type": "string" },
+          "description": {
+            "type": "string"
+          },
           "priority": {
             "type": "integer",
             "minimum": 1,
-            "maximum": 9,
-            "description": "1 = highest urgency, 9 = lowest"
+            "maximum": 9
           },
           "labels": {
             "type": "array",
-            "items": { "type": "string" }
+            "items": {
+              "type": "string"
+            }
           },
           "dueUtc": {
             "type": "string",
@@ -57,14 +75,21 @@
             "type": "array",
             "items": {
               "type": "object",
-              "required": [ "rel", "href" ],
+              "required": [
+                "rel",
+                "href"
+              ],
               "properties": {
-                "rel": { "type": "string" },
+                "rel": {
+                  "type": "string"
+                },
                 "href": {
                   "type": "string",
                   "minLength": 1
                 },
-                "note": { "type": "string" }
+                "note": {
+                  "type": "string"
+                }
               },
               "additionalProperties": false
             }
@@ -80,7 +105,9 @@
                 "type": "integer",
                 "minimum": 0
               },
-              "score": { "type": "number" }
+              "score": {
+                "type": "number"
+              }
             },
             "additionalProperties": true
           }
