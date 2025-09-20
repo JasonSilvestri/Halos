@@ -39,7 +39,7 @@ if (args.includes("--file") && !filePath) {
 // Map logical names to local schema files
 const schemaMap = {
     gate: "lumina-gate.schema.json",
-    envelope: "helix-lumina-envelope.schema.json",
+    envelope: "halo-lumina-envelope.schema.json", // <- renamed
     runner: "lumina-gate.config.schema.json",
     naming: "naming.schema.json",
     freeze: "freeze-shot.schema.json",

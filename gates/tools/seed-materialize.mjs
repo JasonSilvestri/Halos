@@ -28,11 +28,16 @@ const seed = JSON.parse(raw);
 // Normalize any incoming "Halos/gates/**" or "Halos/gates/**"
 // and reroot under TARGET_DIR/**.
 const reroot = (p) => {
-  let s = p.replace(/^[\\/]/, "").replace(/\\/g, "/");
-  s = s.replace(/^Halos\/Halos\/Architecture\/Gates\//, "")
-       .replace(/^Halos\/Architecture\/Gates\//, "");
-  // Anything else (e.g., schemas/…) is left as-is but rerooted under TARGET_DIR
-  return path.join(TARGET_DIR, s);
+    let s = p.replace(/^[\\/]/, "").replace(/\\/g, "/"); // normalize
+    const stripPrefixes = [
+        /^Halos\/gates\//i,
+        /^Halos\/Architecture\/Gates\//i,
+        /^Halos\/Halos\/Architecture\/Gates\//i
+    ];
+    for (const rx of stripPrefixes) {
+        if (rx.test(s)) { s = s.replace(rx, ""); break; }
+    }
+    return path.join(TARGET_DIR, s);
 };
 
 let count = 0;
