@@ -77,6 +77,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "seeds", "seeds", "{0490CD25-EE2A-4FC6-8E3D-B2A1E43AEE74}"
 	ProjectSection(SolutionItems) = preProject
 		seeds\halo.lumina.seed.json = seeds\halo.lumina.seed.json
+		halos.seed.json = halos.seed.json
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sql", "sql", "{5ABB12A6-0922-4D42-BD1D-30BD6A4CE64B}"
