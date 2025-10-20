@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "halos-workitem.schema.json",
+  "title": "Halos Work Item (workflow mixin)",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "halos-workflow.schema.json"
+    }
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "type": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "state",
+    "stateCode"
+  ],
+  "additionalProperties": true
+}

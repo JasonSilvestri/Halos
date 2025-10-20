@@ -1,0 +1,329 @@
+{
+  "halo_seed_header": {
+    "version": "0.2",
+    "project": "Halos",
+    "seed_name": "halo.baby.seed.json",
+    "createdUtc": "2025-10-15T00:00:00Z",
+    "provenance": {
+      "partnerA": "user:JasonSilvestri",
+      "partnerB": "agent:Lumina",
+      "sessionId": "seed-baby-2025-10-15",
+      "nonce": "a1c3d1fd-4d7a-4d1c-9d21-1a2b3c4d5e60"
+    },
+    "determinism": {
+      "uuid_namespace": "6f0e5f9f-7f3a-41bf-b969-9e2b7d2f9b21",
+      "hash": "sha256"
+    },
+    "notes": [
+      "BABY halo v0.2: minimal, but with full 14-state workflow and env checks.",
+      "Materialize bundled_files to Halos/halo.baby/gates/** and run validator."
+    ]
+  },
+
+  "envelope": {
+    "_meta": {
+      "version": "0.2.0",
+      "kind": "Halos",
+      "createdUtc": "2025-10-15T00:00:00Z",
+      "uuid_namespace": "6f0e5f9f-7f3a-41bf-b969-9e2b7d2f9b21",
+      "notes": [
+        "Bare-minimum envelope (paths + simple commands + env check)."
+      ]
+    },
+    "project": {
+      "name": "Halos",
+      "envTargets": [ "LOCAL" ],
+      "requirements": {
+        "node": ">=20.0",
+        "powershell": ">=7.0"
+      }
+    },
+    "roots": {
+      "appRoot": ".",
+      "gateRoot": "Halos/halo.baby/gates"
+    },
+    "paths": {
+      "schemas": {
+        "workflow": "Halos/halo.baby/gates/schemas/halos-workflow.schema.json",
+        "whatsnext": "Halos/halo.baby/gates/schemas/halos-whatsnext.schema.json"
+      },
+      "samples": {
+        "whatsnext": "Halos/halo.baby/gates/samples/whatsnext.sample.json"
+      },
+      "tools": {
+        "validator": "Halos/halo.baby/gates/tools/validate-gate.mjs"
+      },
+      "packageJson": "Halos/halo.baby/gates/package.json"
+    },
+    "commands": {
+      "install": [
+        "npm --prefix Halos/halo.baby/gates install"
+      ],
+      "validateWhatsNext": [
+        "npm --prefix Halos/halo.baby/gates run next:validate:file -- --file Halos/halo.baby/gates/samples/whatsnext.sample.json"
+      ]
+    },
+    "npmScripts": {
+      "packageJsonLocation": "Halos/halo.baby/gates/package.json",
+      "scripts": {
+        "wf:validate:file": "node ./halo.baby/gates/tools/validate-gate.mjs --schema workflow --file",
+        "next:validate:file": "node ./halo.baby/gates/tools/validate-gate.mjs --schema whatsnext --file"
+      },
+      "devDependencies": {
+        "ajv": "^8.17.1",
+        "ajv-formats": "^3.0.1"
+      }
+    }
+  },
+
+  "bundled_files": [
+    {
+      "path": "Halos/halo.baby/gates/schemas/halos-workflow.schema.json",
+      "kind": "json",
+      "json": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "$id": "halos-workflow.schema.json",
+        "title": "Halos Workflow State Mixin (Full 14-state)",
+        "description": "Reusable state mixin.",
+        "type": "object",
+        "required": [ "state", "stateCode" ],
+        "properties": {
+          "stateCode": {
+            "type": "integer",
+            "enum": [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ],
+            "description": "Canonical state code (stable source of truth)."
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "CREATED",
+              "QUEUED",
+              "IN_PROGRESS",
+              "WAITING",
+              "PASSED",
+              "FAILED",
+              "REJECTED",
+              "CANCELLED",
+              "SKIPPED",
+              "TIMEOUT",
+              "NETWORK_ERROR",
+              "VALIDATION_ERROR",
+              "RETRYING",
+              "BLOCKED"
+            ],
+            "description": "Human-friendly label normalized to the code."
+          },
+          "updatedUtc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "reason": {
+            "type": "string",
+            "maxLength": 1000
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": { "state": { "const": "CREATED" } },
+              "required": [ "state" ]
+            },
+            "then": { "properties": { "stateCode": { "const": 1 } } }
+          },
+          {
+            "if": {
+              "properties": { "state": { "const": "QUEUED" } },
+              "required": [ "state" ]
+            },
+            "then": { "properties": { "stateCode": { "const": 2 } } }
+          },
+          {
+            "if": {
+              "properties": { "state": { "const": "IN_PROGRESS" } },
+              "required": [ "state" ]
+            },
+            "then": { "properties": { "stateCode": { "const": 3 } } }
+          },
+          {
+            "if": {
+              "properties": { "state": { "const": "WAITING" } },
+              "required": [ "state" ]
+            },
+            "then": { "properties": { "stateCode": { "const": 4 } } }
+          },
+          {
+            "if": {
+              "properties": { "state": { "const": "PASSED" } },
+              "required": [ "state" ]
+            },
+            "then": { "properties": { "stateCode": { "const": 5 } } }
+          },
+          {
+            "if": {
+              "properties": { "state": { "const": "FAILED" } },
+              "required": [ "state" ]
+            },
+            "then": { "properties": { "stateCode": { "const": 6 } } }
+          },
+          {
+            "if": {
+              "properties": { "state": { "const": "REJECTED" } },
+              "required": [ "state" ]
+            },
+            "then": { "properties": { "stateCode": { "const": 7 } } }
+          },
+          {
+            "if": {
+              "properties": { "state": { "const": "CANCELLED" } },
+              "required": [ "state" ]
+            },
+            "then": { "properties": { "stateCode": { "const": 8 } } }
+          },
+          {
+            "if": {
+              "properties": { "state": { "const": "SKIPPED" } },
+              "required": [ "state" ]
+            },
+            "then": { "properties": { "stateCode": { "const": 9 } } }
+          },
+          {
+            "if": {
+              "properties": { "state": { "const": "TIMEOUT" } },
+              "required": [ "state" ]
+            },
+            "then": { "properties": { "stateCode": { "const": 10 } } }
+          },
+          {
+            "if": {
+              "properties": { "state": { "const": "NETWORK_ERROR" } },
+              "required": [ "state" ]
+            },
+            "then": { "properties": { "stateCode": { "const": 11 } } }
+          },
+          {
+            "if": {
+              "properties": { "state": { "const": "VALIDATION_ERROR" } },
+              "required": [ "state" ]
+            },
+            "then": { "properties": { "stateCode": { "const": 12 } } }
+          },
+          {
+            "if": {
+              "properties": { "state": { "const": "RETRYING" } },
+              "required": [ "state" ]
+            },
+            "then": { "properties": { "stateCode": { "const": 13 } } }
+          },
+          {
+            "if": {
+              "properties": { "state": { "const": "BLOCKED" } },
+              "required": [ "state" ]
+            },
+            "then": { "properties": { "stateCode": { "const": 14 } } }
+          }
+        ],
+        "additionalProperties": true
+      }
+    },
+    {
+      "path": "Halos/halo.baby/gates/schemas/halos-whatsnext.schema.json",
+      "kind": "json",
+      "json": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "$id": "halos-whatsnext.schema.json",
+        "title": "Halos What's Next (Baby)",
+        "description": "Tiny backlog list that reuses the workflow mixin.",
+        "type": "object",
+        "required": [ "manifestId", "createdUtc", "items" ],
+        "properties": {
+          "manifestId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "createdUtc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "items": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "allOf": [ { "$ref": "halos-workflow.schema.json" } ],
+              "required": [ "id", "title", "state", "stateCode" ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "title": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "description": { "type": "string" },
+                "priority": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 9
+                }
+              },
+              "additionalProperties": true
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
+      "path": "Halos/halo.baby/gates/samples/whatsnext.sample.json",
+      "kind": "json",
+      "json": {
+        "manifestId": "halos-baby-001",
+        "createdUtc": "2025-10-15T00:00:00Z",
+        "items": [
+          {
+            "id": "hello-gates",
+            "title": "Prove baby validator works",
+            "description": "Validate the sample using AJV via npm script.",
+            "priority": 1,
+            "state": "IN_PROGRESS",
+            "stateCode": 3,
+            "updatedUtc": "2025-10-15T00:00:10Z",
+            "reason": "first run"
+          },
+          {
+            "id": "freeze-idea",
+            "title": "Decide on minimal freeze format",
+            "priority": 2,
+            "state": "QUEUED",
+            "stateCode": 2
+          }
+        ]
+      }
+    },
+    {
+      "path": "Halos/halo.baby/gates/tools/validate-gate.mjs",
+      "kind": "text",
+      "text": "#!/usr/bin/env node\nimport fs from \"node:fs\";\nimport path from \"node:path\";\nimport process from \"node:process\";\nimport Ajv from \"ajv\";\nimport addFormats from \"ajv-formats\";\n\nconst args = process.argv.slice(2);\nlet schemaKey = \"whatsnext\";\nlet filePath = null;\nfor (let i = 0; i < args.length; i++) {\n  const a = args[i];\n  if (a === \"--schema\" && args[i+1]) { schemaKey = args[i+1]; i++; }\n  else if (a === \"--file\" && args[i+1]) { filePath = args[i+1]; i++; }\n}\n\nconst ROOT = process.cwd();\nconst schemasDir = path.join(ROOT, \"schemas\");\nconst schemaMap = {\n  workflow: \"halos-workflow.schema.json\",\n  whatsnext: \"halos-whatsnext.schema.json\"\n};\n\nif (!schemaMap[schemaKey]) { console.error(`[ERROR] Unknown --schema '${schemaKey}'.`); process.exit(2); }\nconst schemaFilename = schemaMap[schemaKey];\nconst schemaPath = path.join(schemasDir, schemaFilename);\nif (!fs.existsSync(schemaPath)) { console.error(`[ERROR] Schema not found: ${schemaPath}`); process.exit(2); }\n\nif (args.includes(\"--file\") && !filePath) {\n  if (schemaKey === \"whatsnext\") filePath = \"./samples/whatsnext.sample.json\";\n}\n\nlet data = null;\nif (filePath) {\n  const abs = path.isAbsolute(filePath) ? filePath : path.join(ROOT, filePath);\n  if (!fs.existsSync(abs)) { console.error(`[ERROR] Data file not found: ${abs}`); process.exit(2); }\n  data = JSON.parse(fs.readFileSync(abs, \"utf8\"));\n}\n\nconst ajv = new Ajv({ strict: false, allErrors: true, allowUnionTypes: true });\naddFormats(ajv);\nfor (const entry of fs.readdirSync(schemasDir)) {\n  if (entry.endsWith(\".json\")) {\n    const raw = fs.readFileSync(path.join(schemasDir, entry), \"utf8\");\n    try { const s = JSON.parse(raw); ajv.addSchema(s, s.$id || entry); } catch {}\n  }\n}\n\nconst primary = JSON.parse(fs.readFileSync(schemaPath, \"utf8\"));\nconst validate = ajv.getSchema(primary.$id || schemaFilename) || ajv.compile(primary);\n\nif (!data) { console.log(`[OK] Schema '${schemaFilename}' compiled.`); process.exit(0); }\nconst ok = validate(data);\nif (ok) { console.log(`[OK] ${schemaKey} ✓  (${schemaFilename})`); process.exit(0); }\nconsole.error(`[FAIL] ${schemaKey} ✗  (${schemaFilename})`);\nfor (const err of validate.errors ?? []) {\n  console.error(`- ${err.instancePath || \"/\"} ${err.message}`);\n  if (err.params) console.error(`  params: ${JSON.stringify(err.params)}`);\n}\nprocess.exit(1);\n"
+    },
+    {
+      "path": "Halos/halo.baby/gates/package.json",
+      "kind": "json",
+      "json": {
+        "name": "halos-gates-baby",
+        "version": "0.2.0",
+        "private": true,
+        "description": "Baby Halos gates tooling (full workflow mixin + validator).",
+        "type": "module",
+        "scripts": {
+          "wf:validate:file": "node ./halo.baby/gates/tools/validate-gate.mjs --schema workflow --file",
+          "next:validate:file": "node ./halo.baby/gates/tools/validate-gate.mjs --schema whatsnext --file"
+        },
+        "devDependencies": {
+          "ajv": "^8.17.1",
+          "ajv-formats": "^3.0.1"
+        }
+      }
+    }
+  ]
+}

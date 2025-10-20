@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "halo-lumina-envelope.schema.json",
+  "title": "Halo/Lumina Envelope",
+  "type": "object",
+  "required": [ "_meta", "project", "paths" ],
+  "properties": {
+    "_meta": { "type": "object" },
+    "project": { "type": "object" },
+    "paths": { "type": "object" }
+  },
+  "additionalProperties": true
+}

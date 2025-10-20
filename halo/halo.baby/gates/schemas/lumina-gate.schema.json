@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "lumina-gate.schema.json",
+  "title": "Lumina Gate Result",
+  "type": "object",
+  "required": [ "timestampUtc", "gateStatus", "pass" ],
+  "properties": {
+    "timestampUtc": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "gateStatus": {
+      "type": "string",
+      "enum": [ "OK", "WARN", "ERROR" ]
+    },
+    "pass": { "type": "boolean" },
+    "warnings": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "additionalProperties": true
+}

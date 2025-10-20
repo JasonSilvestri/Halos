@@ -1,0 +1,226 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "halos-workflow.schema.json",
+  "title": "Halos Workflow State Mixin",
+  "description": "Reusable state mixin you can $ref into any object.",
+  "type": "object",
+  "required": [
+    "state",
+    "stateCode"
+  ],
+  "properties": {
+    "stateCode": {
+      "type": "integer",
+      "enum": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "description": "Canonical state code (stable, source of truth)."
+    },
+    "state": {
+      "type": "string",
+      "enum": [
+        "CREATED",
+        "QUEUED",
+        "IN_PROGRESS",
+        "WAITING",
+        "PASSED",
+        "FAILED",
+        "REJECTED",
+        "CANCELLED",
+        "SKIPPED",
+        "TIMEOUT",
+        "NETWORK_ERROR",
+        "VALIDATION_ERROR",
+        "RETRYING",
+        "BLOCKED"
+      ],
+      "description": "Human-friendly label normalized to the code."
+    },
+    "reason": {
+      "type": "string",
+      "maxLength": 2000
+    },
+    "updatedUtc": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedBy": {
+      "type": "string",
+      "description": "Actor/system id"
+    },
+    "stateHistory": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "stateCode",
+          "state",
+          "timestampUtc"
+        ],
+        "properties": {
+          "stateCode": {
+            "type": "integer",
+            "enum": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14
+            ]
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "CREATED",
+              "QUEUED",
+              "IN_PROGRESS",
+              "WAITING",
+              "PASSED",
+              "FAILED",
+              "REJECTED",
+              "CANCELLED",
+              "SKIPPED",
+              "TIMEOUT",
+              "NETWORK_ERROR",
+              "VALIDATION_ERROR",
+              "RETRYING",
+              "BLOCKED"
+            ]
+          },
+          "timestampUtc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "reason": {
+            "type": "string",
+            "maxLength": 2000
+          },
+          "by": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "state": {
+            "const": "PASSED"
+          }
+        },
+        "required": [
+          "state"
+        ]
+      },
+      "then": {
+        "properties": {
+          "stateCode": {
+            "const": 5
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state": {
+            "const": "FAILED"
+          }
+        },
+        "required": [
+          "state"
+        ]
+      },
+      "then": {
+        "properties": {
+          "stateCode": {
+            "const": 6
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state": {
+            "const": "REJECTED"
+          }
+        },
+        "required": [
+          "state"
+        ]
+      },
+      "then": {
+        "properties": {
+          "stateCode": {
+            "const": 7
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state": {
+            "const": "WAITING"
+          }
+        },
+        "required": [
+          "state"
+        ]
+      },
+      "then": {
+        "properties": {
+          "stateCode": {
+            "const": 4
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state": {
+            "const": "NETWORK_ERROR"
+          }
+        },
+        "required": [
+          "state"
+        ]
+      },
+      "then": {
+        "properties": {
+          "stateCode": {
+            "const": 11
+          }
+        }
+      }
+    }
+  ],
+  "additionalProperties": true
+}

@@ -82,6 +82,58 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "seeds", "seeds", "{0490CD25
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sql", "sql", "{5ABB12A6-0922-4D42-BD1D-30BD6A4CE64B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "seed", "seed", "{570880CE-197B-4DA6-9BEF-B70EFA873ADF}"
+	ProjectSection(SolutionItems) = preProject
+		seeds\halo.lumina.seed.json = seeds\halo.lumina.seed.json
+		halos.seed.json = halos.seed.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "halo", "halo", "{C6F1E3E7-7A13-474E-A01A-CDC2167C37D1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "halo.baby", "halo.baby", "{B2BB5DCA-227D-435D-83F1-1A0482581F05}"
+	ProjectSection(SolutionItems) = preProject
+		halo.baby.seed.json = halo.baby.seed.json
+		materialize-seed.mjs = materialize-seed.mjs
+		gates\about\README.md = gates\about\README.md
+		Write-HaloSeed.ps1 = Write-HaloSeed.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "gates", "gates", "{59D589F3-2944-4C50-8239-B8A748393105}"
+	ProjectSection(SolutionItems) = preProject
+		halo\halo.baby\gates\package-lock.json = halo\halo.baby\gates\package-lock.json
+		halo\halo.baby\gates\package.json = halo\halo.baby\gates\package.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "about", "about", "{6FE3DC3F-C8FB-4060-B864-53CBEE279331}"
+	ProjectSection(SolutionItems) = preProject
+		halo\halo.baby\gates\about\halo.baby.seed.json.md = halo\halo.baby\gates\about\halo.baby.seed.json.md
+		halo\halo.baby\gates\about\halos-whatsnext.schema.json.md = halo\halo.baby\gates\about\halos-whatsnext.schema.json.md
+		halo\halo.baby\gates\about\halos-workflow.schema.json.md = halo\halo.baby\gates\about\halos-workflow.schema.json.md
+		halo\halo.baby\gates\about\package.json.md = halo\halo.baby\gates\about\package.json.md
+		halo\halo.baby\gates\about\README.md = halo\halo.baby\gates\about\README.md
+		halo\halo.baby\gates\about\validate-gate.mjs.md = halo\halo.baby\gates\about\validate-gate.mjs.md
+		halo\halo.baby\gates\about\whatsnext.json.md = halo\halo.baby\gates\about\whatsnext.json.md
+		halo\halo.baby\gates\about\whatsnext.sample.json.md = halo\halo.baby\gates\about\whatsnext.sample.json.md
+		halo\halo.baby\gates\about\workflow.json.md = halo\halo.baby\gates\about\workflow.json.md
+		halo\halo.baby\gates\about\workitem.json.md = halo\halo.baby\gates\about\workitem.json.md
+		halo\halo.baby\gates\about\workitem.sample.json.md = halo\halo.baby\gates\about\workitem.sample.json.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "node_modules", "node_modules", "{94678796-DD3F-4601-B4AA-8D56B4460E57}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{B3EF1729-9DD4-459A-9216-CAEC48D1715E}"
+	ProjectSection(SolutionItems) = preProject
+		halo\halo.baby\gates\samples\baby-gate.config.json = halo\halo.baby\gates\samples\baby-gate.config.json
+		halo\halo.baby\gates\samples\halo-baby-envelope.json = halo\halo.baby\gates\samples\halo-baby-envelope.json
+		halo\halo.baby\gates\samples\halo-baby-envelope.meta.json = halo\halo.baby\gates\samples\halo-baby-envelope.meta.json
+		halo\halo.baby\gates\samples\halo-baby-result.fail.sample.json = halo\halo.baby\gates\samples\halo-baby-result.fail.sample.json
+		halo\halo.baby\gates\samples\naming.json = halo\halo.baby\gates\samples\naming.json
+		halo\halo.baby\gates\samples\halo-baby-result.sample.json = halo\halo.baby\gates\samples\halo-baby-result.sample.json
+		halo\halo.baby\gates\samples\whatsnext.sample.json = halo\halo.baby\gates\samples\whatsnext.sample.json
+		halo\halo.baby\gates\samples\workitem.sample.item.json = halo\halo.baby\gates\samples\workitem.sample.item.json
+		halo\halo.baby\gates\samples\workitem.sample.json = halo\halo.baby\gates\samples\workitem.sample.json
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -118,6 +170,12 @@ Global
 		{3254C9C8-0BCC-43FD-BA82-E4D3D6161A8F} = {1D499BCD-9448-4942-A688-64D4B3FECF55}
 		{270A8B5F-3877-4501-994B-E438CE37EA13} = {1D499BCD-9448-4942-A688-64D4B3FECF55}
 		{5ABB12A6-0922-4D42-BD1D-30BD6A4CE64B} = {1D499BCD-9448-4942-A688-64D4B3FECF55}
+		{570880CE-197B-4DA6-9BEF-B70EFA873ADF} = {1D499BCD-9448-4942-A688-64D4B3FECF55}
+		{B2BB5DCA-227D-435D-83F1-1A0482581F05} = {C6F1E3E7-7A13-474E-A01A-CDC2167C37D1}
+		{59D589F3-2944-4C50-8239-B8A748393105} = {B2BB5DCA-227D-435D-83F1-1A0482581F05}
+		{6FE3DC3F-C8FB-4060-B864-53CBEE279331} = {59D589F3-2944-4C50-8239-B8A748393105}
+		{94678796-DD3F-4601-B4AA-8D56B4460E57} = {59D589F3-2944-4C50-8239-B8A748393105}
+		{B3EF1729-9DD4-459A-9216-CAEC48D1715E} = {59D589F3-2944-4C50-8239-B8A748393105}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6C068CBA-F3FA-454D-92B1-467A233D1ACA}

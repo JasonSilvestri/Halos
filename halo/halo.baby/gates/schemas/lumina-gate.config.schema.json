@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "lumina-gate.config.schema.json",
+  "title": "Runner Config",
+  "type": "object",
+  "properties": {
+    "mode": {
+      "type": "string",
+      "enum": [ "nonBlocking", "enforcing" ]
+    },
+    "uploadArtifacts": { "type": "boolean" }
+  },
+  "additionalProperties": true
+}
