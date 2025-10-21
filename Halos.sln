@@ -119,6 +119,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "schemas", "schemas", "{7755
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{70AE434E-3574-4B82-9151-17747F6014BD}"
 	ProjectSection(SolutionItems) = preProject
+		halo\halo.baby\gates\tools\echo-workitems.mjs = halo\halo.baby\gates\tools\echo-workitems.mjs
 		halo\halo.baby\gates\tools\validate-gate.mjs = halo\halo.baby\gates\tools\validate-gate.mjs
 	EndProjectSection
 EndProject
