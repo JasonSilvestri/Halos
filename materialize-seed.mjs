@@ -1,23 +1,18 @@
 ﻿#!/usr/bin/env node
-// materialize-seed.mjs
-// Usage: node materialize-seed.mjs <path-to-seed.json>
+// materialize-seed.mjs — writes bundled_files to disk deterministically.
+// Usage: node materialize-seed.mjs <seed.json>
+
 import fs from "node:fs";
 import path from "node:path";
 import process from "node:process";
 
 function findRepoRootFromSeed(seedFilePath) {
-    // seedFilePath example:
-    // E:\All\Repos\Halos\halo\halo.baby\halo.baby.seed.json
-    const parts = seedFilePath.split(path.sep);
+    const norm = path.resolve(seedFilePath);
+    const parts = norm.split(path.sep);
     const idx = parts.lastIndexOf("Halos");
-    if (idx === -1) {
-        // Fallback: use the seed's directory
-        return path.dirname(seedFilePath);
-    }
-    // repo root is the parent of the "Halos" directory
-    const repoRootParts = parts.slice(0, idx);
-    const repoRoot = repoRootParts.length ? repoRootParts.join(path.sep) : path.sep;
-    return repoRoot || path.sep;
+    if (idx === -1) return path.dirname(norm); // fallback: next to seed
+    const repoParts = parts.slice(0, idx);     // parent of the "Halos" folder
+    return repoParts.length ? repoParts.join(path.sep) : path.sep;
 }
 
 function ensureDir(dir) {
@@ -36,20 +31,25 @@ if (!fs.existsSync(seedPath)) {
     process.exit(2);
 }
 
-const seed = JSON.parse(fs.readFileSync(seedPath, "utf8"));
+let seed;
+try {
+    seed = JSON.parse(fs.readFileSync(seedPath, "utf8"));
+} catch (e) {
+    console.error(`Failed to parse JSON: ${seedPath}\n${e.message}`);
+    process.exit(2);
+}
+
 if (!seed.bundled_files) {
     console.error("No bundled_files found in seed.");
     process.exit(2);
 }
 
 const repoRoot = findRepoRootFromSeed(seedPath);
-
 let count = 0;
+
 for (const bundle of seed.bundled_files) {
-    // If bundle.path starts with 'Halos' we write it under <repoRoot>\Halos\...
-    // Otherwise treat it as relative to the seed directory.
     let outPath;
-    if (bundle.path.startsWith("Halos" + path.sep) || bundle.path.startsWith("Halos/")) {
+    if (bundle.path.startsWith("Halos/") || bundle.path.startsWith("Halos\\")) {
         outPath = path.join(repoRoot, bundle.path.replace(/\//g, path.sep));
     } else {
         outPath = path.resolve(path.dirname(seedPath), bundle.path);
@@ -72,4 +72,4 @@ for (const bundle of seed.bundled_files) {
 console.log(`[OK] Materialized ${count} files.`);
 console.log("\nTo install and validate:");
 console.log("  npm --prefix Halos/halo/halo.baby/gates install");
-console.log("  npm --prefix Halos/halo/halo.baby/gates run next:validate:file -- --file Halos/halo/halo.baby/gates/samples/whatsnext.sample.json");
+console.log("  npm --prefix Halos/halo/halo.baby/gates run next:validate:file -- .\\Halos\\halo\\halo.baby\\gates\\samples\\whatsnext.sample.json");
