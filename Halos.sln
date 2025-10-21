@@ -92,10 +92,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "halo", "halo", "{C6F1E3E7-7
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "halo.baby", "halo.baby", "{B2BB5DCA-227D-435D-83F1-1A0482581F05}"
 	ProjectSection(SolutionItems) = preProject
-		halo.baby.seed.json = halo.baby.seed.json
-		materialize-seed.mjs = materialize-seed.mjs
+		halo\halo.baby\halo.baby.seed.json = halo\halo.baby\halo.baby.seed.json
+		halo\halo.baby\materialize-seed.mjs = halo\halo.baby\materialize-seed.mjs
 		gates\about\README.md = gates\about\README.md
-		Write-HaloSeed.ps1 = Write-HaloSeed.ps1
+		halo\halo.baby\Write-HaloSeed.ps1 = halo\halo.baby\Write-HaloSeed.ps1
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "gates", "gates", "{59D589F3-2944-4C50-8239-B8A748393105}"

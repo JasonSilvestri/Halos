@@ -1,88 +1,99 @@
-# Write-HaloSeed.ps1
+﻿# Write-HaloSeed.ps1 — deterministic materializer (repo-root aware, 'gates/' beside seed)
 # Usage:
-#   pwsh -NoProfile -ExecutionPolicy Bypass -File .\Write-HaloSeed.ps1 -SeedPath .\halo.baby.seed.json
+#   pwsh -File .\Write-HaloSeed.ps1 -SeedPath .\halo.baby.seed.json
+
 [CmdletBinding()]
 param(
-  [Parameter(Mandatory=$true)]
+  [Parameter(Mandatory = $true)]
   [string]$SeedPath
 )
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 
-function Assert-Env {
-  # PowerShell version check
-  $psv = $PSVersionTable.PSVersion
-  if (-not $psv) {
-    Write-Error "Unable to detect PowerShell version."
-  }
-  $isPwsh7OrHigher = ($psv.Major -ge 7)
-  if (-not $isPwsh7OrHigher) {
-    Write-Warning "PowerShell $($psv) detected. PowerShell 7+ is recommended."
-    Write-Warning "You can still materialize files, but use Node to run validators."
-  }
-
-  # Node version check
-  try {
-    $nodeVer = & node -v 2>$null
-  } catch {
-    $nodeVer = $null
-  }
-  if (-not $nodeVer) {
-    Write-Warning "Node.js not found on PATH. Install Node 20+ to run validators."
-    return
-  }
-
-  # Parse Node vX.Y.Z
-  if ($nodeVer -match '^v(\d+)\.(\d+)\.(\d+)$') {
-    $major = [int]$Matches[1]
-    if ($major -lt 20) {
-      Write-Warning "Node $nodeVer detected. Node 20+ is recommended."
+function Get-RepoRootFromSeed([string]$SeedFilePath) {
+  $full = (Resolve-Path $SeedFilePath).Path
+  $cur  = Split-Path -Parent $full
+  while ($true) {
+    $name = Split-Path -Leaf $cur
+    if ($name -eq 'Halos') {
+      $parent = Split-Path -Parent $cur
+      if (-not $parent) { $parent = (Get-Item $cur).PSDrive.Root }
+      return $parent
     }
-  } else {
-    Write-Warning "Unexpected Node version format: $nodeVer"
+    $up = Split-Path -Parent $cur
+    if (-not $up -or $up -eq $cur) {
+      return (Split-Path -Parent $full) # fallback
+    }
+    $cur = $up
   }
 }
 
-if (-not (Test-Path $SeedPath)) {
-  throw "Seed file not found: $SeedPath"
+function Assert-Env {
+  $psv = $PSVersionTable.PSVersion
+  if ($psv -and $psv.Major -lt 7) { Write-Warning "PowerShell $($psv) detected. PowerShell 7+ is recommended." }
+  try { $nodeVer = & node -v 2>$null } catch { $nodeVer = $null }
+  if (-not $nodeVer) { Write-Warning "Node.js not found. Install Node 20+ to run validators."; return }
+  if ($nodeVer -match '^v(\d+)\.(\d+)\.(\d+)$') { if ([int]$Matches[1] -lt 20) { Write-Warning "Node $nodeVer detected. Node 20+ is recommended." } }
 }
 
+if (-not (Test-Path $SeedPath)) { throw "Seed file not found: $SeedPath" }
 Assert-Env
 
-$raw = Get-Content -Raw -Path $SeedPath
-$seed = $raw | ConvertFrom-Json -Depth 200
+$seedFull = (Resolve-Path $SeedPath).Path
+$seedDir  = Split-Path -Parent $seedFull
+$seedJson = Get-Content -Raw -Path $seedFull | ConvertFrom-Json -Depth 400
+if (-not $seedJson.bundled_files) { throw "No bundled_files found in seed." }
 
-if (-not $seed.bundled_files) {
-  throw "No bundled_files found in seed."
-}
+$repoRoot = Get-RepoRootFromSeed -SeedFilePath $seedFull
 
-foreach ($bundle in $seed.bundled_files) {
-  $outPath = $bundle.path
-  $dir = Split-Path -Parent $outPath
-  if ($dir -and -not (Test-Path $dir)) {
-    New-Item -ItemType Directory -Path $dir -Force | Out-Null
+Write-Host "[INFO] Seed      : $seedFull"
+Write-Host "[INFO] Seed Dir  : $seedDir"
+Write-Host "[INFO] Repo Root : $repoRoot"
+Write-Host ""
+
+$written = 0
+foreach ($bundle in $seedJson.bundled_files) {
+  $bundlePath = $bundle.path -replace '/', [IO.Path]::DirectorySeparatorChar
+
+  if ($bundle.path -match '^(?i)Halos[\\/].*') {
+    # Explicit repo-rooted write
+    $outPath = Join-Path $repoRoot $bundlePath
+    Write-Host "[TRACE] mode=repo-root  in='$($bundle.path)'  out='$outPath'"
+  } elseif ($bundle.path -match '^(?i)gates[\\/].*') {
+    # Sandbox-local write beside the seed
+    $outPath = Join-Path $seedDir $bundlePath
+    Write-Host "[TRACE] mode=seed-local in='$($bundle.path)'  out='$outPath'"
+  } else {
+    # Default: relative to the seed folder
+    $outPath = Join-Path $seedDir $bundlePath
+    Write-Host "[TRACE] mode=default    in='$($bundle.path)'  out='$outPath'"
   }
+
+  $dir = Split-Path -Parent $outPath
+  if ($dir -and -not (Test-Path $dir)) { New-Item -ItemType Directory -Path $dir -Force | Out-Null }
 
   switch ($bundle.kind) {
     "json" {
-      $json = $bundle.json | ConvertTo-Json -Depth 100
-      $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
-      [System.IO.File]::WriteAllText($outPath, $json, $utf8NoBom)
+      $json = $bundle.json | ConvertTo-Json -Depth 400
+      $utf8 = New-Object System.Text.UTF8Encoding($false)
+      [System.IO.File]::WriteAllText($outPath, $json, $utf8)
     }
     "text" {
-      $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
-      [System.IO.File]::WriteAllText($outPath, $bundle.text, $utf8NoBom)
+      $utf8 = New-Object System.Text.UTF8Encoding($false)
+      [System.IO.File]::WriteAllText($outPath, $bundle.text, $utf8)
     }
-    default {
-      throw "Unknown kind '$($bundle.kind)' for path '$outPath'."
-    }
+    default { throw "Unknown kind '$($bundle.kind)' for path '$($bundle.path)'." }
   }
+
+  Write-Host "[OK] $($bundle.kind.ToUpper()) → $outPath"
+  $written++
 }
 
-Write-Host "[OK] Materialized $(($seed.bundled_files | Measure-Object).Count) files to 'Halos/halo/halo.baby/gates/'."
-
-# Show next commands but don't run them (safety-first)
-Write-Host "`nTo install and validate (Node 20+):"
-Write-Host "  npm --prefix Halos/halo/halo.baby/gates install"
-Write-Host "  npm --prefix Halos/halo/halo.baby/gates run next:validate:file -- --file Halos/halo/halo.baby/gates/samples/whatsnext.sample.json"
+Write-Host ""
+Write-Host "[OK] Materialized $written files."
+Write-Host ""
+Write-Host "To install and validate (from halo.baby):"
+Write-Host "  cd .\gates"
+Write-Host "  npm install"
+Write-Host "  npm run next:validate:file -- .\samples\whatsnext.sample.json"

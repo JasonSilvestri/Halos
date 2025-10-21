@@ -1,73 +1,37 @@
 {
   "halo_seed_header": {
-    "version": "0.2",
+    "version": "0.2.4",
     "project": "Halos",
     "seed_name": "halo.baby.seed.json",
-    "createdUtc": "2025-10-15T00:00:00Z",
-    "provenance": {
-      "partnerA": "user:JasonSilvestri",
-      "partnerB": "agent:Lumina",
-      "sessionId": "seed-baby-2025-10-15",
-      "nonce": "a1c3d1fd-4d7a-4d1c-9d21-1a2b3c4d5e60"
-    },
-    "determinism": {
-      "uuid_namespace": "6f0e5f9f-7f3a-41bf-b969-9e2b7d2f9b21",
-      "hash": "sha256"
-    },
+    "createdUtc": "2025-10-21T00:00:00Z",
     "notes": [
-      "BABY halo v0.2: minimal, but with full 14-state workflow and env checks.",
-      "Materialize bundled_files to Halos/halo/halo.baby/gates/** and run validator."
+      "Baby Halo v0.2.4 — 'gates/' paths relative to seed; 'Halos/' kept for cross-repo seeds."
     ]
   },
-
   "envelope": {
     "_meta": {
-      "version": "0.2.0",
+      "version": "0.2.4",
       "kind": "Halos",
-      "createdUtc": "2025-10-15T00:00:00Z",
-      "uuid_namespace": "6f0e5f9f-7f3a-41bf-b969-9e2b7d2f9b21",
-      "notes": [
-        "Bare-minimum envelope (paths + simple commands + env check)."
-      ]
-    },
-    "project": {
-      "name": "Halos",
-      "envTargets": [ "LOCAL" ],
-      "requirements": {
-        "node": ">=20.0",
-        "powershell": ">=7.0"
-      }
-    },
-    "roots": {
-      "appRoot": ".",
-      "gateRoot": "Halos/halo/halo.baby/gates"
+      "createdUtc": "2025-10-21T00:00:00Z"
     },
     "paths": {
       "schemas": {
-        "workflow": "Halos/halo/halo.baby/gates/schemas/halos-workflow.schema.json",
-        "whatsnext": "Halos/halo/halo.baby/gates/schemas/halos-whatsnext.schema.json"
+        "workflow": "gates/schemas/halos-workflow.schema.json",
+        "whatsnext": "gates/schemas/halos-whatsnext.schema.json"
       },
       "samples": {
-        "whatsnext": "Halos/halo/halo.baby/gates/samples/whatsnext.sample.json"
+        "whatsnext": "gates/samples/whatsnext.sample.json"
       },
       "tools": {
-        "validator": "Halos/halo/halo.baby/gates/tools/validate-gate.mjs"
+        "validator": "gates/tools/validate-gate.mjs"
       },
-      "packageJson": "Halos/halo/halo.baby/gates/package.json"
-    },
-    "commands": {
-      "install": [
-        "npm --prefix Halos/halo/halo.baby/gates install"
-      ],
-      "validateWhatsNext": [
-        "npm --prefix Halos/halo/halo.baby/gates run next:validate:file -- --file Halos/halo/halo.baby/gates/samples/whatsnext.sample.json"
-      ]
+      "packageJson": "gates/package.json"
     },
     "npmScripts": {
-      "packageJsonLocation": "Halos/halo/halo.baby/gates/package.json",
+      "packageJsonLocation": "gates/package.json",
       "scripts": {
-        "wf:validate:file": "node ./halo.baby/gates/tools/validate-gate.mjs --schema workflow --file",
-        "next:validate:file": "node ./halo.baby/gates/tools/validate-gate.mjs --schema whatsnext --file"
+        "wf:validate:file": "node ./tools/validate-gate.mjs --schema workflow --file",
+        "next:validate:file": "node ./tools/validate-gate.mjs --schema whatsnext --file"
       },
       "devDependencies": {
         "ajv": "^8.17.1",
@@ -75,43 +39,24 @@
       }
     }
   },
-
   "bundled_files": [
     {
-      "path": "Halos/halo/halo.baby/gates/schemas/halos-workflow.schema.json",
+      "path": "gates/schemas/halos-workflow.schema.json",
       "kind": "json",
       "json": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "$id": "halos-workflow.schema.json",
         "title": "Halos Workflow State Mixin (Full 14-state)",
-        "description": "Reusable state mixin.",
         "type": "object",
         "required": [ "state", "stateCode" ],
         "properties": {
           "stateCode": {
             "type": "integer",
-            "enum": [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ],
-            "description": "Canonical state code (stable source of truth)."
+            "enum": [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ]
           },
           "state": {
             "type": "string",
-            "enum": [
-              "CREATED",
-              "QUEUED",
-              "IN_PROGRESS",
-              "WAITING",
-              "PASSED",
-              "FAILED",
-              "REJECTED",
-              "CANCELLED",
-              "SKIPPED",
-              "TIMEOUT",
-              "NETWORK_ERROR",
-              "VALIDATION_ERROR",
-              "RETRYING",
-              "BLOCKED"
-            ],
-            "description": "Human-friendly label normalized to the code."
+            "enum": [ "CREATED", "QUEUED", "IN_PROGRESS", "WAITING", "PASSED", "FAILED", "REJECTED", "CANCELLED", "SKIPPED", "TIMEOUT", "NETWORK_ERROR", "VALIDATION_ERROR", "RETRYING", "BLOCKED" ]
           },
           "updatedUtc": {
             "type": "string",
@@ -226,13 +171,12 @@
       }
     },
     {
-      "path": "Halos/halo/halo.baby/gates/schemas/halos-whatsnext.schema.json",
+      "path": "gates/schemas/halos-whatsnext.schema.json",
       "kind": "json",
       "json": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "$id": "halos-whatsnext.schema.json",
         "title": "Halos What's Next (Baby)",
-        "description": "Tiny backlog list that reuses the workflow mixin.",
         "type": "object",
         "required": [ "manifestId", "createdUtc", "items" ],
         "properties": {
@@ -275,11 +219,11 @@
       }
     },
     {
-      "path": "Halos/halo/halo.baby/gates/samples/whatsnext.sample.json",
+      "path": "gates/samples/whatsnext.sample.json",
       "kind": "json",
       "json": {
         "manifestId": "halos-baby-001",
-        "createdUtc": "2025-10-15T00:00:00Z",
+        "createdUtc": "2025-10-21T00:00:00Z",
         "items": [
           {
             "id": "hello-gates",
@@ -288,7 +232,7 @@
             "priority": 1,
             "state": "IN_PROGRESS",
             "stateCode": 3,
-            "updatedUtc": "2025-10-15T00:00:10Z",
+            "updatedUtc": "2025-10-21T00:00:10Z",
             "reason": "first run"
           },
           {
@@ -302,22 +246,22 @@
       }
     },
     {
-      "path": "Halos/halo/halo.baby/gates/tools/validate-gate.mjs",
+      "path": "gates/tools/validate-gate.mjs",
       "kind": "text",
-      "text": "#!/usr/bin/env node\nimport fs from \"node:fs\";\nimport path from \"node:path\";\nimport process from \"node:process\";\nimport Ajv from \"ajv\";\nimport addFormats from \"ajv-formats\";\n\nconst args = process.argv.slice(2);\nlet schemaKey = \"whatsnext\";\nlet filePath = null;\nfor (let i = 0; i < args.length; i++) {\n  const a = args[i];\n  if (a === \"--schema\" && args[i+1]) { schemaKey = args[i+1]; i++; }\n  else if (a === \"--file\" && args[i+1]) { filePath = args[i+1]; i++; }\n}\n\nconst ROOT = process.cwd();\nconst schemasDir = path.join(ROOT, \"schemas\");\nconst schemaMap = {\n  workflow: \"halos-workflow.schema.json\",\n  whatsnext: \"halos-whatsnext.schema.json\"\n};\n\nif (!schemaMap[schemaKey]) { console.error(`[ERROR] Unknown --schema '${schemaKey}'.`); process.exit(2); }\nconst schemaFilename = schemaMap[schemaKey];\nconst schemaPath = path.join(schemasDir, schemaFilename);\nif (!fs.existsSync(schemaPath)) { console.error(`[ERROR] Schema not found: ${schemaPath}`); process.exit(2); }\n\nif (args.includes(\"--file\") && !filePath) {\n  if (schemaKey === \"whatsnext\") filePath = \"./samples/whatsnext.sample.json\";\n}\n\nlet data = null;\nif (filePath) {\n  const abs = path.isAbsolute(filePath) ? filePath : path.join(ROOT, filePath);\n  if (!fs.existsSync(abs)) { console.error(`[ERROR] Data file not found: ${abs}`); process.exit(2); }\n  data = JSON.parse(fs.readFileSync(abs, \"utf8\"));\n}\n\nconst ajv = new Ajv({ strict: false, allErrors: true, allowUnionTypes: true });\naddFormats(ajv);\nfor (const entry of fs.readdirSync(schemasDir)) {\n  if (entry.endsWith(\".json\")) {\n    const raw = fs.readFileSync(path.join(schemasDir, entry), \"utf8\");\n    try { const s = JSON.parse(raw); ajv.addSchema(s, s.$id || entry); } catch {}\n  }\n}\n\nconst primary = JSON.parse(fs.readFileSync(schemaPath, \"utf8\"));\nconst validate = ajv.getSchema(primary.$id || schemaFilename) || ajv.compile(primary);\n\nif (!data) { console.log(`[OK] Schema '${schemaFilename}' compiled.`); process.exit(0); }\nconst ok = validate(data);\nif (ok) { console.log(`[OK] ${schemaKey} ✓  (${schemaFilename})`); process.exit(0); }\nconsole.error(`[FAIL] ${schemaKey} ✗  (${schemaFilename})`);\nfor (const err of validate.errors ?? []) {\n  console.error(`- ${err.instancePath || \"/\"} ${err.message}`);\n  if (err.params) console.error(`  params: ${JSON.stringify(err.params)}`);\n}\nprocess.exit(1);\n"
+      "text": "#!/usr/bin/env node\n// validate-gate.mjs — AJV validator for Baby Halo{} (local refs only)\n\nimport fs from \"node:fs\";\nimport path from \"node:path\";\nimport process from \"node:process\";\nimport Ajv from \"ajv\";\nimport addFormats from \"ajv-formats\";\n\nconst args = process.argv.slice(2);\nlet schemaKey = \"whatsnext\";\nlet filePath = null;\nfor (let i = 0; i < args.length; i++) {\n  const a = args[i];\n  if (a === \"--schema\" && args[i + 1]) { schemaKey = args[i + 1]; i++; }\n  else if (a === \"--file\" && args[i + 1]) { filePath = args[i + 1]; i++; }\n}\nif (args.includes(\"--file\") && !filePath) { if (schemaKey === \"whatsnext\") filePath = \"./samples/whatsnext.sample.json\"; }\nconst ROOT = process.cwd();\nconst schemasDir = path.join(ROOT, \"schemas\");\nconst schemaMap = { workflow: \"halos-workflow.schema.json\", whatsnext: \"halos-whatsnext.schema.json\" };\nif (!schemaMap[schemaKey]) { console.error(`[ERROR] Unknown --schema '${schemaKey}'. Known: ${Object.keys(schemaMap).join(\", \")}`); process.exit(2); }\nconst schemaFilename = schemaMap[schemaKey];\nconst schemaPath = path.join(schemasDir, schemaFilename);\nif (!fs.existsSync(schemaPath)) { console.error(`[ERROR] Schema not found: ${schemaPath}`); process.exit(2); }\nlet data = null;\nif (filePath) {\n  const abs = path.isAbsolute(filePath) ? filePath : path.join(ROOT, filePath);\n  if (!fs.existsSync(abs)) { console.error(`[ERROR] Data file not found: ${abs}`); process.exit(2); }\n  try { data = JSON.parse(fs.readFileSync(abs, \"utf8\")); } catch (e) { console.error(`[ERROR] Failed to parse JSON: ${abs}\\n${e.message}`); process.exit(2); }\n}\nconst ajv = new Ajv({ strict: false, allErrors: true, allowUnionTypes: true });\naddFormats(ajv);\nfor (const entry of fs.readdirSync(schemasDir)) {\n  if (entry.endsWith(\".json\")) {\n    try { const raw = fs.readFileSync(path.join(schemasDir, entry), \"utf8\"); const schema = JSON.parse(raw); const id = schema.$id || entry; ajv.addSchema(schema, id); } catch {}\n  }\n}\nconst primarySchemaRaw = JSON.parse(fs.readFileSync(schemaPath, \"utf8\"));\nconst primaryId = primarySchemaRaw.$id || schemaFilename;\nconst validate = ajv.getSchema(primaryId) || ajv.compile(primarySchemaRaw);\nif (!data) { console.log(`[OK] Schema '${schemaFilename}' compiled.`); process.exit(0); }\nconst ok = validate(data);\nif (ok) { console.log(`[OK] ${schemaKey} ✓  (${schemaFilename})`); process.exit(0); }\nconsole.error(`[FAIL] ${schemaKey} ✗  (${schemaFilename})`);\nfor (const err of validate.errors ?? []) { console.error(`- ${err.instancePath || \"/\"} ${err.message}`); if (err.params) console.error(`  params: ${JSON.stringify(err.params)}`); }\nprocess.exit(1);\n"
     },
     {
-      "path": "Halos/halo/halo.baby/gates/package.json",
+      "path": "gates/package.json",
       "kind": "json",
       "json": {
         "name": "halos-gates-baby",
-        "version": "0.2.0",
+        "version": "0.2.3",
         "private": true,
         "description": "Baby Halos gates tooling (full workflow mixin + validator).",
         "type": "module",
         "scripts": {
-          "wf:validate:file": "node ./halo.baby/gates/tools/validate-gate.mjs --schema workflow --file",
-          "next:validate:file": "node ./halo.baby/gates/tools/validate-gate.mjs --schema whatsnext --file"
+          "wf:validate:file": "node ./tools/validate-gate.mjs --schema workflow --file",
+          "next:validate:file": "node ./tools/validate-gate.mjs --schema whatsnext --file"
         },
         "devDependencies": {
           "ajv": "^8.17.1",
