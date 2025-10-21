@@ -105,18 +105,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "gates", "gates", "{59D589F3
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{D45A7F99-FFA0-41C5-87EF-5CE99E42AD65}"
 	ProjectSection(SolutionItems) = preProject
-		halo\halo.baby\Halos\halo\halo.baby\gates\samples\whatsnext.sample.json = halo\halo.baby\Halos\halo\halo.baby\gates\samples\whatsnext.sample.json
+		halo\halo.baby\gates\samples\whatsnext.sample.json = halo\halo.baby\gates\samples\whatsnext.sample.json
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "schemas", "schemas", "{7755CC5C-344E-4154-BCCA-42C847C0B25C}"
 	ProjectSection(SolutionItems) = preProject
-		halo\halo.baby\Halos\halo\halo.baby\gates\schemas\halos-whatsnext.schema.json = halo\halo.baby\Halos\halo\halo.baby\gates\schemas\halos-whatsnext.schema.json
-		halo\halo.baby\Halos\halo\halo.baby\gates\schemas\halos-workflow.schema.json = halo\halo.baby\Halos\halo\halo.baby\gates\schemas\halos-workflow.schema.json
+		halo\halo.baby\gates\schemas\halos-whatsnext.schema.json = halo\halo.baby\gates\schemas\halos-whatsnext.schema.json
+		halo\halo.baby\gates\schemas\halos-workflow.schema.json = halo\halo.baby\gates\schemas\halos-workflow.schema.json
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{70AE434E-3574-4B82-9151-17747F6014BD}"
 	ProjectSection(SolutionItems) = preProject
-		halo\halo.baby\Halos\halo\halo.baby\gates\tools\validate-gate.mjs = halo\halo.baby\Halos\halo\halo.baby\gates\tools\validate-gate.mjs
+		halo\halo.baby\gates\tools\validate-gate.mjs = halo\halo.baby\gates\tools\validate-gate.mjs
 	EndProjectSection
 EndProject
 Global

@@ -1,12 +1,12 @@
 {
   "name": "halos-gates-baby",
-  "version": "0.2.1",
+  "version": "0.2.0",
   "private": true,
   "description": "Baby Halos gates tooling (full workflow mixin + validator).",
   "type": "module",
   "scripts": {
-    "wf:validate:file": "node ./tools/validate-gate.mjs --schema workflow --file",
-    "next:validate:file": "node ./tools/validate-gate.mjs --schema whatsnext --file"
+    "wf:validate:file": "node ./halo.baby/gates/tools/validate-gate.mjs --schema workflow --file",
+    "next:validate:file": "node ./halo.baby/gates/tools/validate-gate.mjs --schema whatsnext --file"
   },
   "devDependencies": {
     "ajv": "^8.17.1",
