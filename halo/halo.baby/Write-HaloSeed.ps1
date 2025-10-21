@@ -57,15 +57,12 @@ foreach ($bundle in $seedJson.bundled_files) {
   $bundlePath = $bundle.path -replace '/', [IO.Path]::DirectorySeparatorChar
 
   if ($bundle.path -match '^(?i)Halos[\\/].*') {
-    # Explicit repo-rooted write
     $outPath = Join-Path $repoRoot $bundlePath
     Write-Host "[TRACE] mode=repo-root  in='$($bundle.path)'  out='$outPath'"
   } elseif ($bundle.path -match '^(?i)gates[\\/].*') {
-    # Sandbox-local write beside the seed
     $outPath = Join-Path $seedDir $bundlePath
     Write-Host "[TRACE] mode=seed-local in='$($bundle.path)'  out='$outPath'"
   } else {
-    # Default: relative to the seed folder
     $outPath = Join-Path $seedDir $bundlePath
     Write-Host "[TRACE] mode=default    in='$($bundle.path)'  out='$outPath'"
   }

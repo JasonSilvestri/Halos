@@ -1,16 +1,22 @@
 {
   "halo_seed_header": {
-    "version": "0.2.4",
+    "version": "0.2.5",
     "project": "Halos",
     "seed_name": "halo.baby.seed.json",
     "createdUtc": "2025-10-21T00:00:00Z",
     "notes": [
-      "Baby Halo v0.2.4 — 'gates/' paths relative to seed; 'Halos/' kept for cross-repo seeds."
+      "Baby Halo v0.2.5 — roots metadata for cold-start; bundled SEED_VERSION.json for seed-side versioning.",
+      "All bundle paths use 'gates/...', relative to this seed file."
     ]
+  },
+  "roots": {
+    "appRootGitHubRepo": "https://github.com/JasonSilvestri/Halos/",
+    "appRootLocalRepo": "E:\\All\\Repos\\Halos\\",
+    "haloRoot": "halo/halo.baby/"
   },
   "envelope": {
     "_meta": {
-      "version": "0.2.4",
+      "version": "0.2.5",
       "kind": "Halos",
       "createdUtc": "2025-10-21T00:00:00Z"
     },
@@ -25,7 +31,8 @@
       "tools": {
         "validator": "gates/tools/validate-gate.mjs"
       },
-      "packageJson": "gates/package.json"
+      "packageJson": "gates/package.json",
+      "seedVersion": "gates/SEED_VERSION.json"
     },
     "npmScripts": {
       "packageJsonLocation": "gates/package.json",
@@ -40,6 +47,25 @@
     }
   },
   "bundled_files": [
+    {
+      "path": "gates/SEED_VERSION.json",
+      "kind": "json",
+      "json": {
+        "seed": "halo.baby",
+        "version": "0.2.5",
+        "createdUtc": "2025-10-21T00:00:00Z",
+        "previous": [
+          {
+            "version": "0.2.4",
+            "note": "stabilized gates/ locality; validator green"
+          },
+          {
+            "version": "0.2.3",
+            "note": "package.json scripts fixed to ./tools/..."
+          }
+        ]
+      }
+    },
     {
       "path": "gates/schemas/halos-workflow.schema.json",
       "kind": "json",
@@ -255,7 +281,7 @@
       "kind": "json",
       "json": {
         "name": "halos-gates-baby",
-        "version": "0.2.3",
+        "version": "0.2.5",
         "private": true,
         "description": "Baby Halos gates tooling (full workflow mixin + validator).",
         "type": "module",
