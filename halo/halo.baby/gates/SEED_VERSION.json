@@ -1,0 +1,15 @@
+{
+  "seed": "halo.baby",
+  "version": "0.2.5",
+  "createdUtc": "2025-10-21T00:00:00Z",
+  "previous": [
+    {
+      "version": "0.2.4",
+      "note": "stabilized gates/ locality; validator green"
+    },
+    {
+      "version": "0.2.3",
+      "note": "package.json scripts fixed to ./tools/..."
+    }
+  ]
+}

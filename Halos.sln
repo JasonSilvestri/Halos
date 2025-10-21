@@ -101,6 +101,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "gates", "gates", "{59D589F3-2944-4C50-8239-B8A748393105}"
 	ProjectSection(SolutionItems) = preProject
 		halo\halo.baby\gates\package.json = halo\halo.baby\gates\package.json
+		halo\halo.baby\gates\SEED_VERSION.json = halo\halo.baby\gates\SEED_VERSION.json
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{D45A7F99-FFA0-41C5-87EF-5CE99E42AD65}"
