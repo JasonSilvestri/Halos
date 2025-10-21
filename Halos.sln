@@ -100,7 +100,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "halo.baby", "halo.baby", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "gates", "gates", "{59D589F3-2944-4C50-8239-B8A748393105}"
 	ProjectSection(SolutionItems) = preProject
-		halo\halo.baby\gates\package-lock.json = halo\halo.baby\gates\package-lock.json
 		halo\halo.baby\gates\package.json = halo\halo.baby\gates\package.json
 	EndProjectSection
 EndProject
