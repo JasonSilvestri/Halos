@@ -2,7 +2,6 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "halos-whatsnext.schema.json",
   "title": "Halos What's Next (Baby)",
-  "description": "Tiny backlog list that reuses the workflow mixin.",
   "type": "object",
   "required": [
     "manifestId",

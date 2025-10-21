@@ -2,7 +2,6 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "halos-workflow.schema.json",
   "title": "Halos Workflow State Mixin (Full 14-state)",
-  "description": "Reusable state mixin.",
   "type": "object",
   "required": [
     "state",
@@ -26,8 +25,7 @@
         12,
         13,
         14
-      ],
-      "description": "Canonical state code (stable source of truth)."
+      ]
     },
     "state": {
       "type": "string",
@@ -46,8 +44,7 @@
         "VALIDATION_ERROR",
         "RETRYING",
         "BLOCKED"
-      ],
-      "description": "Human-friendly label normalized to the code."
+      ]
     },
     "updatedUtc": {
       "type": "string",
