@@ -1,94 +1,122 @@
 ﻿#!/usr/bin/env node
-// materialize-seed.mjs — repo-root aware for 'Halos/...', seed-local for 'gates/...'
-// Usage: node materialize-seed.mjs <seed.json>
+// materialize-seed.mjs — deterministic materializer (repo-root aware, 'gates/' beside seed)
+// Usage:
+//   node ./materialize-seed.mjs ./halo.baby.seed.json
 
 import fs from "node:fs";
 import path from "node:path";
 import process from "node:process";
 
-function findRepoRootFromSeed(seedFilePath) {
-    const full = path.resolve(seedFilePath);
-    let cur = path.dirname(full);
-    while (true) {
-        const base = path.basename(cur);
-        if (base.toLowerCase() === "halos") {
-            const parent = path.dirname(cur) || path.parse(cur).root;
-            return parent;
-        }
-        const up = path.dirname(cur);
-        if (!up || up === cur) return path.dirname(full);
-        cur = up;
+function readJson(p) {
+    try {
+        return JSON.parse(fs.readFileSync(p, "utf8"));
+    } catch (e) {
+        console.error(`[ERROR] Failed to read/parse JSON: ${p}\n${e.message}`);
+        process.exit(2);
     }
 }
 
 function ensureDir(dir) {
-    fs.mkdirSync(dir, { recursive: true });
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 }
 
-const [, , seedArg] = process.argv;
-if (!seedArg) {
-    console.error("Usage: node materialize-seed.mjs <seed.json>");
-    process.exit(2);
-}
-
-const seedPath = path.resolve(seedArg);
-if (!fs.existsSync(seedPath)) {
-    console.error(`Seed file not found: ${seedPath}`);
-    process.exit(2);
-}
-
-let seed;
-try {
-    seed = JSON.parse(fs.readFileSync(seedPath, "utf8"));
-} catch (e) {
-    console.error(`Failed to parse JSON: ${seedPath}\n${e.message}`);
-    process.exit(2);
-}
-if (!seed.bundled_files) {
-    console.error("No bundled_files found in seed.");
-    process.exit(2);
-}
-
-const repoRoot = findRepoRootFromSeed(seedPath);
-const seedDir = path.dirname(seedPath);
-
-console.log(`[INFO] Seed      : ${seedPath}`);
-console.log(`[INFO] Seed Dir  : ${seedDir}`);
-console.log(`[INFO] Repo Root : ${repoRoot}\n`);
-
-let count = 0;
-for (const bundle of seed.bundled_files) {
-    const normalized = bundle.path.replace(/\//g, path.sep);
-    let outPath, mode;
-    if (/^Halos[\\/]/i.test(bundle.path)) {
-        outPath = path.join(repoRoot, normalized);
-        mode = "repo-root";
-    } else if (/^gates[\\/]/i.test(bundle.path)) {
-        outPath = path.join(seedDir, normalized);
-        mode = "seed-local";
-    } else {
-        outPath = path.join(seedDir, normalized);
-        mode = "default";
+function getRepoRootFromSeed(seedFullPath) {
+    // Walk up from seed to find a folder named "Halos"; repo-root = parent of that.
+    let cur = path.dirname(seedFullPath);
+    while (true) {
+        const leaf = path.basename(cur);
+        if (leaf.toLowerCase() === "halos") {
+            const parent = path.dirname(cur);
+            return parent && parent !== cur ? parent : path.parse(cur).root;
+        }
+        const up = path.dirname(cur);
+        if (!up || up === cur) return path.dirname(seedFullPath); // fallback: seed dir’s parent
+        cur = up;
     }
+}
 
-    ensureDir(path.dirname(outPath));
+function isHalosPrefixed(relPath) {
+    return /^halos[\\/]/i.test(relPath);
+}
+function isGatesPrefixed(relPath) {
+    return /^gates[\\/]/i.test(relPath);
+}
 
-    if (bundle.kind === "json") {
-        fs.writeFileSync(outPath, JSON.stringify(bundle.json, null, 2), "utf8");
-    } else if (bundle.kind === "text") {
-        fs.writeFileSync(outPath, bundle.text, "utf8");
-    } else {
-        console.error(`Unknown kind '${bundle.kind}' for path '${bundle.path}'.`);
+function main() {
+    const args = process.argv.slice(2);
+    if (args.length < 1) {
+        console.error("Usage: node ./materialize-seed.mjs <seed.json>");
         process.exit(2);
     }
 
-    console.log(`[TRACE] mode=${mode} in='${bundle.path}' → out='${outPath}'`);
-    console.log(`[OK] ${bundle.kind.toUpperCase()} → ${outPath}`);
-    count++;
+    const seedArg = args[0];
+    const seedFull = path.isAbsolute(seedArg) ? seedArg : path.resolve(process.cwd(), seedArg);
+    if (!fs.existsSync(seedFull)) {
+        console.error(`[ERROR] Seed file not found: ${seedFull}`);
+        process.exit(2);
+    }
+
+    const seedDir = path.dirname(seedFull);
+    const repoRoot = getRepoRootFromSeed(seedFull);
+    const seedJson = readJson(seedFull);
+    const bundles = seedJson.bundled_files ?? [];
+
+    console.log(`[INFO] Seed      : ${seedFull}`);
+    console.log(`[INFO] Seed Dir  : ${seedDir}`);
+    console.log(`[INFO] Repo Root : ${repoRoot}`);
+    console.log("");
+
+    let written = 0;
+
+    for (const bundle of bundles) {
+        const raw = bundle.path;
+        if (typeof raw !== "string" || !raw.length) {
+            console.error("[ERROR] Invalid bundled_files entry: missing 'path' string.");
+            process.exit(2);
+        }
+
+        // Normalize separators
+        const relPath = raw.replace(/\//g, path.sep);
+        let outPath;
+
+        if (isHalosPrefixed(relPath)) {
+            // Explicit repo-root write: Halos/... under repoRoot
+            outPath = path.join(repoRoot, relPath);
+            console.log(`[TRACE] mode=repo-root  in='${raw}'  out='${outPath}'`);
+        } else if (isGatesPrefixed(relPath)) {
+            // Sandbox-local write beside the seed
+            outPath = path.join(seedDir, relPath);
+            console.log(`[TRACE] mode=seed-local in='${raw}'  out='${outPath}'`);
+        } else {
+            // Default: treat as relative to seed dir
+            outPath = path.join(seedDir, relPath);
+            console.log(`[TRACE] mode=default    in='${raw}'  out='${outPath}'`);
+        }
+
+        ensureDir(path.dirname(outPath));
+
+        if (bundle.kind === "json") {
+            // Pretty-print with 2 spaces; UTF-8 (no BOM)
+            fs.writeFileSync(outPath, JSON.stringify(bundle.json, null, 2), { encoding: "utf8" });
+            console.log(`[OK] JSON → ${outPath}`);
+        } else if (bundle.kind === "text") {
+            fs.writeFileSync(outPath, bundle.text ?? "", { encoding: "utf8" });
+            console.log(`[OK] TEXT → ${outPath}`);
+        } else {
+            console.error(`[ERROR] Unknown kind '${bundle.kind}' for path '${raw}'.`);
+            process.exit(2);
+        }
+
+        written++;
+    }
+
+    console.log("");
+    console.log(`[OK] Materialized ${written} files.`);
+    console.log("");
+    console.log("To install and validate (from halo.baby):");
+    console.log("  cd ./gates");
+    console.log("  npm install");
+    console.log("  npm run next:validate:file -- ./samples/whatsnext.sample.json");
 }
 
-console.log(`\n[OK] Materialized ${count} files.`);
-console.log("\nTo install and validate (from halo.baby):");
-console.log("  cd ./gates");
-console.log("  npm install");
-console.log("  npm run next:validate:file -- .\\samples\\whatsnext.sample.json");
+main();
