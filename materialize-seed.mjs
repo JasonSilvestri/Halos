@@ -1,5 +1,5 @@
 ﻿#!/usr/bin/env node
-// materialize-seed.mjs — writes bundled_files to disk deterministically.
+// materialize-seed.mjs — deterministic materializer (repo-root aware, verbose)
 // Usage: node materialize-seed.mjs <seed.json>
 
 import fs from "node:fs";
@@ -7,12 +7,22 @@ import path from "node:path";
 import process from "node:process";
 
 function findRepoRootFromSeed(seedFilePath) {
-    const norm = path.resolve(seedFilePath);
-    const parts = norm.split(path.sep);
-    const idx = parts.lastIndexOf("Halos");
-    if (idx === -1) return path.dirname(norm); // fallback: next to seed
-    const repoParts = parts.slice(0, idx);     // parent of the "Halos" folder
-    return repoParts.length ? repoParts.join(path.sep) : path.sep;
+    const full = path.resolve(seedFilePath);
+    let cur = path.dirname(full);
+    while (true) {
+        const base = path.basename(cur);
+        if (base.toLowerCase() === "halos") {
+            // repo root is the parent of 'Halos'
+            const parent = path.dirname(cur) || path.parse(cur).root;
+            return parent;
+        }
+        const up = path.dirname(cur);
+        if (!up || up === cur) {
+            // fallback to seed directory
+            return path.dirname(full);
+        }
+        cur = up;
+    }
 }
 
 function ensureDir(dir) {
@@ -31,10 +41,9 @@ if (!fs.existsSync(seedPath)) {
     process.exit(2);
 }
 
+const seedText = fs.readFileSync(seedPath, "utf8");
 let seed;
-try {
-    seed = JSON.parse(fs.readFileSync(seedPath, "utf8"));
-} catch (e) {
+try { seed = JSON.parse(seedText); } catch (e) {
     console.error(`Failed to parse JSON: ${seedPath}\n${e.message}`);
     process.exit(2);
 }
@@ -45,31 +54,39 @@ if (!seed.bundled_files) {
 }
 
 const repoRoot = findRepoRootFromSeed(seedPath);
-let count = 0;
+const seedDir = path.dirname(seedPath);
 
+console.log(`[INFO] Seed      : ${seedPath}`);
+console.log(`[INFO] Seed Dir  : ${seedDir}`);
+console.log(`[INFO] Repo Root : ${repoRoot}`);
+console.log("");
+
+let count = 0;
 for (const bundle of seed.bundled_files) {
+    const normalized = bundle.path.replace(/\//g, path.sep);
     let outPath;
-    if (bundle.path.startsWith("Halos/") || bundle.path.startsWith("Halos\\")) {
-        outPath = path.join(repoRoot, bundle.path.replace(/\//g, path.sep));
+    if (/^Halos[\\/]/i.test(bundle.path)) {
+        outPath = path.join(repoRoot, normalized);
     } else {
-        outPath = path.resolve(path.dirname(seedPath), bundle.path);
+        outPath = path.join(seedDir, normalized);
     }
 
     ensureDir(path.dirname(outPath));
 
     if (bundle.kind === "json") {
-        fs.writeFileSync(outPath, JSON.stringify(bundle.json, null, 2), { encoding: "utf8" });
+        fs.writeFileSync(outPath, JSON.stringify(bundle.json, null, 2), "utf8");
     } else if (bundle.kind === "text") {
-        fs.writeFileSync(outPath, bundle.text, { encoding: "utf8" });
+        fs.writeFileSync(outPath, bundle.text, "utf8");
     } else {
         console.error(`Unknown kind '${bundle.kind}' for path '${bundle.path}'.`);
         process.exit(2);
     }
+
     console.log(`[OK] ${bundle.kind.toUpperCase()} → ${outPath}`);
     count++;
 }
 
-console.log(`[OK] Materialized ${count} files.`);
+console.log(`\n[OK] Materialized ${count} files.`);
 console.log("\nTo install and validate:");
-console.log("  npm --prefix Halos/halo/halo.baby/gates install");
-console.log("  npm --prefix Halos/halo/halo.baby/gates run next:validate:file -- .\\Halos\\halo\\halo.baby\\gates\\samples\\whatsnext.sample.json");
+console.log("  npm --prefix gates install");
+console.log("  npm --prefix gates run next:validate:file -- .\\gates\\samples\\whatsnext.sample.json");

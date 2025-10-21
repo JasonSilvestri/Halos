@@ -1,6 +1,7 @@
-﻿# Write-HaloSeed.ps1 — writes bundled_files to disk deterministically.
+﻿# Write-HaloSeed.ps1 — deterministic materializer (repo-root aware, verbose)
 # Usage:
 #   pwsh -File .\Write-HaloSeed.ps1 -SeedPath .\halo.baby.seed.json
+
 [CmdletBinding()]
 param(
   [Parameter(Mandatory = $true)]
@@ -12,18 +13,23 @@ $ErrorActionPreference = "Stop"
 
 function Get-RepoRootFromSeed([string]$SeedFilePath) {
   $full = (Resolve-Path $SeedFilePath).Path
-  $parts = $full -split [regex]::Escape([IO.Path]::DirectorySeparatorChar)
-  $idx = [Array]::LastIndexOf($parts, 'Halos')
-  if ($idx -lt 0) {
-    return (Split-Path -Parent $full)
+  $cur  = Split-Path -Parent $full
+  # Walk up until we find a folder literally named 'Halos'
+  while ($true) {
+    $name = Split-Path -Leaf $cur
+    if ($name -eq 'Halos') {
+      # repo root is the parent of 'Halos'
+      $parent = Split-Path -Parent $cur
+      if (-not $parent) { $parent = (Get-Item $cur).PSDrive.Root }
+      return $parent
+    }
+    $up = Split-Path -Parent $cur
+    if (-not $up -or $up -eq $cur) {
+      # Give up: fall back to the seed directory
+      return (Split-Path -Parent $full)
+    }
+    $cur = $up
   }
-  if ($idx -eq 0) {
-    $drive = (Get-Item $full).PSDrive.Root
-    return $drive
-  }
-  $repoParts = $parts[0..($idx - 1)]
-  $repoRoot = [IO.Path]::Combine($repoParts)
-  return $repoRoot
 }
 
 function Assert-Env {
@@ -32,39 +38,37 @@ function Assert-Env {
     Write-Warning "PowerShell $($psv) detected. PowerShell 7+ is recommended."
   }
   try { $nodeVer = & node -v 2>$null } catch { $nodeVer = $null }
-  if (-not $nodeVer) {
-    Write-Warning "Node.js not found on PATH. Install Node 20+ to run validators."
-    return
-  }
+  if (-not $nodeVer) { Write-Warning "Node.js not found. Install Node 20+ to run validators."; return }
   if ($nodeVer -match '^v(\d+)\.(\d+)\.(\d+)$') {
-    $major = [int]$Matches[1]
-    if ($major -lt 20) { Write-Warning "Node $nodeVer detected. Node 20+ is recommended." }
-  } else {
-    Write-Warning "Unexpected Node version format: $nodeVer"
+    if ([int]$Matches[1] -lt 20) { Write-Warning "Node $nodeVer detected. Node 20+ is recommended." }
   }
 }
 
-if (-not (Test-Path $SeedPath)) {
-  throw "Seed file not found: $SeedPath"
-}
+if (-not (Test-Path $SeedPath)) { throw "Seed file not found: $SeedPath" }
 
 Assert-Env
 
 $seedFull = (Resolve-Path $SeedPath).Path
-$seedJson = Get-Content -Raw -Path $seedFull | ConvertFrom-Json -Depth 200
-if (-not $seedJson.bundled_files) {
-  throw "No bundled_files found in seed."
-}
+$seedDir  = Split-Path -Parent $seedFull
+$seedJson = Get-Content -Raw -Path $seedFull | ConvertFrom-Json -Depth 400
+if (-not $seedJson.bundled_files) { throw "No bundled_files found in seed." }
 
 $repoRoot = Get-RepoRootFromSeed -SeedFilePath $seedFull
-$seedDir  = Split-Path -Parent $seedFull
+
+Write-Host "[INFO] Seed        : $seedFull"
+Write-Host "[INFO] Seed Dir    : $seedDir"
+Write-Host "[INFO] Repo Root   : $repoRoot"
+Write-Host ""
 
 $written = 0
 foreach ($bundle in $seedJson.bundled_files) {
+  $bundlePath = $bundle.path -replace '/', [IO.Path]::DirectorySeparatorChar
   if ($bundle.path -match '^(?i)Halos[\\/].*') {
-    $outPath = Join-Path $repoRoot ($bundle.path -replace '/', [IO.Path]::DirectorySeparatorChar)
+    # Write under <repoRoot>\Halos\...
+    $outPath = Join-Path $repoRoot $bundlePath
   } else {
-    $outPath = Join-Path $seedDir ($bundle.path -replace '/', [IO.Path]::DirectorySeparatorChar)
+    # Write relative to the seed folder
+    $outPath = Join-Path $seedDir $bundlePath
   }
 
   $dir = Split-Path -Parent $outPath
@@ -72,24 +76,24 @@ foreach ($bundle in $seedJson.bundled_files) {
 
   switch ($bundle.kind) {
     "json" {
-      $json = $bundle.json | ConvertTo-Json -Depth 100
-      $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
-      [System.IO.File]::WriteAllText($outPath, $json, $utf8NoBom)
+      $json = $bundle.json | ConvertTo-Json -Depth 400
+      $utf8 = New-Object System.Text.UTF8Encoding($false)
+      [System.IO.File]::WriteAllText($outPath, $json, $utf8)
     }
     "text" {
-      $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
-      [System.IO.File]::WriteAllText($outPath, $bundle.text, $utf8NoBom)
+      $utf8 = New-Object System.Text.UTF8Encoding($false)
+      [System.IO.File]::WriteAllText($outPath, $bundle.text, $utf8)
     }
-    default {
-      throw "Unknown kind '$($bundle.kind)' for path '$outPath'."
-    }
+    default { throw "Unknown kind '$($bundle.kind)' for path '$($bundle.path)'." }
   }
 
   Write-Host "[OK] $($bundle.kind.ToUpper()) → $outPath"
   $written++
 }
 
+Write-Host ""
 Write-Host "[OK] Materialized $written files."
-Write-Host "`nTo install and validate (from anywhere):"
-Write-Host "  npm --prefix Halos/halo/halo.baby/gates install"
-Write-Host "  npm --prefix Halos/halo/halo.baby/gates run next:validate:file -- .\Halos\halo\halo.baby\gates\samples\whatsnext.sample.json"
+Write-Host ""
+Write-Host "To install and validate:"
+Write-Host "  npm --prefix gates install"
+Write-Host "  npm --prefix gates run next:validate:file -- .\gates\samples\whatsnext.sample.json"
