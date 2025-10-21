@@ -35,7 +35,7 @@ for (const bundle of seed.bundled_files) {
         process.exit(2);
     }
 }
-console.log(`[OK] Materialized ${seed.bundled_files.length} files to 'Halos/halo.baby/gates/'.`);
+console.log(`[OK] Materialized ${seed.bundled_files.length} files to 'Halos/halo/halo.baby/gates/'.`);
 console.log("\nTo install and validate:");
-console.log("  npm --prefix Halos/halo.baby/gates install");
-console.log("  npm --prefix Halos/halo.baby/gates run next:validate:file -- --file Halos/halo.baby/gates/samples/whatsnext.sample.json");
+console.log("  npm --prefix Halos/halo/halo.baby/gates install");
+console.log("  npm --prefix Halos/halo/halo.baby/gates run next:validate:file -- --file Halos/halo/halo.baby/gates/samples/whatsnext.sample.json");

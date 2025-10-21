@@ -80,9 +80,9 @@ foreach ($bundle in $seed.bundled_files) {
   }
 }
 
-Write-Host "[OK] Materialized $(($seed.bundled_files | Measure-Object).Count) files to 'Halos/halo.baby/gates/'."
+Write-Host "[OK] Materialized $(($seed.bundled_files | Measure-Object).Count) files to 'Halos/halo/halo.baby/gates/'."
 
 # Show next commands but don't run them (safety-first)
 Write-Host "`nTo install and validate (Node 20+):"
-Write-Host "  npm --prefix Halos/halo.baby/gates install"
-Write-Host "  npm --prefix Halos/halo.baby/gates run next:validate:file -- --file Halos/halo.baby/gates/samples/whatsnext.sample.json"
+Write-Host "  npm --prefix Halos/halo/halo.baby/gates install"
+Write-Host "  npm --prefix Halos/halo/halo.baby/gates run next:validate:file -- --file Halos/halo/halo.baby/gates/samples/whatsnext.sample.json"
