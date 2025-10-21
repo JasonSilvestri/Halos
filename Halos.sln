@@ -94,7 +94,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "halo.baby", "halo.baby", "{
 	ProjectSection(SolutionItems) = preProject
 		halo\halo.baby\halo.baby.seed.json = halo\halo.baby\halo.baby.seed.json
 		halo\halo.baby\materialize-seed.mjs = halo\halo.baby\materialize-seed.mjs
-		gates\about\README.md = gates\about\README.md
+		halo\halo.baby\README.md = halo\halo.baby\README.md
 		halo\halo.baby\Write-HaloSeed.ps1 = halo\halo.baby\Write-HaloSeed.ps1
 	EndProjectSection
 EndProject
