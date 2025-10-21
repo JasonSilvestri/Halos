@@ -125,6 +125,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{70AE434E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "node_modules", "node_modules", "{A9F7B4C8-B0D7-4AEF-A303-66AF0C5F05B2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "about", "about", "{24276D9E-72D0-4936-8E3E-61C3D166F8C7}"
+	ProjectSection(SolutionItems) = preProject
+		halo\halo.baby\gates\about\halo.baby.seed.json.md = halo\halo.baby\gates\about\halo.baby.seed.json.md
+		halo\halo.baby\gates\about\halos-whatsnext.schema.json.md = halo\halo.baby\gates\about\halos-whatsnext.schema.json.md
+		halo\halo.baby\gates\about\validate-gate.mjs.md = halo\halo.baby\gates\about\validate-gate.mjs.md
+		halo\halo.baby\gates\about\whatsnext.sample.json.md = halo\halo.baby\gates\about\whatsnext.sample.json.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -168,6 +176,7 @@ Global
 		{7755CC5C-344E-4154-BCCA-42C847C0B25C} = {59D589F3-2944-4C50-8239-B8A748393105}
 		{70AE434E-3574-4B82-9151-17747F6014BD} = {59D589F3-2944-4C50-8239-B8A748393105}
 		{A9F7B4C8-B0D7-4AEF-A303-66AF0C5F05B2} = {59D589F3-2944-4C50-8239-B8A748393105}
+		{24276D9E-72D0-4936-8E3E-61C3D166F8C7} = {59D589F3-2944-4C50-8239-B8A748393105}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6C068CBA-F3FA-454D-92B1-467A233D1ACA}
