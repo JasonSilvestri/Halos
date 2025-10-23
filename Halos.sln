@@ -122,10 +122,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{70AE434E
 	ProjectSection(SolutionItems) = preProject
 		halo\halo.baby\gates\tools\drift-banner.mjs = halo\halo.baby\gates\tools\drift-banner.mjs
 		halo\halo.baby\gates\tools\echo-workitems.mjs = halo\halo.baby\gates\tools\echo-workitems.mjs
+		halo\halo.baby\gates\tools\enforce-ready.mjs = halo\halo.baby\gates\tools\enforce-ready.mjs
 		halo\halo.baby\gates\tools\gen-readmes.mjs = halo\halo.baby\gates\tools\gen-readmes.mjs
 		halo\halo.baby\gates\tools\onboard.mjs = halo\halo.baby\gates\tools\onboard.mjs
 		halo\halo.baby\gates\tools\README.md = halo\halo.baby\gates\tools\README.md
 		halo\halo.baby\gates\tools\validate-gate.mjs = halo\halo.baby\gates\tools\validate-gate.mjs
+		halo\halo.baby\gates\tools\write-stamp.mjs = halo\halo.baby\gates\tools\write-stamp.mjs
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "node_modules", "node_modules", "{A9F7B4C8-B0D7-4AEF-A303-66AF0C5F05B2}"

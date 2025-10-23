@@ -5,6 +5,7 @@
   "description": "Baby Halos gates tooling (workflow mixin + validator + workitems echo + onboarding + drift banner).",
   "type": "module",
   "scripts": {
+    "seed:validate:all": "npm run next:validate:file && npm run work:validate:file",
     "wf:validate:file": "node ./tools/validate-gate.mjs --schema workflow --file",
     "next:validate:file": "node ./tools/validate-gate.mjs --schema whatsnext --file",
     "work:validate:file": "node ./tools/validate-gate.mjs --schema workitems --file",
@@ -12,7 +13,9 @@
     "seed:onboard": "node ./tools/onboard.mjs ../halo.baby.seed.json",
     "seed:banner": "node ./tools/drift-banner.mjs ../halo.baby.seed.json",
     "seed:materialize": "node ./materialize-seed.mjs ../halo.baby.seed.json",
-    "docs:about": "node ./tools/gen-readmes.mjs ../halo.baby.seed.json"
+    "docs:about": "node ./tools/gen-readmes.mjs ../halo.baby.seed.json",
+    "seed:stamp": "node ./tools/write-stamp.mjs",
+    "seed:enforce": "node ./tools/enforce-ready.mjs"
   },
   "devDependencies": {
     "ajv": "^8.17.1",
