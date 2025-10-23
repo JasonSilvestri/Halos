@@ -1,14 +1,18 @@
 {
   "name": "halos-gates-baby",
-  "version": "0.2.6",
+  "version": "0.2.7-pre",
   "private": true,
-  "description": "Baby Halos gates tooling (full workflow mixin + validator + workitems echo).",
+  "description": "Baby Halos gates tooling (workflow mixin + validator + workitems echo + onboarding + drift banner).",
   "type": "module",
   "scripts": {
     "wf:validate:file": "node ./tools/validate-gate.mjs --schema workflow --file",
     "next:validate:file": "node ./tools/validate-gate.mjs --schema whatsnext --file",
     "work:validate:file": "node ./tools/validate-gate.mjs --schema workitems --file",
-    "work:echo": "node ./tools/echo-workitems.mjs"
+    "work:echo": "node ./tools/echo-workitems.mjs",
+    "seed:onboard": "node ./tools/onboard.mjs ../halo.baby.seed.json",
+    "seed:banner": "node ./tools/drift-banner.mjs ../halo.baby.seed.json",
+    "seed:materialize": "node ./materialize-seed.mjs ../halo.baby.seed.json",
+    "docs:about": "node ./tools/gen-readmes.mjs ../halo.baby.seed.json"
   },
   "devDependencies": {
     "ajv": "^8.17.1",

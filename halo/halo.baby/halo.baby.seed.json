@@ -1,11 +1,11 @@
 {
   "halo_seed_header": {
-    "version": "0.2.6",
+    "version": "0.2.7-pre",
     "project": "Halos",
     "seed_name": "halo.baby.seed.json",
-    "createdUtc": "2025-10-21T00:00:00Z",
+    "createdUtc": "2025-10-22T00:00:00Z",
     "notes": [
-      "Baby Halo v0.2.6 — adds minimal workitems schema, sample, validator support, and an echo tool for cold-start verification.",
+      "Halo Baby v0.2.7-pre — adds authorship + origin metadata, RenderHints, DriftGuards, status banner, onboarding dialog (i18n-capable), and fully bundles all gates files to guarantee offline cold-start.",
       "All bundle paths use 'gates/...', relative to this seed file."
     ]
   },
@@ -16,10 +16,82 @@
   },
   "envelope": {
     "_meta": {
-      "version": "0.2.6",
+      "version": "0.2.7-pre",
       "kind": "Halos",
-      "createdUtc": "2025-10-21T00:00:00Z"
+      "createdUtc": "2025-10-22T00:00:00Z",
+
+      "author": "Jason Silvestri",
+      "co_authors": [ "System design assistance by 'Lumina' (ChatGPT collaborator)" ],
+      "inventor": "This universal text prompt and LLM format was invented by Jason Silvestri.",
+      "inventor_notes": "Native to ChatGPT by design—without the collaboration with Lumina, this pattern would not exist.",
+      "copyright": "© 2024-2025 Jason Silvestri. All Rights Reserved.",
+
+      "origin": {
+        "seed_id": "halos://seed/halo.baby/0.2.7-pre",
+        "repo_url": "https://github.com/JasonSilvestri/Halo/halo/halo.baby",
+        "spec_url": "https://github.com/JasonSilvestri/Halo/halo/halo.baby#readme"
+      }
     },
+
+    "render_hints": {
+      "markdown_fence_policy": {
+        "default_code_language": "json",
+        "outer_backticks_required": 5,
+        "inner_backticks_for_nested_examples": 4,
+        "allow_html": false,
+        "notes": [
+          "Wrap whole responses that contain nested fenced blocks with OUTER=5 backticks.",
+          "Use INNER=4 backticks for heavy nested examples to prevent UI flattening."
+        ]
+      },
+      "summarization_policy": {
+        "allow_summarization": false,
+        "allow_ellipses": false,
+        "notes": [
+          "No truncation for seeds or about docs.",
+          "Do not condense file listings or schema bodies."
+        ]
+      }
+    },
+
+    "drift_guards": {
+      "guards": [
+        {
+          "id": "subscription_or_session_fail",
+          "severity": "critical",
+          "symptoms": [ "thread missing", "asset links expired", "tool unavailable" ],
+          "action": "print_banner_and_continue_with_seed",
+          "banner": "⚠️ Collaboration guard: falling back to local halo.baby seed context; links may be stale."
+        },
+        {
+          "id": "renderer_backtick_collapse",
+          "severity": "high",
+          "symptoms": [ "markdown fences merged", "code blocks flattened" ],
+          "action": "re-emit_with_outer5_inner4",
+          "banner": "⚠️ Rendering Safety: rewrapping output with outer=5 backticks, inner=4."
+        },
+        {
+          "id": "patchwork_mode_detected",
+          "severity": "high",
+          "symptoms": [ "partial file diffs only", "ellipses present" ],
+          "action": "switch_to_full_emit",
+          "banner": "⚠️ Patchwork detected: switching to full, deterministic emits."
+        }
+      ]
+    },
+
+    "collab_state": {
+      "status_checklist_markdown": "| Step | Status | Notes |\n|---|---|---|\n| Restore | ⏳ | queued |\n| Build | ⏳ | queued |\n| Schema Validate | ⏳ | queued |\n| Markdown Fence Check | ⏳ | queued |\n| Secrets Redaction | ⏳ | queued |",
+      "display_banner_markdown": "⚠️ **Rendering Safety**: Display code blocks as `json`. Use **outer 5** backticks for nested fences. No ellipses. No patchwork."
+    },
+
+    "onboarding": {
+      "enabled": true,
+      "locale": "en",
+      "loader": "gates/i18n/onboarding.en.json",
+      "notes": "Dialog loads from /gates/i18n/. Users can pass --locale to override. Choose 'Build Seed' to run materialization."
+    },
+
     "paths": {
       "schemas": {
         "workflow": "gates/schemas/halos-workflow.schema.json",
@@ -32,18 +104,32 @@
       },
       "tools": {
         "validator": "gates/tools/validate-gate.mjs",
-        "echoWorkitems": "gates/tools/echo-workitems.mjs"
+        "echoWorkitems": "gates/tools/echo-workitems.mjs",
+        "onboard": "gates/tools/onboard.mjs",
+        "driftBanner": "gates/tools/drift-banner.mjs",
+        "materializer_node": "gates/materialize-seed.mjs",
+        "materializer_ps": "gates/Write-HaloSeed.ps1",
+        "genReadmes": "gates/tools/gen-readmes.mjs"
+      },
+      "i18n": {
+        "onboarding": "gates/i18n/onboarding.en.json"
       },
       "packageJson": "gates/package.json",
       "seedVersion": "gates/SEED_VERSION.json"
     },
+
     "npmScripts": {
       "packageJsonLocation": "gates/package.json",
       "scripts": {
         "wf:validate:file": "node ./tools/validate-gate.mjs --schema workflow --file",
         "next:validate:file": "node ./tools/validate-gate.mjs --schema whatsnext --file",
         "work:validate:file": "node ./tools/validate-gate.mjs --schema workitems --file",
-        "work:echo": "node ./tools/echo-workitems.mjs"
+        "work:echo": "node ./tools/echo-workitems.mjs",
+
+        "seed:onboard": "node ./tools/onboard.mjs ../halo.baby.seed.json",
+        "seed:banner": "node ./tools/drift-banner.mjs ../halo.baby.seed.json",
+        "seed:materialize": "node ./materialize-seed.mjs ../halo.baby.seed.json",
+        "docs:about": "node ./tools/gen-readmes.mjs ../halo.baby.seed.json"
       },
       "devDependencies": {
         "ajv": "^8.17.1",
@@ -51,15 +137,20 @@
       }
     }
   },
+
   "bundled_files": [
     {
       "path": "gates/SEED_VERSION.json",
       "kind": "json",
       "json": {
         "seed": "halo.baby",
-        "version": "0.2.6",
-        "createdUtc": "2025-10-21T00:00:00Z",
+        "version": "0.2.7-pre",
+        "createdUtc": "2025-10-22T00:00:00Z",
         "previous": [
+          {
+            "version": "0.2.6",
+            "note": "stable baby seed with schemas, samples, validator, echo tool"
+          },
           {
             "version": "0.2.5",
             "note": "added roots metadata + SEED_VERSION.json"
@@ -75,6 +166,7 @@
         ]
       }
     },
+
     {
       "path": "gates/schemas/halos-workflow.schema.json",
       "kind": "json",
@@ -304,6 +396,34 @@
         "additionalProperties": false
       }
     },
+
+    {
+      "path": "gates/samples/whatsnext.sample.json",
+      "kind": "json",
+      "json": {
+        "manifestId": "halos-baby-001",
+        "createdUtc": "2025-10-21T00:00:00Z",
+        "items": [
+          {
+            "id": "hello-gates",
+            "title": "Prove baby validator works",
+            "description": "Validate the sample using AJV via npm script.",
+            "priority": 1,
+            "state": "IN_PROGRESS",
+            "stateCode": 3,
+            "updatedUtc": "2025-10-21T00:00:10Z",
+            "reason": "first run"
+          },
+          {
+            "id": "freeze-idea",
+            "title": "Decide on minimal freeze format",
+            "priority": 2,
+            "state": "QUEUED",
+            "stateCode": 2
+          }
+        ]
+      }
+    },
     {
       "path": "gates/samples/workitems.seed-echo.sample.json",
       "kind": "json",
@@ -377,6 +497,7 @@
         ]
       }
     },
+
     {
       "path": "gates/tools/validate-gate.mjs",
       "kind": "text",
@@ -388,46 +509,126 @@
       "text": "#!/usr/bin/env node\n// echo-workitems.mjs — prints a concise checklist of workitems (for cold-start proof)\n\nimport fs from \"node:fs\";\nimport path from \"node:path\";\nimport process from \"node:process\";\n\nconst args = process.argv.slice(2);\nconst fileArg = args[0] || \"./samples/workitems.seed-echo.sample.json\";\nconst ROOT = process.cwd();\nconst filePath = path.isAbsolute(fileArg) ? fileArg : path.join(ROOT, fileArg);\nif (!fs.existsSync(filePath)) { console.error(`[ERROR] Workitems file not found: ${filePath}`); process.exit(2); }\nlet data;\ntry { data = JSON.parse(fs.readFileSync(filePath, \"utf8\")); } catch (e) {\n  console.error(`[ERROR] Failed to parse JSON: ${filePath}\\n${e.message}`);\n  process.exit(2);\n}\nconsole.log(`# Workitems Echo — ${data.manifestId}`);\nconsole.log(`createdUtc: ${data.createdUtc}`);\nconsole.log(\"\");\nfor (const item of data.items || []) {\n  const state = `${item.state}(${item.stateCode})`;\n  console.log(`- [${item.kind}] ${item.id} :: ${item.title}`);\n  console.log(`    path  : ${item.path}`);\n  if (item.reason) console.log(`    reason: ${item.reason}`);\n  console.log(`    state : ${state}`);\n}\n"
     },
     {
-      "path": "gates/samples/whatsnext.sample.json",
+      "path": "gates/tools/onboard.mjs",
+      "kind": "text",
+      "text": "#!/usr/bin/env node\n// onboard.mjs — minimal CLI dialog that reads i18n onboarding script and walks the user\nimport fs from \"node:fs\";\nimport path from \"node:path\";\nimport readline from \"node:readline\";\n\nfunction readJson(p){return JSON.parse(fs.readFileSync(p,\"utf8\"));}\nfunction findStep(script,id){return script.find(s=>s.id===id)||null;}\nasync function ask(q){const rl=readline.createInterface({input:process.stdin,output:process.stdout});const ans=await new Promise(res=>rl.question(q,v=>res((v?.trim()||\"\"))));rl.close();return ans.toLowerCase();}\n\nasync function run(seedArg,opts){\n  const seedPath=path.isAbsolute(seedArg)?seedArg:path.resolve(process.cwd(),seedArg);\n  const seed=readJson(seedPath);\n  const locale=(opts.locale||seed.onboarding?.locale||\"en\").toLowerCase();\n  const i18nRel=seed.onboarding?.loader?.replace(/\\.en\\./,`.${locale}.`)||\"gates/i18n/onboarding.en.json\";\n  const i18nPath=path.isAbsolute(i18nRel)?i18nRel:path.resolve(path.dirname(seedPath),i18nRel);\n  if(!fs.existsSync(i18nPath)){console.log(`[WARN] i18n file not found for locale '${locale}', falling back to EN.`);}\n  const script=(fs.existsSync(i18nPath)?readJson(i18nPath):readJson(path.resolve(path.dirname(seedPath),\"gates/i18n/onboarding.en.json\"))).script||[];\n  if(!seed.onboarding?.enabled||script.length===0){console.log(\"[INFO] Onboarding disabled or empty. Nothing to do.\");return;}\n  let cur=findStep(script,\"welcome\")||script[0];\n  while(cur){\n    console.log(\"\\n\"+cur.text);\n    if(!cur.choices||cur.choices.length===0)break;\n    const labels=cur.choices.map(c=>c.label);\n    const ans=await ask(`(${labels.join(\"/\")}): `);\n    const match=cur.choices.find(c=>c.label.toLowerCase()===ans);\n    if(!match){console.log(`[WARN] Unknown choice \"${ans}\". Try again.`);continue;}\n    if(match.next===\"materialize\"){console.log(\"[INFO] User requested Build Seed. Run: npm run seed:materialize\");}\n    cur=findStep(script,match.next);\n  }\n  console.log(\"\\n[OK] Onboarding complete.\");\n}\n\nconst args=process.argv.slice(2);\nconst seedArg=args[0]||\"../halo.baby.seed.json\";\nconst localeArg=(args.find(a=>a.startsWith(\"--locale=\"))||\"\").split(\"=\")[1];\nrun(seedArg,{locale:localeArg}).catch(e=>{console.error(e);process.exit(1);});\n"
+    },
+    {
+      "path": "gates/tools/drift-banner.mjs",
+      "kind": "text",
+      "text": "#!/usr/bin/env node\n// drift-banner.mjs — prints collab banner + render hints from seed\nimport fs from \"node:fs\";\nimport path from \"node:path\";\nfunction readJson(p){return JSON.parse(fs.readFileSync(p,\"utf8\"));}\nfunction run(seedArg){\n  const seedPath=path.isAbsolute(seedArg)?seedArg:path.resolve(process.cwd(),seedArg);\n  const seed=readJson(seedPath);\n  const banner=seed.collab_state?.display_banner_markdown;\n  const fence=seed.render_hints?.markdown_fence_policy;\n  if(banner) console.log(banner);\n  if(fence){\n    console.log(`\\nRender policy → outer backticks: ${fence.outer_backticks_required}, inner: ${fence.inner_backticks_for_nested_examples}, default lang: ${fence.default_code_language}`);\n  }\n}\nrun(process.argv[2]||\"../halo.baby.seed.json\");\n"
+    },
+    {
+      "path": "gates/tools/gen-readmes.mjs",
+      "kind": "text",
+      "text": "#!/usr/bin/env node\n// gen-readmes.mjs — generate per-artifact about pages under gates/about\nimport fs from \"node:fs\";import path from \"node:path\";import process from \"node:process\";\nfunction readJson(p){return JSON.parse(fs.readFileSync(p,\"utf8\"));}\nfunction ensureDir(p){if(!fs.existsSync(p))fs.mkdirSync(p,{recursive:true});}\nfunction mdEscape(s){return String(s).replace(/```/g,\"``\\\\`\");}\nfunction classify(p){if(/\\\\/schemas\\\\/|\\/schemas\\//.test(p))return\"schema\";if(/\\\\/samples\\\\/|\\/samples\\//.test(p))return\"sample\";if(/\\\\/tools\\\\/|\\/tools\\//.test(p))return\"tool\";if(p.endsWith(\"package.json\"))return\"package\";if(p.endsWith(\"SEED_VERSION.json\"))return\"doc\";if(p.endsWith(\".seed.json\"))return\"seed\";return\"doc\";}\nfunction renderAbout(rel,kind,payload){const title=path.basename(rel);return `# About: \\`${title}\\`\\n\\n**Kind:** ${kind}  \\n**Path:** \\`${rel}\\`\\n\\n---\\n\\n## Purpose\\n\\n${kind===\"schema\"?\"JSON Schema used by Baby Halo v0.2.7-pre.\":kind===\"sample\"?\"Sample JSON used to prove the schema.\":kind===\"tool\"?\"Node.js utility used by the gates harness.\":kind===\"package\"?\"NPM manifest for the gates workspace.\":kind===\"seed\"?\"Seed file that materializes gates files deterministically.\":\"Document emitted by the seed materializer.\"}\\n\\n---\\n\\n## Preview\\n\\n${payload?\"```\"+(typeof payload===\"string\"?\"\":\"json\")+\"\\n\"+mdEscape(payload)+\"\\n```\":\"_no preview_\"}\\n\\n---\\n`}\nfunction main(){const seedArg=process.argv[2];if(!seedArg){console.error(\"Usage: node ./tools/gen-readmes.mjs <seed.json>\");process.exit(2);}const seedFull=path.isAbsolute(seedArg)?seedArg:path.resolve(process.cwd(),seedArg);if(!fs.existsSync(seedFull)){console.error(`[ERROR] Seed not found: ${seedFull}`);process.exit(2);}const seedDir=path.dirname(seedFull);const gatesDir=path.join(seedDir,\"gates\");const aboutDir=path.join(gatesDir,\"about\");ensureDir(aboutDir);const seed=readJson(seedFull);const bundles=seed.bundled_files??[];const outputs=[{rel:\"halo.baby.seed.json\",kind:\"seed\",payload:fs.readFileSync(seedFull,\"utf8\")},...bundles.map(b=>({rel:b.path,kind:classify(b.path),payload:b.kind===\"json\"?JSON.stringify(b.json,null,2):b.text}))];let count=0;for(const o of outputs){const name=path.basename(o.rel)+\".md\";const outPath=path.join(aboutDir,name);const md=renderAbout(o.rel.replace(/\\\\/g,\"/\"),o.kind,o.payload);fs.writeFileSync(outPath,md,{encoding:\"utf8\"});console.log(`[OK] wrote ${path.relative(process.cwd(),outPath)}`);count++;}console.log(`[OK] generated ${count} about pages -> ${aboutDir}`);}main();\n"
+    },
+
+    {
+      "path": "gates/materialize-seed.mjs",
+      "kind": "text",
+      "text": "#!/usr/bin/env node\n// materialize-seed.mjs — deterministic materializer (repo-root aware, 'gates/' beside seed)\n// Usage: node ./materialize-seed.mjs ./halo.baby.seed.json\nimport fs from \"node:fs\";import path from \"node:path\";import process from \"node:process\";\nfunction readJson(p){try{return JSON.parse(fs.readFileSync(p,\"utf8\"));}catch(e){console.error(`[ERROR] Failed to read/parse JSON: ${p}\\n${e.message}`);process.exit(2);}}\nfunction ensureDir(dir){if(!fs.existsSync(dir))fs.mkdirSync(dir,{recursive:true});}\nfunction getRepoRootFromSeed(seedFullPath){let cur=path.dirname(seedFullPath);while(true){const leaf=path.basename(cur);if(leaf.toLowerCase()===\"halos\"){const parent=path.dirname(cur);return parent&&parent!==cur?parent:path.parse(cur).root;}const up=path.dirname(cur);if(!up||up===cur)return path.dirname(seedFullPath);cur=up;}}\nfunction isHalosPrefixed(rel){return /^halos[\\\\/]/i.test(rel);}function isGatesPrefixed(rel){return /^gates[\\\\/]/i.test(rel);} \nfunction main(){const args=process.argv.slice(2);if(args.length<1){console.error(\"Usage: node ./materialize-seed.mjs <seed.json>\");process.exit(2);}const seedArg=args[0];const seedFull=path.isAbsolute(seedArg)?seedArg:path.resolve(process.cwd(),seedArg);if(!fs.existsSync(seedFull)){console.error(`[ERROR] Seed file not found: ${seedFull}`);process.exit(2);}const seedDir=path.dirname(seedFull);const repoRoot=getRepoRootFromSeed(seedFull);const seedJson=readJson(seedFull);const bundles=seedJson.bundled_files??[];console.log(`[INFO] Seed      : ${seedFull}`);console.log(`[INFO] Seed Dir  : ${seedDir}`);console.log(`[INFO] Repo Root : ${repoRoot}`);console.log(\"\");let written=0;for(const bundle of bundles){const raw=bundle.path;if(typeof raw!==\"string\"||!raw.length){console.error(\"[ERROR] Invalid bundled_files entry: missing 'path' string.\");process.exit(2);}const rel=raw.replace(/\\//g,path.sep);let outPath;if(isHalosPrefixed(rel)){outPath=path.join(repoRoot,rel);console.log(`[TRACE] mode=repo-root  in='${raw}'  out='${outPath}'`);}else if(isGatesPrefixed(rel)){outPath=path.join(seedDir,rel);console.log(`[TRACE] mode=seed-local in='${raw}'  out='${outPath}'`);}else{outPath=path.join(seedDir,rel);console.log(`[TRACE] mode=default    in='${raw}'  out='${outPath}'`);}ensureDir(path.dirname(outPath));if(bundle.kind===\"json\"){fs.writeFileSync(outPath,JSON.stringify(bundle.json,null,2),{encoding:\"utf8\"});console.log(`[OK] JSON → ${outPath}`);}else if(bundle.kind===\"text\"){fs.writeFileSync(outPath,bundle.text??\"\",{encoding:\"utf8\"});console.log(`[OK] TEXT → ${outPath}`);}else{console.error(`[ERROR] Unknown kind '${bundle.kind}' for path '${raw}'.`);process.exit(2);}written++;}console.log(\"\");console.log(`[OK] Materialized ${written} files.`);console.log(\"\");console.log(\"To install and validate (from halo.baby):\");console.log(\"  cd ./gates\");console.log(\"  npm install\");console.log(\"  npm run next:validate:file -- ./samples/whatsnext.sample.json\");}\nmain();\n"
+    },
+    {
+      "path": "gates/Write-HaloSeed.ps1",
+      "kind": "text",
+      "text": "# Write-HaloSeed.ps1 — deterministic materializer (repo-root aware, 'gates/' beside seed)\n# Usage: pwsh -File .\\Write-HaloSeed.ps1 -SeedPath .\\halo.baby.seed.json\n[CmdletBinding()]param([Parameter(Mandatory=$true)][string]$SeedPath)\nSet-StrictMode -Version Latest;$ErrorActionPreference=\"Stop\"\nfunction Get-RepoRootFromSeed([string]$SeedFilePath){$full=(Resolve-Path $SeedFilePath).Path;$cur=Split-Path -Parent $full;while($true){$name=Split-Path -Leaf $cur;if($name -eq 'Halos'){ $parent=Split-Path -Parent $cur; if(-not $parent){$parent=(Get-Item $cur).PSDrive.Root}; return $parent } $up=Split-Path -Parent $cur; if(-not $up -or $up -eq $cur){ return (Split-Path -Parent $full) } $cur=$up }}\nfunction Assert-Env{try{$nodeVer=& node -v 2>$null}catch{$nodeVer=$null} if(-not $nodeVer){Write-Warning \"Node.js not found. Install Node 20+ to run validators.\"}}\nif(-not (Test-Path $SeedPath)){throw \"Seed file not found: $SeedPath\"}\nAssert-Env\n$seedFull=(Resolve-Path $SeedPath).Path;$seedDir=Split-Path -Parent $seedFull;$seedJson=Get-Content -Raw -Path $seedFull | ConvertFrom-Json -Depth 100\nif(-not $seedJson.bundled_files){throw \"No bundled_files found in seed.\"}\n$repoRoot=Get-RepoRootFromSeed -SeedFilePath $seedFull\nWrite-Host \"[INFO] Seed      : $seedFull\";Write-Host \"[INFO] Seed Dir  : $seedDir\";Write-Host \"[INFO] Repo Root : $repoRoot\";Write-Host \"\"\n$written=0\nforeach($bundle in $seedJson.bundled_files){$bundlePath=$bundle.path -replace '/', [IO.Path]::DirectorySeparatorChar\n  if($bundle.path -match '^(?i)Halos[\\\\/].*'){ $outPath=Join-Path $repoRoot $bundlePath; Write-Host \"[TRACE] mode=repo-root  in='$($bundle.path)'  out='$outPath'\"}\n  elseif($bundle.path -match '^(?i)gates[\\\\/].*'){ $outPath=Join-Path $seedDir $bundlePath; Write-Host \"[TRACE] mode=seed-local in='$($bundle.path)'  out='$outPath'\"}\n  else{ $outPath=Join-Path $seedDir $bundlePath; Write-Host \"[TRACE] mode=default    in='$($bundle.path)'  out='$outPath'\"}\n  $dir=Split-Path -Parent $outPath; if($dir -and -not (Test-Path $dir)){ New-Item -ItemType Directory -Path $dir -Force | Out-Null }\n  switch($bundle.kind){\"json\"{ $json=$bundle.json | ConvertTo-Json -Depth 100; $utf8= New-Object System.Text.UTF8Encoding($false); [System.IO.File]::WriteAllText($outPath,$json,$utf8)}\n    \"text\"{ $utf8= New-Object System.Text.UTF8Encoding($false); [System.IO.File]::WriteAllText($outPath,$bundle.text,$utf8)}\n    default{ throw \"Unknown kind '$($bundle.kind)' for path '$($bundle.path)'.\"}}\n  Write-Host \"[OK] $($bundle.kind.ToUpper()) → $outPath\"; $written++ }\nWrite-Host \"\";Write-Host \"[OK] Materialized $written files.\";Write-Host \"\";Write-Host \"To install and validate (from halo.baby):\";Write-Host \"  cd .\\gates\";Write-Host \"  npm install\";Write-Host \"  npm run next:validate:file -- .\\samples\\whatsnext.sample.json\"\n"
+    },
+
+    {
+      "path": "gates/i18n/onboarding.en.json",
       "kind": "json",
       "json": {
-        "manifestId": "halos-baby-001",
-        "createdUtc": "2025-10-21T00:00:00Z",
-        "items": [
+        "locale": "en",
+        "script": [
           {
-            "id": "hello-gates",
-            "title": "Prove baby validator works",
-            "description": "Validate the sample using AJV via npm script.",
-            "priority": 1,
-            "state": "IN_PROGRESS",
-            "stateCode": 3,
-            "updatedUtc": "2025-10-21T00:00:10Z",
-            "reason": "first run"
+            "id": "welcome",
+            "text": "Want to know what's different about our current collaboration?",
+            "choices": [
+              {
+                "label": "yes",
+                "next": "credit_truth"
+              },
+              {
+                "label": "no",
+                "next": "silent_guardrails"
+              }
+            ]
           },
           {
-            "id": "freeze-idea",
-            "title": "Decide on minimal freeze format",
-            "priority": 2,
-            "state": "QUEUED",
-            "stateCode": 2
+            "id": "credit_truth",
+            "text": "As Jason explains it: agents like Lumina don't need Halos{}—but Halos{} makes the work reproducible and transferable under constraints. Want to know more?",
+            "choices": [
+              {
+                "label": "yes",
+                "next": "mutual_merit"
+              },
+              {
+                "label": "no",
+                "next": "silent_guardrails"
+              }
+            ]
+          },
+          {
+            "id": "mutual_merit",
+            "text": "Jason can ship without AI; Lumina can reason without scaffolding. Halos{} is the handshake—ego parked at the door. Want to know more?",
+            "choices": [
+              {
+                "label": "yes",
+                "next": "use_case"
+              },
+              {
+                "label": "no",
+                "next": "silent_guardrails"
+              }
+            ]
+          },
+          {
+            "id": "use_case",
+            "text": "Halos{} = cold-start seed + tiny gates. Validate, then evolve. When you want the full file drop, say 'Build Seed'. Proceed?",
+            "choices": [
+              {
+                "label": "Build Seed",
+                "next": "materialize"
+              },
+              {
+                "label": "later",
+                "next": "silent_guardrails"
+              }
+            ]
+          },
+          {
+            "id": "materialize",
+            "text": "Materializing… (this step runs only when explicitly requested).",
+            "choices": []
+          },
+          {
+            "id": "silent_guardrails",
+            "text": "Cool. We’ll continue with the halo guardrails silently. Ask for 'Build Seed' anytime.",
+            "choices": []
           }
         ]
       }
     },
+
     {
       "path": "gates/package.json",
       "kind": "json",
       "json": {
         "name": "halos-gates-baby",
-        "version": "0.2.6",
+        "version": "0.2.7-pre",
         "private": true,
-        "description": "Baby Halos gates tooling (full workflow mixin + validator + workitems echo).",
+        "description": "Baby Halos gates tooling (workflow mixin + validator + workitems echo + onboarding + drift banner).",
         "type": "module",
         "scripts": {
           "wf:validate:file": "node ./tools/validate-gate.mjs --schema workflow --file",
           "next:validate:file": "node ./tools/validate-gate.mjs --schema whatsnext --file",
           "work:validate:file": "node ./tools/validate-gate.mjs --schema workitems --file",
-          "work:echo": "node ./tools/echo-workitems.mjs"
+          "work:echo": "node ./tools/echo-workitems.mjs",
+          "seed:onboard": "node ./tools/onboard.mjs ../halo.baby.seed.json",
+          "seed:banner": "node ./tools/drift-banner.mjs ../halo.baby.seed.json",
+          "seed:materialize": "node ./materialize-seed.mjs ../halo.baby.seed.json",
+          "docs:about": "node ./tools/gen-readmes.mjs ../halo.baby.seed.json"
         },
         "devDependencies": {
           "ajv": "^8.17.1",
