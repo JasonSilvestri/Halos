@@ -90,77 +90,77 @@
         }
       ]
     },
-  "policy": {
-    "require_materialization_before_version_bump": true,
-    "stamp_file": "gates/.halo_stamp.json",
-    "validation_scripts": [
-      "npm run next:validate:file",
-      "npm run work:validate:file"
-    ],
-    "message": "Version bumps are honored only after seed materialization and successful validation. Run: npm run seed:validate:all && npm run seed:stamp"
+    "policy": {
+      "require_materialization_before_version_bump": true,
+      "stamp_file": "gates/.halo_stamp.json",
+      "validation_scripts": [
+        "npm run next:validate:file",
+        "npm run work:validate:file"
+      ],
+      "message": "Version bumps are honored only after seed materialization and successful validation. Run: npm run seed:validate:all && npm run seed:stamp"
 
-  },
-  "cognition": {
-    "allow_extended_thinking": true,
-    "reasoning_budget_hint": "high",
-    "notes": [
-      "Prefer complete, non-ellipsized emits for seed artifacts.",
-      "Defer heavy generation until explicit 'Build Seed', but think broadly first."
-    ]
-  },
-  "collab_state": {
-    "status_checklist_markdown": "| Step | Status | Notes |\n|---|---|---|\n| Restore | ⏳ | queued |\n| Build | ⏳ | queued |\n| Schema Validate | ⏳ | queued |\n| Markdown Fence Check | ⏳ | queued |\n| Secrets Redaction | ⏳ | queued |",
-    "display_banner_markdown": "⚠️ **Rendering Safety**: Display code blocks as `json`. Use **outer 5** backticks for nested fences. No ellipses. No patchwork."
-  },
-  "onboarding": {
-    "enabled": true,
-    "locale": "en",
-    "loader": "gates/i18n/onboarding.en.json",
-    "notes": "Dialog loads from /gates/i18n/. Users can pass --locale to override. Choose 'Build Seed' to run materialization."
-  },
-  "paths": {
-    "schemas": {
-      "workflow": "gates/schemas/halos-workflow.schema.json",
-      "whatsnext": "gates/schemas/halos-whatsnext.schema.json",
-      "workitems": "gates/schemas/halos-workitems.schema.json"
     },
-    "samples": {
-      "whatsnext": "gates/samples/whatsnext.sample.json",
-      "workitems": "gates/samples/workitems.seed-echo.sample.json"
+    "cognition": {
+      "allow_extended_thinking": true,
+      "reasoning_budget_hint": "high",
+      "notes": [
+        "Prefer complete, non-ellipsized emits for seed artifacts.",
+        "Defer heavy generation until explicit 'Build Seed', but think broadly first."
+      ]
     },
-    "tools": {
-      "validator": "gates/tools/validate-gate.mjs",
-      "echoWorkitems": "gates/tools/echo-workitems.mjs",
-      "onboard": "gates/tools/onboard.mjs",
-      "driftBanner": "gates/tools/drift-banner.mjs",
-      "materializer_node": "gates/materialize-seed.mjs",
-      "materializer_ps": "gates/Write-HaloSeed.ps1",
-      "genReadmes": "gates/tools/gen-readmes.mjs"
+    "collab_state": {
+      "status_checklist_markdown": "| Step | Status | Notes |\n|---|---|---|\n| Materialize | ⏳ | queued |\n| Install | ⏳ | queued |\n| Schema Validate (both) | ⏳ | queued |\n| Write Stamp | ⏳ | queued |\n| Enforce Policy | ⏳ | queued |\n| Markdown Fence Check | ⏳ | queued |",
+      "display_banner_markdown": "⚠️ **Rendering Safety**: Display code blocks as `json`. Use **outer 5** backticks for nested fences. No ellipses. No patchwork."
     },
-    "i18n": {
-      "onboarding": "gates/i18n/onboarding.en.json"
+    "onboarding": {
+      "enabled": true,
+      "locale": "en",
+      "loader": "gates/i18n/onboarding.en.json",
+      "notes": "Dialog loads from /gates/i18n/. Users can pass --locale to override. Choose 'Build Seed' to run materialization."
     },
-    "packageJson": "gates/package.json",
-    "seedVersion": "gates/SEED_VERSION.json"
-  },
-  "npmScripts": {
-    "packageJsonLocation": "gates/package.json",
-    "scripts": {
-      "wf:validate:file": "node ./tools/validate-gate.mjs --schema workflow --file",
-      "next:validate:file": "node ./tools/validate-gate.mjs --schema whatsnext --file",
-      "work:validate:file": "node ./tools/validate-gate.mjs --schema workitems --file",
-      "work:echo": "node ./tools/echo-workitems.mjs",
+    "paths": {
+      "schemas": {
+        "workflow": "gates/schemas/halos-workflow.schema.json",
+        "whatsnext": "gates/schemas/halos-whatsnext.schema.json",
+        "workitems": "gates/schemas/halos-workitems.schema.json"
+      },
+      "samples": {
+        "whatsnext": "gates/samples/whatsnext.sample.json",
+        "workitems": "gates/samples/workitems.seed-echo.sample.json"
+      },
+      "tools": {
+        "validator": "gates/tools/validate-gate.mjs",
+        "echoWorkitems": "gates/tools/echo-workitems.mjs",
+        "onboard": "gates/tools/onboard.mjs",
+        "driftBanner": "gates/tools/drift-banner.mjs",
+        "materializer_node": "gates/materialize-seed.mjs",
+        "materializer_ps": "gates/Write-HaloSeed.ps1",
+        "genReadmes": "gates/tools/gen-readmes.mjs"
+      },
+      "i18n": {
+        "onboarding": "gates/i18n/onboarding.en.json"
+      },
+      "packageJson": "gates/package.json",
+      "seedVersion": "gates/SEED_VERSION.json"
+    },
+    "npmScripts": {
+      "packageJsonLocation": "gates/package.json",
+      "scripts": {
+        "wf:validate:file": "node ./tools/validate-gate.mjs --schema workflow --file",
+        "next:validate:file": "node ./tools/validate-gate.mjs --schema whatsnext --file",
+        "work:validate:file": "node ./tools/validate-gate.mjs --schema workitems --file",
+        "work:echo": "node ./tools/echo-workitems.mjs",
 
-      "seed:onboard": "node ./tools/onboard.mjs ../halo.baby.seed.json",
-      "seed:banner": "node ./tools/drift-banner.mjs ../halo.baby.seed.json",
-      "seed:materialize": "node ./materialize-seed.mjs ../halo.baby.seed.json",
-      "docs:about": "node ./tools/gen-readmes.mjs ../halo.baby.seed.json"
-    },
-    "devDependencies": {
-      "ajv": "^8.17.1",
-      "ajv-formats": "^3.0.1"
+        "seed:onboard": "node ./tools/onboard.mjs ../halo.baby.seed.json",
+        "seed:banner": "node ./tools/drift-banner.mjs ../halo.baby.seed.json",
+        "seed:materialize": "node ./materialize-seed.mjs ../halo.baby.seed.json",
+        "docs:about": "node ./tools/gen-readmes.mjs ../halo.baby.seed.json"
+      },
+      "devDependencies": {
+        "ajv": "^8.17.1",
+        "ajv-formats": "^3.0.1"
+      }
     }
-  }
   },
 "bundled_files": [
     {
