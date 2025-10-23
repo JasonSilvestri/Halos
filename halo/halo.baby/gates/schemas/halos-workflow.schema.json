@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "halos-workflow.schema.json",
-  "title": "Halos Workflow State Mixin (Full 14-state)",
+  "title": "Halos Workflow State Mixin (Full 15-state)",
   "type": "object",
   "required": [
     "state",
@@ -24,7 +24,8 @@
         11,
         12,
         13,
-        14
+        14,
+        15
       ]
     },
     "state": {
@@ -43,7 +44,8 @@
         "NETWORK_ERROR",
         "VALIDATION_ERROR",
         "RETRYING",
-        "BLOCKED"
+        "BLOCKED",
+        "COMPLETED"
       ]
     },
     "updatedUtc": {
@@ -318,6 +320,25 @@
         "properties": {
           "stateCode": {
             "const": 14
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state": {
+            "const": "COMPLETED"
+          }
+        },
+        "required": [
+          "state"
+        ]
+      },
+      "then": {
+        "properties": {
+          "stateCode": {
+            "const": 15
           }
         }
       }

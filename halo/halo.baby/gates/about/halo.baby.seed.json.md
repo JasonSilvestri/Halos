@@ -1,31 +1,28 @@
-# halo.baby.seed.json (Cold-Start)
+# About: `halo.baby.seed.json`
 
-**Purpose:** One file to rehydrate Gates tooling: header, envelope, schemas, samples, validator, and docs.
+**Kind:** seed  
+**Path:** `halo/halo.baby/halo.baby.seed.json`
 
-**Materialize:** Write each `bundled_files[].path` with its `json` or `text` content.
+---
 
-**After writing:**
-```powershell
-cd Halos/halo/halo.baby/gates
-npm install
-npm run next:validate:file -- --file ./samples/whatsnext.sample.json
+## Purpose
+
+Seed file that materializes gates files deterministically.
+
+---
+
+## Preview
+
+```
+(omitted here for brevity — the full seed lives beside this page)
 ```
 
 ---
 
-## Halo\{\} Packages
+## How to use
 
-- **See Halo\{\} Package:** [`./package.json.md`](./package.json.md)
+Materialize files:
 
----
-
-## Navigation
-
-- **Back to Home (repo root):** [`../../README.md`](../../README.md)
-
----
-
-
-##### [Halos\{\} GitHub](https://github.com/JasonSilvestri/Halos)
-
-###### Copyright © 2025 — All Rights Reserved by Jason Silvestri
+```powershell
+pwsh -File ./Write-HaloSeed.ps1 -SeedPath ./halo.baby.seed.json
+```

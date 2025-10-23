@@ -1,29 +1,28 @@
-# halos-whatsnext.schema.json
+# About: `halos-whatsnext.schema.json`
 
-**What it is:** A compact "What's Next" manifest. Each item includes the workflow mixin, priorities, labels, links.
+**Kind:** schema  
+**Path:** `gates/schemas/halos-whatsnext.schema.json`
 
-**Why:** A safe, appendable backlog that travels with seeds and envelopes.
+---
 
-**Validate:**
-```powershell
-npm --prefix "Halos/halo/halo.baby/gates" run next:validate:file -- --file "Halos/halo/halo.baby/gates/samples/whatsnext.sample.json"
+## Purpose
+
+JSON Schema for the "What's Next" manifest.
+
+---
+
+## Preview
+
+```json
+{ "$schema":"https://json-schema.org/draft/2020-12/schema","$id":"halos-whatsnext.schema.json","title":"Halos What's Next (Baby)","type":"object","required":["manifestId","createdUtc","items"],"properties":{ "manifestId":{"type":"string","minLength":1},"createdUtc":{"type":"string","format":"date-time"},"items":{"type":"array","minItems":1,"items":{"type":"object","allOf":[{"$ref":"halos-workflow.schema.json"}],"required":["id","title","state","stateCode"],"properties":{"id":{"type":"string","minLength":1},"title":{"type":"string","minLength":1},"description":{"type":"string"},"priority":{"type":"integer","minimum":1,"maximum":9}},"additionalProperties":true}}},"additionalProperties":false }
 ```
 
 ---
 
-## Halo\{\} Packages
+## How to use
 
-- **See Halo\{\} Package:** [`./package.json.md`](./package.json.md)
+Validate sample:
 
----
-
-## Navigation
-
-- **Back to Home (repo root):** [`../../README.md`](../../README.md)
-
----
-
-
-##### [Halos\{\} GitHub](https://github.com/JasonSilvestri/Halos)
-
-###### Copyright © 2025 — All Rights Reserved by Jason Silvestri
+```bash
+npm run next:validate:file
+```

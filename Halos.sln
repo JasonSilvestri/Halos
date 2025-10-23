@@ -101,6 +101,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "gates", "gates", "{59D589F3-2944-4C50-8239-B8A748393105}"
 	ProjectSection(SolutionItems) = preProject
 		halo\halo.baby\gates\package.json = halo\halo.baby\gates\package.json
+		halo\halo.baby\gates\README.md = halo\halo.baby\gates\README.md
 		halo\halo.baby\gates\SEED_VERSION.json = halo\halo.baby\gates\SEED_VERSION.json
 	EndProjectSection
 EndProject
@@ -119,7 +120,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "schemas", "schemas", "{7755
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{70AE434E-3574-4B82-9151-17747F6014BD}"
 	ProjectSection(SolutionItems) = preProject
+		halo\halo.baby\gates\tools\drift-banner.mjs = halo\halo.baby\gates\tools\drift-banner.mjs
 		halo\halo.baby\gates\tools\echo-workitems.mjs = halo\halo.baby\gates\tools\echo-workitems.mjs
+		halo\halo.baby\gates\tools\gen-readmes.mjs = halo\halo.baby\gates\tools\gen-readmes.mjs
+		halo\halo.baby\gates\tools\onboard.mjs = halo\halo.baby\gates\tools\onboard.mjs
+		halo\halo.baby\gates\tools\README.md = halo\halo.baby\gates\tools\README.md
 		halo\halo.baby\gates\tools\validate-gate.mjs = halo\halo.baby\gates\tools\validate-gate.mjs
 	EndProjectSection
 EndProject
@@ -127,10 +132,28 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "node_modules", "node_module
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "about", "about", "{24276D9E-72D0-4936-8E3E-61C3D166F8C7}"
 	ProjectSection(SolutionItems) = preProject
+		halo\halo.baby\gates\about\echo-workitems.mjs.md = halo\halo.baby\gates\about\echo-workitems.mjs.md
 		halo\halo.baby\gates\about\halo.baby.seed.json.md = halo\halo.baby\gates\about\halo.baby.seed.json.md
 		halo\halo.baby\gates\about\halos-whatsnext.schema.json.md = halo\halo.baby\gates\about\halos-whatsnext.schema.json.md
+		halo\halo.baby\gates\about\halos-workflow.schema.json.md = halo\halo.baby\gates\about\halos-workflow.schema.json.md
+		halo\halo.baby\gates\about\halos-workitems.schema.json.md = halo\halo.baby\gates\about\halos-workitems.schema.json.md
+		halo\halo.baby\gates\about\package.json.md = halo\halo.baby\gates\about\package.json.md
+		halo\halo.baby\gates\about\SEED_VERSION.json.md = halo\halo.baby\gates\about\SEED_VERSION.json.md
 		halo\halo.baby\gates\about\validate-gate.mjs.md = halo\halo.baby\gates\about\validate-gate.mjs.md
 		halo\halo.baby\gates\about\whatsnext.sample.json.md = halo\halo.baby\gates\about\whatsnext.sample.json.md
+		halo\halo.baby\gates\about\workitems.seed-echo.sample.json.md = halo\halo.baby\gates\about\workitems.seed-echo.sample.json.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "i18n", "i18n", "{FB3FED46-1D09-4506-9117-0B74E940BF96}"
+	ProjectSection(SolutionItems) = preProject
+		halo\halo.baby\gates\i18n\onboarding.en.json = halo\halo.baby\gates\i18n\onboarding.en.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "git", "git", "{5A484B3E-2287-4454-A518-13B5E3C54E97}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{67697325-40CE-4AD6-AAEC-67807BA3F102}"
+	ProjectSection(SolutionItems) = preProject
+		halo\halo.baby\gates\git\workflows\halos-gates.yaml = halo\halo.baby\gates\git\workflows\halos-gates.yaml
 	EndProjectSection
 EndProject
 Global
@@ -177,6 +200,9 @@ Global
 		{70AE434E-3574-4B82-9151-17747F6014BD} = {59D589F3-2944-4C50-8239-B8A748393105}
 		{A9F7B4C8-B0D7-4AEF-A303-66AF0C5F05B2} = {59D589F3-2944-4C50-8239-B8A748393105}
 		{24276D9E-72D0-4936-8E3E-61C3D166F8C7} = {59D589F3-2944-4C50-8239-B8A748393105}
+		{FB3FED46-1D09-4506-9117-0B74E940BF96} = {59D589F3-2944-4C50-8239-B8A748393105}
+		{5A484B3E-2287-4454-A518-13B5E3C54E97} = {59D589F3-2944-4C50-8239-B8A748393105}
+		{67697325-40CE-4AD6-AAEC-67807BA3F102} = {5A484B3E-2287-4454-A518-13B5E3C54E97}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6C068CBA-F3FA-454D-92B1-467A233D1ACA}
