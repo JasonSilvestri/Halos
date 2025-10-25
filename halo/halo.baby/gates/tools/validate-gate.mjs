@@ -22,9 +22,10 @@ if (args.includes("--file") && !filePath) {
 const ROOT = process.cwd();
 const schemasDir = path.join(ROOT, "schemas");
 const schemaMap = {
-  workflow: "halos-workflow.schema.json",
-  whatsnext: "halos-whatsnext.schema.json",
-  workitems: "halos-workitems.schema.json"
+    workflow: "halos-workflow.schema.json",
+    whatsnext: "halos-whatsnext.schema.json",
+    workitems: "halos-workitems.schema.json",
+    onboarding: "halos-onboarding.schema.json"
 };
 if (!schemaMap[schemaKey]) { console.error(`[ERROR] Unknown --schema '${schemaKey}'. Known: ${Object.keys(schemaMap).join(", ")}`); process.exit(2); }
 const schemaFilename = schemaMap[schemaKey];

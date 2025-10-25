@@ -1,6 +1,9 @@
 {
   "manifestId": "halos-baby-stamp",
   "version": "0.2.7-pre",
+  "stampedUtc": "2025-10-25T11:53:40.146Z",
+  "envelopeHash": "<sha256 of envelope object bytes>",
+  "signedBy": "user.local",
   "validatedUtc": "2025-10-25T11:53:40.146Z",
   "hashes": {
     "schemas/halos-workflow.schema.json": "47f1a03c9f55d29e7b295fe30bdccaeb776a4480eb08583e6b1be4f0e3594aa3",
