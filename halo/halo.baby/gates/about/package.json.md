@@ -13,28 +13,33 @@ NPM manifest for the gates workspace.
 
 ## Preview
 
-````json
+```
 {
   "name": "halos-gates-baby",
-  "version": "0.2.7-pre",
+  "version": "0.2.7-rc",
   "private": true,
-  "description": "Baby Halos gates tooling (workflow mixin + validator + workitems echo + onboarding + drift banner).",
+  "description": "Baby Halos gates tooling (workflow mixin + validator + workitems echo + onboarding + drift banner + stamp + readiness enforce).",
   "type": "module",
   "scripts": {
     "wf:validate:file": "node ./tools/validate-gate.mjs --schema workflow --file",
     "next:validate:file": "node ./tools/validate-gate.mjs --schema whatsnext --file",
     "work:validate:file": "node ./tools/validate-gate.mjs --schema workitems --file",
+    "seed:validate:all": "npm run next:validate:file && npm run work:validate:file",
+    "onboard:validate": "node ./tools/validate-gate.mjs --schema onboarding --file ./i18n/onboarding.en.json",
     "work:echo": "node ./tools/echo-workitems.mjs",
-    "seed:onboard": "node ./tools/onboard.mjs ../halo.baby.seed.json",
+    "docs:about": "node ./tools/gen-readmes.mjs ../halo.baby.seed.json",
     "seed:banner": "node ./tools/drift-banner.mjs ../halo.baby.seed.json",
-    "seed:materialize": "node ./materialize-seed.mjs ../halo.baby.seed.json",
-    "docs:about": "node ./tools/gen-readmes.mjs ../halo.baby.seed.json"
+    "seed:onboard": "node ./tools/onboard.mjs ../halo.baby.seed.json",
+    "seed:add-anchor": "node ./tools/add-anchor.mjs ../halo.baby.seed.json",
+    "seed:stamp": "node ./tools/write-stamp.mjs",
+    "seed:enforce": "node ./tools/enforce-ready.mjs",
+    "seed:materialize": "node ../materialize-seed.mjs ../halo.baby.seed.json"
   },
   "devDependencies": {
     "ajv": "^8.17.1",
     "ajv-formats": "^3.0.1"
   }
 }
-````
+```
 
 ---

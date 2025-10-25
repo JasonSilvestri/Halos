@@ -1,3 +1,19 @@
+# About: `enforce-ready.mjs`
+
+**Kind:** tool  
+**Path:** `gates/tools/enforce-ready.mjs`
+
+---
+
+## Purpose
+
+Node.js utility used by the gates harness.
+
+---
+
+## Preview
+
+```
 #!/usr/bin/env node
 // enforce-ready.mjs — sanity gate before honoring version bump
 // NOTE: Body placeholder derived from behavior you ran:
@@ -21,3 +37,7 @@ function main(){
 }
 
 main();
+
+```
+
+---

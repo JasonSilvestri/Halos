@@ -1,3 +1,19 @@
+# About: `write-stamp.mjs`
+
+**Kind:** tool  
+**Path:** `gates/tools/write-stamp.mjs`
+
+---
+
+## Purpose
+
+Node.js utility used by the gates harness.
+
+---
+
+## Preview
+
+```
 #!/usr/bin/env node
 // write-stamp.mjs — writes gates/.halo_stamp.json after successful validation
 
@@ -61,3 +77,7 @@ function main() {
 }
 
 main();
+
+```
+
+---

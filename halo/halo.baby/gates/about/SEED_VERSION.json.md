@@ -13,12 +13,16 @@ Document emitted by the seed materializer.
 
 ## Preview
 
-````json
+```
 {
   "seed": "halo.baby",
-  "version": "0.2.7-pre",
-  "createdUtc": "2025-10-22T00:00:00Z",
+  "version": "0.2.7-rc",
+  "createdUtc": "2025-10-25T00:00:00Z",
   "previous": [
+    {
+      "version": "0.2.7-pre",
+      "note": "first bundle with provenance, drift guards, onboarding, stamp policy"
+    },
     {
       "version": "0.2.6",
       "note": "stable baby seed with schemas, samples, validator, echo tool"
@@ -37,6 +41,6 @@ Document emitted by the seed materializer.
     }
   ]
 }
-````
+```
 
 ---

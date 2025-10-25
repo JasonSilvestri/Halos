@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "halos-workflow.schema.json",
-  "title": "Halos Workflow State Mixin (Full 14-state)",
+  "title": "Halos Workflow State Mixin (Full 14-state + COMPLETED)",
   "type": "object",
   "required": [
     "state",

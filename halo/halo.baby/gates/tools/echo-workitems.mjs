@@ -9,9 +9,14 @@ const args = process.argv.slice(2);
 const fileArg = args[0] || "./samples/workitems.seed-echo.sample.json";
 const ROOT = process.cwd();
 const filePath = path.isAbsolute(fileArg) ? fileArg : path.join(ROOT, fileArg);
-if (!fs.existsSync(filePath)) { console.error(`[ERROR] Workitems file not found: ${filePath}`); process.exit(2); }
+if (!fs.existsSync(filePath)) {
+  console.error(`[ERROR] Workitems file not found: ${filePath}`);
+  process.exit(2);
+}
 let data;
-try { data = JSON.parse(fs.readFileSync(filePath, "utf8")); } catch (e) {
+try {
+  data = JSON.parse(fs.readFileSync(filePath, "utf8"));
+} catch (e) {
   console.error(`[ERROR] Failed to parse JSON: ${filePath}\n${e.message}`);
   process.exit(2);
 }

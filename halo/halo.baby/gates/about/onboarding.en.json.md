@@ -13,9 +13,10 @@ Document emitted by the seed materializer.
 
 ## Preview
 
-````json
+```
 {
   "locale": "en",
+  "version": "0.2.7-rc",
   "script": [
     {
       "id": "welcome",
@@ -85,6 +86,6 @@ Document emitted by the seed materializer.
     }
   ]
 }
-````
+```
 
 ---

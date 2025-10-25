@@ -1,19 +1,3 @@
-# About: `materialize-seed.mjs`
-
-**Kind:** tool  
-**Path:** `gates/tools/materialize-seed.mjs`
-
----
-
-## Purpose
-
-Node.js utility used by the gates harness.
-
----
-
-## Preview
-
-```
 #!/usr/bin/env node
 // materialize-seed.mjs — deterministic materializer (repo-root aware, 'gates/' beside seed)
 // Usage:
@@ -132,7 +116,3 @@ function main() {
 }
 
 main();
-
-```
-
----

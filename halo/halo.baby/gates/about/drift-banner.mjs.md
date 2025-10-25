@@ -13,7 +13,7 @@ Node.js utility used by the gates harness.
 
 ## Preview
 
-````json
+```
 #!/usr/bin/env node
 // drift-banner.mjs — prints collab banner + render hints from seed
 import fs from "node:fs";
@@ -24,13 +24,20 @@ function run(seedArg){
   const seed=readJson(seedPath);
   const banner=seed.collab_state?.display_banner_markdown;
   const fence=seed.render_hints?.markdown_fence_policy;
+  const hints=seed.envelope?._meta?.provenance?.hints;
+  if(hints){
+    console.log("\nProvenance Hints:");
+    console.log(`  chat_anchor_ids: ${hints.chat_anchor_ids?.join(", ")}`);
+    console.log(`  ui_build_ids   : ${hints.ui_build_ids?.join(", ")}`);
+    console.log(`  ui_user_hint   : ${hints.ui_user_token_hint}`);
+  }
   if(banner) console.log(banner);
   if(fence){
-    console.log(`\nRender policy → outer backticks: ${fence.outer_backticks_required}, inner: ${fence.inner_backticks_for_nested_examples}, default lang: ${fence.default_code_language}`);
+    console.log(`Render policy → outer backticks: ${fence.outer_backticks_required}, inner: ${fence.inner_backticks_for_nested_examples}, default lang: ${fence.default_code_language}`);
   }
 }
 run(process.argv[2]||"../halo.baby.seed.json");
 
-````
+```
 
 ---

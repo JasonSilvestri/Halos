@@ -13,7 +13,7 @@ Sample JSON used to prove the schema.
 
 ## Preview
 
-````json
+```
 {
   "manifestId": "halos-baby-echo-001",
   "createdUtc": "2025-10-21T00:00:00Z",
@@ -83,6 +83,6 @@ Sample JSON used to prove the schema.
     }
   ]
 }
-````
+```
 
 ---

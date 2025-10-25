@@ -7,13 +7,13 @@
 
 ## Purpose
 
-JSON Schema used by Baby Halo v0.2.7-pre.
+JSON Schema used by Baby Halo v0.2.7-rc.
 
 ---
 
 ## Preview
 
-````json
+```
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "halos-workitems.schema.json",
@@ -84,6 +84,6 @@ JSON Schema used by Baby Halo v0.2.7-pre.
   },
   "additionalProperties": false
 }
-````
+```
 
 ---

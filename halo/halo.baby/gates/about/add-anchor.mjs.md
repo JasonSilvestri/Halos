@@ -1,3 +1,19 @@
+# About: `add-anchor.mjs`
+
+**Kind:** tool  
+**Path:** `gates/tools/add-anchor.mjs`
+
+---
+
+## Purpose
+
+Node.js utility used by the gates harness.
+
+---
+
+## Preview
+
+```
 #!/usr/bin/env node
 // add-anchor.mjs — updates provenance.hints fields in halo.baby.seed.json
 // NOTE: Placeholder reconstructed from your PowerShell output.
@@ -35,3 +51,7 @@ function main(){
 }
 
 main();
+
+```
+
+---
