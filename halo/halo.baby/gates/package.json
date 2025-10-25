@@ -15,7 +15,8 @@
     "seed:onboard": "node ./tools/onboard.mjs ../halo.baby.seed.json",
     "seed:banner": "node ./tools/drift-banner.mjs ../halo.baby.seed.json",
     "seed:materialize": "node ../materialize-seed.mjs ../halo.baby.seed.json",
-    "docs:about": "node ./tools/gen-readmes.mjs ../halo.baby.seed.json"
+    "docs:about": "node ./tools/gen-readmes.mjs ../halo.baby.seed.json",
+    "seed:add-anchor": "node ./tools/add-anchor.mjs ../halo.baby.seed.json"
   },
   "devDependencies": {
     "ajv": "^8.17.1",

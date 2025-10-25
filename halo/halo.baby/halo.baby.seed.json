@@ -37,8 +37,26 @@
         "sessionId": "seed-baby-2025-10-15",
         "nonce": "cc502eac-b30a-4b21-9e28-3c391d491d66",
         "chat_anchor": {
-          "message_id": "2c77ca2f-9d97-41a9-a5f3-3f87093ff389",
-          "note": "Local anchor for the thread where gen-readmes.fix + onboarding path fixes landed."
+          "message_id": "9aeb3576-38cd-4134-b2c4-13d9b01a26d8",
+          "note": "Local anchor for the thread where we have had the most success to date."
+        },
+        "hints": {
+          "chat_anchor_ids": [
+            "70d06c9e-086f-4a28-a330-2fc96b9a74eb",
+            "e32d9df7-9cb9-4770-a0aa-185b2290bab5",
+            "98eb2789-6f59-4b55-99b8-2d1bb5cf6d6c",
+            "2c77ca2f-9d97-41a9-a5f3-3f87093ff389",
+            "38324e51-9695-4faf-a489-808f701ddca9",
+            "3b0b0b24-bdf7-4b1a-b207-58d03e1d357b",
+            "cf3cf2f3-65f0-4ab2-b4da-e508fc046a0e",
+            "2c46b3db-5cf3-4c4d-9736-f3715bf328cb",
+            "f1ef1d5c-af63-4de3-b68e-592566901553",
+            "9aeb3576-38cd-4134-b2c4-13d9b01a26d8"
+          ],
+          "ui_build_ids": [
+            "prod-46f202804b1b838698852d8c27cb5bdfe8f31362"
+          ],
+          "ui_user_token_hint": "user-WzHrzEIlGnT91Hm5HLvQPmHz"
         }
       },
       "provenance_visibility": "internal",
