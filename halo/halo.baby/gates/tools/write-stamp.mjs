@@ -33,6 +33,10 @@ function main() {
         if (fs.existsSync(p)) hashes[f] = sha256File(p);
     }
 
+    // after computing file hashes:
+    const envelope = JSON.stringify(seed.envelope);
+    hashes["__envelope__"] = crypto.createHash("sha256").update(envelope).digest("hex");
+
     const stamp = {
         manifestId: "halos-baby-stamp",
         version,

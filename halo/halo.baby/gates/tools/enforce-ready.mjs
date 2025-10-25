@@ -25,19 +25,29 @@ function main() {
         console.log("[OK] Policy not enforced. (noop)");
         process.exit(0);
     }
+
     if (!stamp) {
         console.error("[FAIL] No stamp present. Run validation & stamping first.");
         console.error(policy.message || "Run: npm run seed:validate:all && npm run seed:stamp");
         process.exit(1);
     }
+
     if (!stamp.validatedUtc) {
         console.error("[FAIL] Stamp exists but not validated. Run: npm run seed:validate:all && npm run seed:stamp");
         process.exit(1);
     }
+
+
     if (stamp.version !== version) {
         console.error(`[FAIL] Stamp version (${stamp.version}) does not match seed version (${version}). Re-validate & stamp.`);
         process.exit(1);
     }
+    //const envelopeHash = crypto.createHash("sha256").update(JSON.stringify(seed.envelope)).digest("hex");
+
+    //if (stamp.hashes?.["__envelope__"] !== envelopeHash) {
+    //    console.error("[FAIL] Envelope changed since stamp. Re-validate & stamp.");
+    //    process.exit(1);
+    //}
     console.log(`[OK] Ready: ${version} stamped at ${stamp.validatedUtc}`);
 }
 

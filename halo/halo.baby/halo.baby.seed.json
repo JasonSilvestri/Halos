@@ -19,7 +19,7 @@
       "version": "0.2.7-pre",
       "kind": "Halos",
       "createdUtc": "2025-10-22T00:00:00Z",
-
+      "bundle_level": "full",
       "author": "Jason Silvestri",
       "co_authors": [ "System design assistance by 'Lumina' (ChatGPT collaborator)" ],
       "inventor": "This universal text prompt and LLM format was invented by Jason Silvestri.",
@@ -35,11 +35,13 @@
         "partnerA": "user:JasonSilvestri",
         "partnerB": "agent:Lumina",
         "sessionId": "seed-baby-2025-10-15",
-        "nonce": "a1c3d1fd-4d7a-4d1c-9d21-1a2b3c4d5e60"
+        "nonce": "cc502eac-b30a-4b21-9e28-3c391d491d66"
       },
+      "provenance_visibility": "internal",
       "determinism": {
         "uuid_namespace": "6f0e5f9f-7f3a-41bf-b969-9e2b7d2f9b21",
-        "hash": "sha256"
+        "hash": "sha256",
+        "envelope_hash_in_stamp": true
       }
     },
 
@@ -92,20 +94,21 @@
     },
     "policy": {
       "require_materialization_before_version_bump": true,
+      "allow_emergency_override": false,
+      "override_nonce_hint": "set-on-release-only",
       "stamp_file": "gates/.halo_stamp.json",
       "validation_scripts": [
         "npm run next:validate:file",
         "npm run work:validate:file"
       ],
-      "message": "Version bumps are honored only after seed materialization and successful validation. Run: npm run seed:validate:all && npm run seed:stamp"
-
+      "message": "Version bumps are honored only after validation. Run: npm run seed:validate:all && npm run seed:stamp"
     },
     "cognition": {
       "allow_extended_thinking": true,
       "reasoning_budget_hint": "high",
       "notes": [
-        "Prefer complete, non-ellipsized emits for seed artifacts.",
-        "Defer heavy generation until explicit 'Build Seed', but think broadly first."
+        "Emit complete artifacts; avoid summaries.",
+        "Defer heavy generation until explicit intent."
       ]
     },
     "collab_state": {
@@ -122,7 +125,8 @@
       "schemas": {
         "workflow": "gates/schemas/halos-workflow.schema.json",
         "whatsnext": "gates/schemas/halos-whatsnext.schema.json",
-        "workitems": "gates/schemas/halos-workitems.schema.json"
+        "workitems": "gates/schemas/halos-workitems.schema.json",
+        "onboarding": "gates/schemas/halos-onboarding.schema.json"
       },
       "samples": {
         "whatsnext": "gates/samples/whatsnext.sample.json",
@@ -162,7 +166,7 @@
       }
     }
   },
-"bundled_files": [
+  "bundled_files": [
     {
       "path": "gates/SEED_VERSION.json",
       "kind": "json",
@@ -427,7 +431,49 @@
         "additionalProperties": false
       }
     },
-
+    {
+      "path": "gates/schemas/halos-onboarding.schema.json",
+      "kind": "json",
+      "json": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "$id": "halos-onboarding.schema.json",
+        "title": "Halos Onboarding i18n",
+        "type": "object",
+        "required": [ "locale", "version", "script" ],
+        "properties": {
+          "locale": {
+            "type": "string",
+            "minLength": 2
+          },
+          "version": { "type": "string" },
+          "script": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": [ "id", "text" ],
+              "properties": {
+                "id": { "type": "string" },
+                "text": { "type": "string" },
+                "choices": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [ "label", "next" ],
+                    "properties": {
+                      "label": { "type": "string" },
+                      "next": { "type": "string" }
+                    }
+                  }
+                }
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
     {
       "path": "gates/samples/whatsnext.sample.json",
       "kind": "json",
@@ -641,16 +687,16 @@
         ]
       }
     },
-  {
-    "path": "gates/.halo_stamp.json",
-    "kind": "json",
-    "json": {
-      "manifestId": "halos-baby-stamp",
-      "version": "0.0.0",
-      "validatedUtc": null,
-      "hashes": {}
-    }
-  },
+    {
+      "path": "gates/.halo_stamp.json",
+      "kind": "json",
+      "json": {
+        "manifestId": "halos-baby-stamp",
+        "version": "0.0.0",
+        "validatedUtc": null,
+        "hashes": {}
+      }
+    },
     {
       "path": "gates/package.json",
       "kind": "json",

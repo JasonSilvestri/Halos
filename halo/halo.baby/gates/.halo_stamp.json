@@ -1,12 +1,6 @@
 {
   "manifestId": "halos-baby-stamp",
-  "version": "0.2.7-pre",
-  "validatedUtc": "2025-10-23T15:33:49.374Z",
-  "hashes": {
-    "schemas/halos-workflow.schema.json": "47f1a03c9f55d29e7b295fe30bdccaeb776a4480eb08583e6b1be4f0e3594aa3",
-    "schemas/halos-whatsnext.schema.json": "32600b7e7c6e0709619a899bb475fdf1b31677b8f618c821ad53e4a00e65e3f4",
-    "schemas/halos-workitems.schema.json": "6bcc4264f82591a1047d97c6fb92d8967c4ce1936290a739af4281e85de811eb",
-    "samples/whatsnext.sample.json": "e818ae6ba23396c74996b1da62127606af0ff9ff54b87e1a8bff1c4dbbbfeae8",
-    "samples/workitems.seed-echo.sample.json": "1e847dfc038b79ea8644fde2d690f7955f9561cdd7777c861b131493a4254b23"
-  }
+  "version": "0.0.0",
+  "validatedUtc": null,
+  "hashes": {}
 }

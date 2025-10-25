@@ -114,6 +114,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{D45A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "schemas", "schemas", "{7755CC5C-344E-4154-BCCA-42C847C0B25C}"
 	ProjectSection(SolutionItems) = preProject
+		halo\halo.baby\gates\schemas\halos-onboarding.schema.json = halo\halo.baby\gates\schemas\halos-onboarding.schema.json
 		halo\halo.baby\gates\schemas\halos-whatsnext.schema.json = halo\halo.baby\gates\schemas\halos-whatsnext.schema.json
 		halo\halo.baby\gates\schemas\halos-workflow.schema.json = halo\halo.baby\gates\schemas\halos-workflow.schema.json
 		halo\halo.baby\gates\schemas\halos-workitems.schema.json = halo\halo.baby\gates\schemas\halos-workitems.schema.json
