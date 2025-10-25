@@ -17,8 +17,13 @@ function classify(p) {
 function renderAbout(rel, kind, payload) {
     const title = path.basename(rel);
 
-   const prov = seed.envelope?._meta?.provenance;
+    const seed = readJson(rel);
+    seed.envelope ??= {};
+    seed.envelope._meta ??= {};
+    const prov = seed.envelope?._meta?.provenance;
     const hints = prov?.hints;
+    const anchor = seed.envelope?._meta?.chat_anchor?.message_id;
+
     const hintBlock = hints ? `
 ### Provenance Hints
 - chat_anchor_ids: ${(hints.chat_anchor_ids || []).join(", ") || "_none_"}
