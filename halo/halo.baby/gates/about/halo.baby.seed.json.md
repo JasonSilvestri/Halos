@@ -37,11 +37,12 @@ Seed file that materializes gates files deterministically.
       "createdUtc": "2025-10-22T00:00:00Z",
       "bundle_level": "full",
       "author": "Jason Silvestri",
-      "co_authors": [ "System design assistance by 'Lumina' (ChatGPT collaborator)" ],
+      "co_authors": [
+        "System design assistance by 'Lumina' (ChatGPT collaborator)"
+      ],
       "inventor": "This universal text prompt and LLM format was invented by Jason Silvestri.",
       "inventor_notes": "Native to ChatGPT by design—without the collaboration with Lumina, this pattern would not exist.",
       "copyright": "© 2024-2025 Jason Silvestri. All Rights Reserved.",
-
       "origin": {
         "seed_id": "halos://seed/halo.baby/0.2.7-pre",
         "repo_url": "https://github.com/JasonSilvestri/Halo/halo/halo.baby",
@@ -53,7 +54,7 @@ Seed file that materializes gates files deterministically.
         "sessionId": "seed-baby-2025-10-15",
         "nonce": "cc502eac-b30a-4b21-9e28-3c391d491d66",
         "chat_anchor": {
-          "message_id": "f1ef1d5c-af63-4de3-b68e-592566901553",
+          "message_id": "9aeb3576-38cd-4134-b2c4-13d9b01a26d8",
           "note": "Local anchor for the thread where we have had the most success to date."
         },
         "hints": {
@@ -66,12 +67,17 @@ Seed file that materializes gates files deterministically.
             "3b0b0b24-bdf7-4b1a-b207-58d03e1d357b",
             "cf3cf2f3-65f0-4ab2-b4da-e508fc046a0e",
             "2c46b3db-5cf3-4c4d-9736-f3715bf328cb",
-            "f1ef1d5c-af63-4de3-b68e-592566901553"
+            "f1ef1d5c-af63-4de3-b68e-592566901553",
+            "9aeb3576-38cd-4134-b2c4-13d9b01a26d8"
           ],
           "ui_build_ids": [
             "prod-46f202804b1b838698852d8c27cb5bdfe8f31362"
           ],
           "ui_user_token_hint": "user-WzHrzEIlGnT91Hm5HLvQPmHz"
+        },
+        "hints_policy": {
+          "visibility": "internal",
+          "hash_values": false
         }
       },
       "provenance_visibility": "internal",
@@ -81,7 +87,6 @@ Seed file that materializes gates files deterministically.
         "envelope_hash_in_stamp": true
       }
     },
-
     "render_hints": {
       "markdown_fence_policy": {
         "default_code_language": "json",
@@ -93,7 +98,6 @@ Seed file that materializes gates files deterministically.
           "Use INNER=4 backticks for heavy nested examples to prevent UI flattening."
         ]
       },
-
       "summarization_policy": {
         "allow_summarization": false,
         "allow_ellipses": false,
@@ -103,27 +107,36 @@ Seed file that materializes gates files deterministically.
         ]
       }
     },
-
     "drift_guards": {
       "guards": [
         {
           "id": "subscription_or_session_fail",
           "severity": "critical",
-          "symptoms": [ "thread missing", "asset links expired", "tool unavailable" ],
+          "symptoms": [
+            "thread missing",
+            "asset links expired",
+            "tool unavailable"
+          ],
           "action": "print_banner_and_continue_with_seed",
           "banner": "⚠️ Collaboration guard: falling back to local halo.baby seed context; links may be stale."
         },
         {
           "id": "renderer_backtick_collapse",
           "severity": "high",
-          "symptoms": [ "markdown fences merged", "code blocks flattened" ],
+          "symptoms": [
+            "markdown fences merged",
+            "code blocks flattened"
+          ],
           "action": "re-emit_with_outer5_inner4",
           "banner": "⚠️ Rendering Safety: rewrapping output with outer=5 backticks, inner=4."
         },
         {
           "id": "patchwork_mode_detected",
           "severity": "high",
-          "symptoms": [ "partial file diffs only", "ellipses present" ],
+          "symptoms": [
+            "partial file diffs only",
+            "ellipses present"
+          ],
           "action": "switch_to_full_emit",
           "banner": "⚠️ Patchwork detected: switching to full, deterministic emits."
         }
@@ -191,7 +204,6 @@ Seed file that materializes gates files deterministically.
         "next:validate:file": "node ./tools/validate-gate.mjs --schema whatsnext --file",
         "work:validate:file": "node ./tools/validate-gate.mjs --schema workitems --file",
         "work:echo": "node ./tools/echo-workitems.mjs",
-
         "seed:onboard": "node ./tools/onboard.mjs ../halo.baby.seed.json",
         "seed:banner": "node ./tools/drift-banner.mjs ../halo.baby.seed.json",
         "seed:materialize": "node ./materialize-seed.mjs ../halo.baby.seed.json",
@@ -231,7 +243,6 @@ Seed file that materializes gates files deterministically.
         ]
       }
     },
-
     {
       "path": "gates/schemas/halos-workflow.schema.json",
       "kind": "json",
@@ -240,15 +251,50 @@ Seed file that materializes gates files deterministically.
         "$id": "halos-workflow.schema.json",
         "title": "Halos Workflow State Mixin (Full 14-state)",
         "type": "object",
-        "required": [ "state", "stateCode" ],
+        "required": [
+          "state",
+          "stateCode"
+        ],
         "properties": {
           "stateCode": {
             "type": "integer",
-            "enum": [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 ]
+            "enum": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15
+            ]
           },
           "state": {
             "type": "string",
-            "enum": [ "CREATED", "QUEUED", "IN_PROGRESS", "WAITING", "PASSED", "FAILED", "REJECTED", "CANCELLED", "SKIPPED", "TIMEOUT", "NETWORK_ERROR", "VALIDATION_ERROR", "RETRYING", "BLOCKED", "COMPLETED" ]
+            "enum": [
+              "CREATED",
+              "QUEUED",
+              "IN_PROGRESS",
+              "WAITING",
+              "PASSED",
+              "FAILED",
+              "REJECTED",
+              "CANCELLED",
+              "SKIPPED",
+              "TIMEOUT",
+              "NETWORK_ERROR",
+              "VALIDATION_ERROR",
+              "RETRYING",
+              "BLOCKED",
+              "COMPLETED"
+            ]
           },
           "updatedUtc": {
             "type": "string",
@@ -262,108 +308,288 @@ Seed file that materializes gates files deterministically.
         "allOf": [
           {
             "if": {
-              "properties": { "state": { "const": "CREATED" } },
-              "required": [ "state" ]
+              "properties": {
+                "state": {
+                  "const": "CREATED"
+                }
+              },
+              "required": [
+                "state"
+              ]
             },
-            "then": { "properties": { "stateCode": { "const": 1 } } }
+            "then": {
+              "properties": {
+                "stateCode": {
+                  "const": 1
+                }
+              }
+            }
           },
           {
             "if": {
-              "properties": { "state": { "const": "QUEUED" } },
-              "required": [ "state" ]
+              "properties": {
+                "state": {
+                  "const": "QUEUED"
+                }
+              },
+              "required": [
+                "state"
+              ]
             },
-            "then": { "properties": { "stateCode": { "const": 2 } } }
+            "then": {
+              "properties": {
+                "stateCode": {
+                  "const": 2
+                }
+              }
+            }
           },
           {
             "if": {
-              "properties": { "state": { "const": "IN_PROGRESS" } },
-              "required": [ "state" ]
+              "properties": {
+                "state": {
+                  "const": "IN_PROGRESS"
+                }
+              },
+              "required": [
+                "state"
+              ]
             },
-            "then": { "properties": { "stateCode": { "const": 3 } } }
+            "then": {
+              "properties": {
+                "stateCode": {
+                  "const": 3
+                }
+              }
+            }
           },
           {
             "if": {
-              "properties": { "state": { "const": "WAITING" } },
-              "required": [ "state" ]
+              "properties": {
+                "state": {
+                  "const": "WAITING"
+                }
+              },
+              "required": [
+                "state"
+              ]
             },
-            "then": { "properties": { "stateCode": { "const": 4 } } }
+            "then": {
+              "properties": {
+                "stateCode": {
+                  "const": 4
+                }
+              }
+            }
           },
           {
             "if": {
-              "properties": { "state": { "const": "PASSED" } },
-              "required": [ "state" ]
+              "properties": {
+                "state": {
+                  "const": "PASSED"
+                }
+              },
+              "required": [
+                "state"
+              ]
             },
-            "then": { "properties": { "stateCode": { "const": 5 } } }
+            "then": {
+              "properties": {
+                "stateCode": {
+                  "const": 5
+                }
+              }
+            }
           },
           {
             "if": {
-              "properties": { "state": { "const": "FAILED" } },
-              "required": [ "state" ]
+              "properties": {
+                "state": {
+                  "const": "FAILED"
+                }
+              },
+              "required": [
+                "state"
+              ]
             },
-            "then": { "properties": { "stateCode": { "const": 6 } } }
+            "then": {
+              "properties": {
+                "stateCode": {
+                  "const": 6
+                }
+              }
+            }
           },
           {
             "if": {
-              "properties": { "state": { "const": "REJECTED" } },
-              "required": [ "state" ]
+              "properties": {
+                "state": {
+                  "const": "REJECTED"
+                }
+              },
+              "required": [
+                "state"
+              ]
             },
-            "then": { "properties": { "stateCode": { "const": 7 } } }
+            "then": {
+              "properties": {
+                "stateCode": {
+                  "const": 7
+                }
+              }
+            }
           },
           {
             "if": {
-              "properties": { "state": { "const": "CANCELLED" } },
-              "required": [ "state" ]
+              "properties": {
+                "state": {
+                  "const": "CANCELLED"
+                }
+              },
+              "required": [
+                "state"
+              ]
             },
-            "then": { "properties": { "stateCode": { "const": 8 } } }
+            "then": {
+              "properties": {
+                "stateCode": {
+                  "const": 8
+                }
+              }
+            }
           },
           {
             "if": {
-              "properties": { "state": { "const": "SKIPPED" } },
-              "required": [ "state" ]
+              "properties": {
+                "state": {
+                  "const": "SKIPPED"
+                }
+              },
+              "required": [
+                "state"
+              ]
             },
-            "then": { "properties": { "stateCode": { "const": 9 } } }
+            "then": {
+              "properties": {
+                "stateCode": {
+                  "const": 9
+                }
+              }
+            }
           },
           {
             "if": {
-              "properties": { "state": { "const": "TIMEOUT" } },
-              "required": [ "state" ]
+              "properties": {
+                "state": {
+                  "const": "TIMEOUT"
+                }
+              },
+              "required": [
+                "state"
+              ]
             },
-            "then": { "properties": { "stateCode": { "const": 10 } } }
+            "then": {
+              "properties": {
+                "stateCode": {
+                  "const": 10
+                }
+              }
+            }
           },
           {
             "if": {
-              "properties": { "state": { "const": "NETWORK_ERROR" } },
-              "required": [ "state" ]
+              "properties": {
+                "state": {
+                  "const": "NETWORK_ERROR"
+                }
+              },
+              "required": [
+                "state"
+              ]
             },
-            "then": { "properties": { "stateCode": { "const": 11 } } }
+            "then": {
+              "properties": {
+                "stateCode": {
+                  "const": 11
+                }
+              }
+            }
           },
           {
             "if": {
-              "properties": { "state": { "const": "VALIDATION_ERROR" } },
-              "required": [ "state" ]
+              "properties": {
+                "state": {
+                  "const": "VALIDATION_ERROR"
+                }
+              },
+              "required": [
+                "state"
+              ]
             },
-            "then": { "properties": { "stateCode": { "const": 12 } } }
+            "then": {
+              "properties": {
+                "stateCode": {
+                  "const": 12
+                }
+              }
+            }
           },
           {
             "if": {
-              "properties": { "state": { "const": "RETRYING" } },
-              "required": [ "state" ]
+              "properties": {
+                "state": {
+                  "const": "RETRYING"
+                }
+              },
+              "required": [
+                "state"
+              ]
             },
-            "then": { "properties": { "stateCode": { "const": 13 } } }
+            "then": {
+              "properties": {
+                "stateCode": {
+                  "const": 13
+                }
+              }
+            }
           },
           {
             "if": {
-              "properties": { "state": { "const": "BLOCKED" } },
-              "required": [ "state" ]
+              "properties": {
+                "state": {
+                  "const": "BLOCKED"
+                }
+              },
+              "required": [
+                "state"
+              ]
             },
-            "then": { "properties": { "stateCode": { "const": 14 } } }
+            "then": {
+              "properties": {
+                "stateCode": {
+                  "const": 14
+                }
+              }
+            }
           },
           {
             "if": {
-              "properties": { "state": { "const": "COMPLETED" } },
-              "required": [ "state" ]
+              "properties": {
+                "state": {
+                  "const": "COMPLETED"
+                }
+              },
+              "required": [
+                "state"
+              ]
             },
-            "then": { "properties": { "stateCode": { "const": 15 } } }
+            "then": {
+              "properties": {
+                "stateCode": {
+                  "const": 15
+                }
+              }
+            }
           }
         ],
         "additionalProperties": true
@@ -377,7 +603,11 @@ Seed file that materializes gates files deterministically.
         "$id": "halos-whatsnext.schema.json",
         "title": "Halos What's Next (Baby)",
         "type": "object",
-        "required": [ "manifestId", "createdUtc", "items" ],
+        "required": [
+          "manifestId",
+          "createdUtc",
+          "items"
+        ],
         "properties": {
           "manifestId": {
             "type": "string",
@@ -392,8 +622,17 @@ Seed file that materializes gates files deterministically.
             "minItems": 1,
             "items": {
               "type": "object",
-              "allOf": [ { "$ref": "halos-workflow.schema.json" } ],
-              "required": [ "id", "title", "state", "stateCode" ],
+              "allOf": [
+                {
+                  "$ref": "halos-workflow.schema.json"
+                }
+              ],
+              "required": [
+                "id",
+                "title",
+                "state",
+                "stateCode"
+              ],
               "properties": {
                 "id": {
                   "type": "string",
@@ -403,7 +642,9 @@ Seed file that materializes gates files deterministically.
                   "type": "string",
                   "minLength": 1
                 },
-                "description": { "type": "string" },
+                "description": {
+                  "type": "string"
+                },
                 "priority": {
                   "type": "integer",
                   "minimum": 1,
@@ -425,7 +666,11 @@ Seed file that materializes gates files deterministically.
         "$id": "halos-workitems.schema.json",
         "title": "Halos Work Items (Seed Echo)",
         "type": "object",
-        "required": [ "manifestId", "createdUtc", "items" ],
+        "required": [
+          "manifestId",
+          "createdUtc",
+          "items"
+        ],
         "properties": {
           "manifestId": {
             "type": "string",
@@ -440,8 +685,19 @@ Seed file that materializes gates files deterministically.
             "minItems": 1,
             "items": {
               "type": "object",
-              "allOf": [ { "$ref": "halos-workflow.schema.json" } ],
-              "required": [ "id", "title", "kind", "path", "state", "stateCode" ],
+              "allOf": [
+                {
+                  "$ref": "halos-workflow.schema.json"
+                }
+              ],
+              "required": [
+                "id",
+                "title",
+                "kind",
+                "path",
+                "state",
+                "stateCode"
+              ],
               "properties": {
                 "id": {
                   "type": "string",
@@ -453,13 +709,21 @@ Seed file that materializes gates files deterministically.
                 },
                 "kind": {
                   "type": "string",
-                  "enum": [ "schema", "sample", "script", "package", "doc" ]
+                  "enum": [
+                    "schema",
+                    "sample",
+                    "script",
+                    "package",
+                    "doc"
+                  ]
                 },
                 "path": {
                   "type": "string",
                   "minLength": 1
                 },
-                "note": { "type": "string" }
+                "note": {
+                  "type": "string"
+                }
               },
               "additionalProperties": true
             }
@@ -476,30 +740,50 @@ Seed file that materializes gates files deterministically.
         "$id": "halos-onboarding.schema.json",
         "title": "Halos Onboarding i18n",
         "type": "object",
-        "required": [ "locale", "version", "script" ],
+        "required": [
+          "locale",
+          "version",
+          "script"
+        ],
         "properties": {
           "locale": {
             "type": "string",
             "minLength": 2
           },
-          "version": { "type": "string" },
+          "version": {
+            "type": "string"
+          },
           "script": {
             "type": "array",
             "minItems": 1,
             "items": {
               "type": "object",
-              "required": [ "id", "text" ],
+              "required": [
+                "id",
+                "text"
+              ],
               "properties": {
-                "id": { "type": "string" },
-                "text": { "type": "string" },
+                "id": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                },
                 "choices": {
                   "type": "array",
                   "items": {
                     "type": "object",
-                    "required": [ "label", "next" ],
+                    "required": [
+                      "label",
+                      "next"
+                    ],
                     "properties": {
-                      "label": { "type": "string" },
-                      "next": { "type": "string" }
+                      "label": {
+                        "type": "string"
+                      },
+                      "next": {
+                        "type": "string"
+                      }
                     }
                   }
                 }
@@ -611,7 +895,6 @@ Seed file that materializes gates files deterministically.
         ]
       }
     },
-
     {
       "path": "gates/tools/validate-gate.mjs",
       "kind": "text",
@@ -637,7 +920,6 @@ Seed file that materializes gates files deterministically.
       "kind": "text",
       "text": "#!/usr/bin/env node\n// gen-readmes.mjs — generate per-artifact about pages under gates/about\nimport fs from \"node:fs\";import path from \"node:path\";import process from \"node:process\";\nfunction readJson(p){return JSON.parse(fs.readFileSync(p,\"utf8\"));}\nfunction ensureDir(p){if(!fs.existsSync(p))fs.mkdirSync(p,{recursive:true});}\nfunction mdEscape(s){return String(s).replace(/``\`/g,\"``\\\\`\");}\nfunction classify(p){if(/\\\\/schemas\\\\/|\\/schemas\\//.test(p))return\"schema\";if(/\\\\/samples\\\\/|\\/samples\\//.test(p))return\"sample\";if(/\\\\/tools\\\\/|\\/tools\\//.test(p))return\"tool\";if(p.endsWith(\"package.json\"))return\"package\";if(p.endsWith(\"SEED_VERSION.json\"))return\"doc\";if(p.endsWith(\".seed.json\"))return\"seed\";return\"doc\";}\nfunction renderAbout(rel,kind,payload){const title=path.basename(rel);return `# About: \\`${title}\\`\\n\\n**Kind:** ${kind}  \\n**Path:** \\`${rel}\\`\\n\\n---\\n\\n## Purpose\\n\\n${kind===\"schema\"?\"JSON Schema used by Baby Halo v0.2.7-pre.\":kind===\"sample\"?\"Sample JSON used to prove the schema.\":kind===\"tool\"?\"Node.js utility used by the gates harness.\":kind===\"package\"?\"NPM manifest for the gates workspace.\":kind===\"seed\"?\"Seed file that materializes gates files deterministically.\":\"Document emitted by the seed materializer.\"}\\n\\n---\\n\\n## Preview\\n\\n${payload?\"``\`\"+(typeof payload===\"string\"?\"\":\"json\")+\"\\n\"+mdEscape(payload)+\"\\n``\`\":\"_no preview_\"}\\n\\n---\\n`}\nfunction main(){const seedArg=process.argv[2];if(!seedArg){console.error(\"Usage: node ./tools/gen-readmes.mjs <seed.json>\");process.exit(2);}const seedFull=path.isAbsolute(seedArg)?seedArg:path.resolve(process.cwd(),seedArg);if(!fs.existsSync(seedFull)){console.error(`[ERROR] Seed not found: ${seedFull}`);process.exit(2);}const seedDir=path.dirname(seedFull);const gatesDir=path.join(seedDir,\"gates\");const aboutDir=path.join(gatesDir,\"about\");ensureDir(aboutDir);const seed=readJson(seedFull);const bundles=seed.bundled_files??[];const outputs=[{rel:\"halo.baby.seed.json\",kind:\"seed\",payload:fs.readFileSync(seedFull,\"utf8\")},...bundles.map(b=>({rel:b.path,kind:classify(b.path),payload:b.kind===\"json\"?JSON.stringify(b.json,null,2):b.text}))];let count=0;for(const o of outputs){const name=path.basename(o.rel)+\".md\";const outPath=path.join(aboutDir,name);const md=renderAbout(o.rel.replace(/\\\\/g,\"/\"),o.kind,o.payload);fs.writeFileSync(outPath,md,{encoding:\"utf8\"});console.log(`[OK] wrote ${path.relative(process.cwd(),outPath)}`);count++;}console.log(`[OK] generated ${count} about pages -> ${aboutDir}`);}main();\n"
     },
-
     {
       "path": "gates/materialize-seed.mjs",
       "kind": "text",
@@ -648,7 +930,6 @@ Seed file that materializes gates files deterministically.
       "kind": "text",
       "text": "# Write-HaloSeed.ps1 — deterministic materializer (repo-root aware, 'gates/' beside seed)\n# Usage: pwsh -File .\\Write-HaloSeed.ps1 -SeedPath .\\halo.baby.seed.json\n[CmdletBinding()]param([Parameter(Mandatory=$true)][string]$SeedPath)\nSet-StrictMode -Version Latest;$ErrorActionPreference=\"Stop\"\nfunction Get-RepoRootFromSeed([string]$SeedFilePath){$full=(Resolve-Path $SeedFilePath).Path;$cur=Split-Path -Parent $full;while($true){$name=Split-Path -Leaf $cur;if($name -eq 'Halos'){ $parent=Split-Path -Parent $cur; if(-not $parent){$parent=(Get-Item $cur).PSDrive.Root}; return $parent } $up=Split-Path -Parent $cur; if(-not $up -or $up -eq $cur){ return (Split-Path -Parent $full) } $cur=$up }}\nfunction Assert-Env{try{$nodeVer=& node -v 2>$null}catch{$nodeVer=$null} if(-not $nodeVer){Write-Warning \"Node.js not found. Install Node 20+ to run validators.\"}}\nif(-not (Test-Path $SeedPath)){throw \"Seed file not found: $SeedPath\"}\nAssert-Env\n$seedFull=(Resolve-Path $SeedPath).Path;$seedDir=Split-Path -Parent $seedFull;$seedJson=Get-Content -Raw -Path $seedFull | ConvertFrom-Json -Depth 100\nif(-not $seedJson.bundled_files){throw \"No bundled_files found in seed.\"}\n$repoRoot=Get-RepoRootFromSeed -SeedFilePath $seedFull\nWrite-Host \"[INFO] Seed      : $seedFull\";Write-Host \"[INFO] Seed Dir  : $seedDir\";Write-Host \"[INFO] Repo Root : $repoRoot\";Write-Host \"\"\n$written=0\nforeach($bundle in $seedJson.bundled_files){$bundlePath=$bundle.path -replace '/', [IO.Path]::DirectorySeparatorChar\n  if($bundle.path -match '^(?i)Halos[\\\\/].*'){ $outPath=Join-Path $repoRoot $bundlePath; Write-Host \"[TRACE] mode=repo-root  in='$($bundle.path)'  out='$outPath'\"}\n  elseif($bundle.path -match '^(?i)gates[\\\\/].*'){ $outPath=Join-Path $seedDir $bundlePath; Write-Host \"[TRACE] mode=seed-local in='$($bundle.path)'  out='$outPath'\"}\n  else{ $outPath=Join-Path $seedDir $bundlePath; Write-Host \"[TRACE] mode=default    in='$($bundle.path)'  out='$outPath'\"}\n  $dir=Split-Path -Parent $outPath; if($dir -and -not (Test-Path $dir)){ New-Item -ItemType Directory -Path $dir -Force | Out-Null }\n  switch($bundle.kind){\"json\"{ $json=$bundle.json | ConvertTo-Json -Depth 100; $utf8= New-Object System.Text.UTF8Encoding($false); [System.IO.File]::WriteAllText($outPath,$json,$utf8)}\n    \"text\"{ $utf8= New-Object System.Text.UTF8Encoding($false); [System.IO.File]::WriteAllText($outPath,$bundle.text,$utf8)}\n    default{ throw \"Unknown kind '$($bundle.kind)' for path '$($bundle.path)'.\"}}\n  Write-Host \"[OK] $($bundle.kind.ToUpper()) → $outPath\"; $written++ }\nWrite-Host \"\";Write-Host \"[OK] Materialized $written files.\";Write-Host \"\";Write-Host \"To install and validate (from halo.baby):\";Write-Host \"  cd .\\gates\";Write-Host \"  npm install\";Write-Host \"  npm run next:validate:file -- .\\samples\\whatsnext.sample.json\"\n"
     },
-
     {
       "path": "gates/i18n/onboarding.en.json",
       "kind": "json",
