@@ -42,7 +42,9 @@ Assert-Env
 
 $seedFull = (Resolve-Path $SeedPath).Path
 $seedDir  = Split-Path -Parent $seedFull
-$seedJson = Get-Content -Raw -Path $seedFull | ConvertFrom-Json -Depth 100
+# replace the ConvertFrom-Json call with:
+$seedJson = Get-Content -Raw -Path $seedFull | ConvertFrom-Json -Depth ([Math]::Min(100, 100))
+
 if (-not $seedJson.bundled_files) { throw "No bundled_files found in seed." }
 
 $repoRoot = Get-RepoRootFromSeed -SeedFilePath $seedFull
