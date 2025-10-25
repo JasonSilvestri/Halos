@@ -6,11 +6,16 @@ function readJson(p){return JSON.parse(fs.readFileSync(p,"utf8"));}
 function run(seedArg){
   const seedPath=path.isAbsolute(seedArg)?seedArg:path.resolve(process.cwd(),seedArg);
   const seed=readJson(seedPath);
-  const banner=seed.collab_state?.display_banner_markdown;
+    /*const banner=seed.collab_state?.display_banner_markdown;*/
+  const banner = seed.envelope?.collab_state?.display_banner_markdown;
+  const anchor = seed.envelope?._meta?.chat_anchor?.message_id;
   const fence=seed.render_hints?.markdown_fence_policy;
-  if(banner) console.log(banner);
-  if(fence){
-    console.log(`\nRender policy → outer backticks: ${fence.outer_backticks_required}, inner: ${fence.inner_backticks_for_nested_examples}, default lang: ${fence.default_code_language}`);
-  }
+    if (banner) console.log(banner);
+    if (anchor) {
+       console.log(`\nCollab anchor → message_id: ${anchor}`);
+    }
+    if(fence){
+        console.log(`\nRender policy → outer backticks: ${fence.outer_backticks_required}, inner: ${fence.inner_backticks_for_nested_examples}, default lang: ${fence.default_code_language}`);
+    }
 }
 run(process.argv[2]||"../halo.baby.seed.json");
