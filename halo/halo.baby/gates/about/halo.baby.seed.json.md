@@ -51,7 +51,11 @@ Seed file that materializes gates files deterministically.
         "partnerA": "user:JasonSilvestri",
         "partnerB": "agent:Lumina",
         "sessionId": "seed-baby-2025-10-15",
-        "nonce": "cc502eac-b30a-4b21-9e28-3c391d491d66"
+        "nonce": "cc502eac-b30a-4b21-9e28-3c391d491d66",
+        "chat_anchor": {
+          "message_id": "2c77ca2f-9d97-41a9-a5f3-3f87093ff389",
+          "note": "Local anchor for the thread where gen-readmes.fix + onboarding path fixes landed."
+        }
       },
       "provenance_visibility": "internal",
       "determinism": {
