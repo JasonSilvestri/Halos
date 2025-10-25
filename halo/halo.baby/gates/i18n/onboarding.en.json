@@ -1,5 +1,6 @@
 {
   "locale": "en",
+  "version": "0.2.7-pre",
   "script": [
     {
       "id": "welcome",
