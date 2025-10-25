@@ -7,13 +7,13 @@
 
 ## Purpose
 
-Sample JSON used to prove the "What's Next" schema.
+Sample JSON used to prove the schema.
 
 ---
 
 ## Preview
 
-```json
+````json
 {
   "manifestId": "halos-baby-001",
   "createdUtc": "2025-10-21T00:00:00Z",
@@ -37,14 +37,6 @@ Sample JSON used to prove the "What's Next" schema.
     }
   ]
 }
-```
+````
 
 ---
-
-## How to use
-
-Validate against schema:
-
-```bash
-npm run next:validate:file
-```
