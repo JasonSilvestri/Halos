@@ -1,0 +1,26 @@
+name: halos-gates
+
+on:
+  pull_request:
+  push:
+    paths:
+      - "halo/halo.nova/gates/**"
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: halo/halo.nova/gates
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20.x"
+      - run: npm ci
+      - run: node ./tools/validate-gate.mjs --schema workflowstates
+      - run: node ./tools/validate-gate.mjs --schema whatsnext
+      - run: node ./tools/validate-gate.mjs --schema workitems
+      - run: npm run next:validate:file
+      - run: npm run work:validate:file
+      - run: npm run work:echo

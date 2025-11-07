@@ -1,0 +1,18 @@
+{
+  "manifestId": "halos-nova-stamp",
+  "version": "1.0",
+  "stampedUtc": "2025-10-25T20:28:22.640Z",
+  "validatedUtc": "2025-10-25T20:28:22.640Z",
+  "envelopeHash": "070415c80390f2eae1b1197ffb91b7697915b45d36f9706caad31abcccfcbd80",
+  "signedBy": "user.local",
+  "hashes": {
+    "schemas/halos-workflow-states.schema.json": "f39372c9daf04adbfcda38160211befe1ce4d4f35f3e513a3e9ea12afb595ff5",
+    "schemas/halos-whatsnext.schema.json": "32600b7e7c6e0709619a899bb475fdf1b31677b8f618c821ad53e4a00e65e3f4",
+    "schemas/halos-workitems.schema.json": "6bcc4264f82591a1047d97c6fb92d8967c4ce1936290a739af4281e85de811eb",
+    "schemas/halos-onboarding.schema.json": "cc977fcd48083fd7ee206610dba1dea8ebbbcbb7c1a5f6f552efa87a78ccb570",
+    "samples/whatsnext.sample.json": "e818ae6ba23396c74996b1da62127606af0ff9ff54b87e1a8bff1c4dbbbfeae8",
+    "samples/workitems.seed-echo.sample.json": "1e847dfc038b79ea8644fde2d690f7955f9561cdd7777c861b131493a4254b23",
+    "i18n/onboarding.en.json": "b95c9bd6d0c2e5a7f0f595c85997a3a0be167727305cb1fdb0c56358e94258cd",
+    "__envelope__": "070415c80390f2eae1b1197ffb91b7697915b45d36f9706caad31abcccfcbd80"
+  }
+}

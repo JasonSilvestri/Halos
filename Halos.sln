@@ -77,6 +77,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "seeds", "seeds", "{0490CD25-EE2A-4FC6-8E3D-B2A1E43AEE74}"
 	ProjectSection(SolutionItems) = preProject
 		seeds\halo.lumina.seed.json = seeds\halo.lumina.seed.json
+		halo\halo.nova\halo.nova.seed.json = halo\halo.nova\halo.nova.seed.json
 		halos.seed.json = halos.seed.json
 	EndProjectSection
 EndProject
@@ -161,6 +162,93 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 		halo\halo.baby\gates\git\workflows\halos-gates.yaml = halo\halo.baby\gates\git\workflows\halos-gates.yaml
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "halo.nova", "halo.nova", "{9CA4128F-0EB0-4C51-A642-B4DE7ECBB731}"
+	ProjectSection(SolutionItems) = preProject
+		halo\halo.nova\halo.nova.seed.json = halo\halo.nova\halo.nova.seed.json
+		halo\halo.nova\materialize-seed.mjs = halo\halo.nova\materialize-seed.mjs
+		halo\halo.nova\README.md = halo\halo.nova\README.md
+		halo\halo.nova\Write-HaloSeed.ps1 = halo\halo.nova\Write-HaloSeed.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "gates", "gates", "{CAEB84F0-C1AD-475E-8231-5544EE994E21}"
+	ProjectSection(SolutionItems) = preProject
+		halo\halo.nova\gates\.halo_stamp.json = halo\halo.nova\gates\.halo_stamp.json
+		halo\halo.nova\gates\materialize-seed.mjs = halo\halo.nova\gates\materialize-seed.mjs
+		halo\halo.nova\gates\package-lock.json = halo\halo.nova\gates\package-lock.json
+		halo\halo.nova\gates\package.json = halo\halo.nova\gates\package.json
+		halo\halo.nova\gates\README.md = halo\halo.nova\gates\README.md
+		halo\halo.nova\gates\SEED_VERSION.json = halo\halo.nova\gates\SEED_VERSION.json
+		halo\halo.nova\gates\Write-HaloSeed.ps1 = halo\halo.nova\gates\Write-HaloSeed.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "git", "git", "{01517695-F95A-4BBD-B61A-CADA87C48EAF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "about", "about", "{7176AFF4-AB43-4343-B2AF-BC93FF6DDC17}"
+	ProjectSection(SolutionItems) = preProject
+		halo\halo.nova\gates\about\.halo_stamp.json.md = halo\halo.nova\gates\about\.halo_stamp.json.md
+		halo\halo.nova\gates\about\add-anchor.mjs.md = halo\halo.nova\gates\about\add-anchor.mjs.md
+		halo\halo.nova\gates\about\drift-banner.mjs.md = halo\halo.nova\gates\about\drift-banner.mjs.md
+		halo\halo.nova\gates\about\echo-workitems.mjs.md = halo\halo.nova\gates\about\echo-workitems.mjs.md
+		halo\halo.nova\gates\about\enforce-ready.mjs.md = halo\halo.nova\gates\about\enforce-ready.mjs.md
+		halo\halo.nova\gates\about\gen-readmes.mjs.md = halo\halo.nova\gates\about\gen-readmes.mjs.md
+		halo\halo.nova\gates\about\halo.nova.seed.json.md = halo\halo.nova\gates\about\halo.nova.seed.json.md
+		halo\halo.nova\gates\about\halos-onboarding.schema.json.md = halo\halo.nova\gates\about\halos-onboarding.schema.json.md
+		halo\halo.nova\gates\about\halos-whatsnext.schema.json.md = halo\halo.nova\gates\about\halos-whatsnext.schema.json.md
+		halo\halo.nova\gates\about\halos-workitems.schema.json.md = halo\halo.nova\gates\about\halos-workitems.schema.json.md
+		halo\halo.nova\gates\about\halos-workflow-states.schema.json.md = halo\halo.nova\gates\about\halos-workflow-states.schema.json.md
+		halo\halo.nova\gates\about\materialize-seed.mjs.md = halo\halo.nova\gates\about\materialize-seed.mjs.md
+		halo\halo.nova\gates\about\onboard.mjs.md = halo\halo.nova\gates\about\onboard.mjs.md
+		halo\halo.nova\gates\about\onboarding.en.json.md = halo\halo.nova\gates\about\onboarding.en.json.md
+		halo\halo.nova\gates\about\package.json.md = halo\halo.nova\gates\about\package.json.md
+		halo\halo.nova\gates\about\SEED_VERSION.json.md = halo\halo.nova\gates\about\SEED_VERSION.json.md
+		halo\halo.nova\gates\about\validate-gate.mjs.md = halo\halo.nova\gates\about\validate-gate.mjs.md
+		halo\halo.nova\gates\about\whatsnext.sample.json.md = halo\halo.nova\gates\about\whatsnext.sample.json.md
+		halo\halo.nova\gates\about\workitems.seed-echo.sample.json.md = halo\halo.nova\gates\about\workitems.seed-echo.sample.json.md
+		halo\halo.nova\gates\about\Write-HaloSeed.ps1.md = halo\halo.nova\gates\about\Write-HaloSeed.ps1.md
+		halo\halo.nova\gates\about\write-stamp.mjs.md = halo\halo.nova\gates\about\write-stamp.mjs.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "i18n", "i18n", "{2066208D-D503-43C5-A14F-361B78D7BC6D}"
+	ProjectSection(SolutionItems) = preProject
+		halo\halo.nova\gates\i18n\onboarding.en.json = halo\halo.nova\gates\i18n\onboarding.en.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "node_modules", "node_modules", "{7ACD4956-AF22-4633-8A50-8999772CDDFD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{6E6AAE3D-062B-457E-886A-E62E1C0881F1}"
+	ProjectSection(SolutionItems) = preProject
+		halo\halo.nova\gates\samples\whatsnext.sample.json = halo\halo.nova\gates\samples\whatsnext.sample.json
+		halo\halo.nova\gates\samples\workitems.seed-echo.sample.json = halo\halo.nova\gates\samples\workitems.seed-echo.sample.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "schemas", "schemas", "{B1B3654C-FA39-40B4-89EB-8EBE4EC1D3C9}"
+	ProjectSection(SolutionItems) = preProject
+		halo\halo.nova\gates\schemas\halos-onboarding.schema.json = halo\halo.nova\gates\schemas\halos-onboarding.schema.json
+		halo\halo.nova\gates\schemas\halos-whatsnext.schema.json = halo\halo.nova\gates\schemas\halos-whatsnext.schema.json
+		halo\halo.nova\gates\schemas\halos-workflow.schema.json = halo\halo.nova\gates\schemas\halos-workflow.schema.json
+		halo\halo.nova\gates\schemas\halos-workitems.schema.json = halo\halo.nova\gates\schemas\halos-workitems.schema.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{8CAE924D-6767-4624-8B62-C35CA380B6D2}"
+	ProjectSection(SolutionItems) = preProject
+		halo\halo.nova\gates\tools\add-anchor.mjs = halo\halo.nova\gates\tools\add-anchor.mjs
+		halo\halo.nova\gates\tools\drift-banner.mjs = halo\halo.nova\gates\tools\drift-banner.mjs
+		halo\halo.nova\gates\tools\echo-workitems.mjs = halo\halo.nova\gates\tools\echo-workitems.mjs
+		halo\halo.nova\gates\tools\enforce-ready.mjs = halo\halo.nova\gates\tools\enforce-ready.mjs
+		halo\halo.nova\gates\tools\gen-readmes.mjs = halo\halo.nova\gates\tools\gen-readmes.mjs
+		halo\halo.nova\gates\tools\materialize-seed.mjs = halo\halo.nova\gates\tools\materialize-seed.mjs
+		halo\halo.nova\gates\tools\onboard.mjs = halo\halo.nova\gates\tools\onboard.mjs
+		halo\halo.nova\gates\tools\README.md = halo\halo.nova\gates\tools\README.md
+		halo\halo.nova\gates\tools\validate-gate.mjs = halo\halo.nova\gates\tools\validate-gate.mjs
+		halo\halo.nova\gates\tools\write-stamp.mjs = halo\halo.nova\gates\tools\write-stamp.mjs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{F2A3DB5A-D4E1-43F2-94DE-8A43FEB8B16B}"
+	ProjectSection(SolutionItems) = preProject
+		halo\halo.nova\gates\git\workflows\halos-gates.yaml = halo\halo.nova\gates\git\workflows\halos-gates.yaml
+		halo\halo.nova\gates\git\workflows\README.md = halo\halo.nova\gates\git\workflows\README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -208,6 +296,16 @@ Global
 		{FB3FED46-1D09-4506-9117-0B74E940BF96} = {59D589F3-2944-4C50-8239-B8A748393105}
 		{5A484B3E-2287-4454-A518-13B5E3C54E97} = {59D589F3-2944-4C50-8239-B8A748393105}
 		{67697325-40CE-4AD6-AAEC-67807BA3F102} = {5A484B3E-2287-4454-A518-13B5E3C54E97}
+		{9CA4128F-0EB0-4C51-A642-B4DE7ECBB731} = {C6F1E3E7-7A13-474E-A01A-CDC2167C37D1}
+		{CAEB84F0-C1AD-475E-8231-5544EE994E21} = {9CA4128F-0EB0-4C51-A642-B4DE7ECBB731}
+		{01517695-F95A-4BBD-B61A-CADA87C48EAF} = {CAEB84F0-C1AD-475E-8231-5544EE994E21}
+		{7176AFF4-AB43-4343-B2AF-BC93FF6DDC17} = {CAEB84F0-C1AD-475E-8231-5544EE994E21}
+		{2066208D-D503-43C5-A14F-361B78D7BC6D} = {CAEB84F0-C1AD-475E-8231-5544EE994E21}
+		{7ACD4956-AF22-4633-8A50-8999772CDDFD} = {CAEB84F0-C1AD-475E-8231-5544EE994E21}
+		{6E6AAE3D-062B-457E-886A-E62E1C0881F1} = {CAEB84F0-C1AD-475E-8231-5544EE994E21}
+		{B1B3654C-FA39-40B4-89EB-8EBE4EC1D3C9} = {CAEB84F0-C1AD-475E-8231-5544EE994E21}
+		{8CAE924D-6767-4624-8B62-C35CA380B6D2} = {CAEB84F0-C1AD-475E-8231-5544EE994E21}
+		{F2A3DB5A-D4E1-43F2-94DE-8A43FEB8B16B} = {01517695-F95A-4BBD-B61A-CADA87C48EAF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6C068CBA-F3FA-454D-92B1-467A233D1ACA}

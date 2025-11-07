@@ -1,0 +1,78 @@
+# About: `halos-whatsnext.schema.json`
+
+**Kind:** schema  
+**Path:** `gates/schemas/halos-whatsnext.schema.json`
+
+---
+
+## Purpose
+
+JSON Schema used by Nova Halo v1.0.
+
+---
+
+## Preview
+
+```
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "halos-whatsnext.schema.json",
+  "title": "Halos What's Next (Nova)",
+  "type": "object",
+  "required": [
+    "manifestId",
+    "createdUtc",
+    "items"
+  ],
+  "properties": {
+    "manifestId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "createdUtc": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "items": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "halos-workflow-states.schema.json"
+          }
+        ],
+        "required": [
+          "id",
+          "title",
+          "state",
+          "stateCode"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": {
+            "type": "string"
+          },
+          "priority": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": false
+}
+```
+
+---
