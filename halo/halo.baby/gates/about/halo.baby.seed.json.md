@@ -913,4 +913,39 @@ Seed file that materializes gates files deterministically.
 }
 ```
 
+
+## Latest Steps to Validate `halo.baby` v0.2.7-rc
+
+### 1: Materialize the seed: 
+
+#### 1.1: `cd E:\All\Repos\Halos\halo\halo.baby`:
+
+```
+
+cd E:\All\Repos\Halos\halo\halo.baby
+
+pwsh -File .\Write-HaloSeed.ps1 -SeedPath .\halo.baby.seed.json
+
+or
+
+node ./materialize-seed.mjs ./halo.baby.seed.json
+
+```
+
+### 2: Validate and stamp:
+
+#### 2.1: `cd gates`:
+
+```powershell
+cd gates
+npm install
+npm run seed:validate:all
+npm run onboard:validate
+npm run seed:stamp
+npm run seed:enforce
+npm run docs:about
+npm run seed:banner
+
+```
+
 ---
